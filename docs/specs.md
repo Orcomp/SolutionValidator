@@ -31,7 +31,7 @@ The application will check the folder structure within a repository follows this
 ./doc
 ./deployment
 
-Read this post for more details: http://blog.catenalogic.com/post/2012/04/04/Setting-output-directories-of-projects.aspx
+Read this post for more details: http://geertvanhorrik.com/2012/04/04/setting-output-directories-of-projects/
 
 The solution file for the project should be found in the ./src folder. Each project belonging to the solution should be contained in its own folder inside the ./src folder.
 
