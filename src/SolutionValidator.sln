@@ -1,8 +1,31 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator", "SolutionValidator\SolutionValidator.csproj", "{608BB359-9060-463E-BC76-208B6999AE1C}"
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{52F55AB9-C171-473F-837C-9D958B10B030}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.Tests", "SolutionValidator.Tests\SolutionValidator.Tests.csproj", "{BDC7FE20-53B2-4871-80B8-E01364F25058}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.Core", "SolutionValidator.Core\SolutionValidator.Core.csproj", "{B5CE3449-0AB7-41C6-AE6A-7B67CD2C7BF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.UI.Wpf", "SolutionValidator.UI.Wpf\SolutionValidator.UI.Wpf.csproj", "{064A6825-00AB-4240-9544-463213938436}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.UI.Console", "SolutionValidator.UI.Console\SolutionValidator.UI.Console.csproj", "{918FD405-7BBE-4005-9710-EF70B6E254FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.Core.Tests", "SolutionValidator.Core.Tests\SolutionValidator.Core.Tests.csproj", "{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{49DD0255-0F79-4264-AD05-4BF7FD54BE11}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{025902C4-3FB2-420C-98D5-16738319ED53}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.bat = ..\build.bat
+		..\build.fsx = ..\build.fsx
+		..\clean.bat = ..\clean.bat
+		..\version.txt = ..\version.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,16 +33,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{608BB359-9060-463E-BC76-208B6999AE1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{608BB359-9060-463E-BC76-208B6999AE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{608BB359-9060-463E-BC76-208B6999AE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{608BB359-9060-463E-BC76-208B6999AE1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDC7FE20-53B2-4871-80B8-E01364F25058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDC7FE20-53B2-4871-80B8-E01364F25058}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDC7FE20-53B2-4871-80B8-E01364F25058}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDC7FE20-53B2-4871-80B8-E01364F25058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5CE3449-0AB7-41C6-AE6A-7B67CD2C7BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CE3449-0AB7-41C6-AE6A-7B67CD2C7BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CE3449-0AB7-41C6-AE6A-7B67CD2C7BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CE3449-0AB7-41C6-AE6A-7B67CD2C7BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{064A6825-00AB-4240-9544-463213938436}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{064A6825-00AB-4240-9544-463213938436}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{064A6825-00AB-4240-9544-463213938436}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{064A6825-00AB-4240-9544-463213938436}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918FD405-7BBE-4005-9710-EF70B6E254FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918FD405-7BBE-4005-9710-EF70B6E254FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918FD405-7BBE-4005-9710-EF70B6E254FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918FD405-7BBE-4005-9710-EF70B6E254FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B} = {52F55AB9-C171-473F-837C-9D958B10B030}
 	EndGlobalSection
 EndGlobal
