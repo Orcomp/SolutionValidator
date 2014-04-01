@@ -24,17 +24,17 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 		{
 			var result = new List<string>();
 			root = root.Trim().ToLower();
-			pattern = pattern.Replace('/','\\').Trim('\\');
+			pattern = pattern.Replace('/','\\').Trim('\\')+'\\';
 			string[] folders = Directory.GetDirectories(root, "*", SearchOption.AllDirectories);
 			
 			string regexPattern = EscapeRegexSpecial(pattern);
 			regexPattern = regexPattern
-				.Replace(@"\\", @"\")
 				.Replace(FileSystemRule.RecursionToken, @".+")
 				// Not used currently: .Replace(FileSystemRule.OneLevelWildCardToken, @"[^\\]+")
-				;
+			;
 			
-			regexPattern = string.Format("^{0}$", regexPattern);
+			regexPattern = string.Format(@"^{0}$", regexPattern);
+			
 
 			foreach (string folder in folders)
 			{

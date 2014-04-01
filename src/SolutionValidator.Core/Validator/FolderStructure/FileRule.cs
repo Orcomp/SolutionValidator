@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SolutionValidator.Core.Infrastructure.DependencyInjection;
 using SolutionValidator.Core.Validator.Common;
 
 namespace SolutionValidator.Core.Validator.FolderStructure
 {
 	public class FileRule : FileSystemRule
 	{
-		public FileRule(string relativePath, CheckType checkType) : base(relativePath, checkType)
+		public FileRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper) : base(relativePath, checkType, fileSystemHelper )
 		{
 		}
 
@@ -18,7 +17,7 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 			string folderPattern = RelativePath.Replace(searchPattern, "");
 
 			var foldersToCheck = new List<string>();
-			var fileSystemHelper = Dependency.Resolve<FileSystemHelper>();
+		
 
 			if (!IsRecursive)
 			{
@@ -26,13 +25,13 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 			}
 			else
 			{
-				fileSystemHelper.GetFolders(projectInfo.ProjectFullPath, folderPattern);
+				foldersToCheck.AddRange(FileSystemHelper.GetFolders(projectInfo.ProjectFullPath, folderPattern));
 			}
 
 			bool exist = false;
 			foreach (string folder in foldersToCheck)
 			{
-				exist = exist || fileSystemHelper.Exists(folder, searchPattern);
+				exist = exist || FileSystemHelper.Exists(folder, searchPattern);
 			}
 
 

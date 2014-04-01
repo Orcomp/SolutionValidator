@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace SolutionValidator.Core.Validator.FolderStructure
 {
 	public class FileSystemRuleParser
 	{
+		private IFileSystemHelper fileSystemHelper;
 		private const string RecursionTokenReplacement = "T_o@k@e_n";
+		private const string FileWildCardTokenReplacement = "W_T_o@k@e_n";
+
+		public FileSystemRuleParser(IFileSystemHelper fileSystemHelper)
+		{
+			this.fileSystemHelper = fileSystemHelper;
+		}
 
 		public IEnumerable<FileSystemRule> Parse(StreamReader reader)
 		{
@@ -60,7 +68,8 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 			}
 
 			// Check if path is valid (valid does not mean exist...)
-			if (!IsPathValid(line.Replace(FileSystemRule.RecursionToken, RecursionTokenReplacement)))
+
+			if (!IsPathValid(line))
 			{
 				throw new ParseException("Invalid path", 0, 0);
 			}
@@ -83,16 +92,29 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 
 			if (line.EndsWith("\\"))
 			{
-				return new FolderRule(line, checkType);
+				return new FolderRule(line, checkType, fileSystemHelper);
 			}
-			return new FileRule(line, checkType);
+			return new FileRule(line, checkType, fileSystemHelper);
 		}
 
 		private bool IsPathValid(string path)
 		{
 			try
 			{
-				Path.GetFullPath(path);
+				string pathToCheck = path
+					.Replace(FileSystemRule.RecursionToken, RecursionTokenReplacement);
+				if (!path.EndsWith(@"\"))
+				{
+					var split = pathToCheck.Split('\\');
+					if (split.Length > 0)
+					{
+						split[split.Length-1] = split[split.Length-1]
+							.Replace(FileSystemRule.FileWildCardToken, FileWildCardTokenReplacement);
+						pathToCheck = String.Join(@"\", split);
+					}
+				}
+
+				Path.GetFullPath(pathToCheck);
 				return true;
 			}
 			catch 

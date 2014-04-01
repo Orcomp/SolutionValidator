@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SolutionValidator.Core.Validator.FolderStructure;
 
 namespace SolutionValidator.Core.Tests.Validator.FolderStructure
@@ -15,33 +12,42 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 		[TestFixtureSetUp]
 		public void Setup()
 		{
-			parser = new FileSystemRuleParser();
-			//projectInfo = new ProjectInfo("c:/solution", "c:/project");
+			parser = new FileSystemRuleParser(null);
 		}
 
 		[Test]
-		public void Test()
+		[TestCase("**/qwe", true, true)]
+		[TestCase("qwe", false, true)]
+		[TestCase("qwe/qwe", false, true)]
+		[TestCase("qwe/qwe/asd.asd", false, true)]
+		[TestCase("qwe/**/asd.asd", true, true)]
+		[TestCase("qwe/*.*", false, false)]
+		public void TestParseLineValidPath(string line, bool expectedIsRecursive, bool canBeFolder)
 		{
-			//var output = new List<string>();
-			//Find("D:\\2014Develop\\Elance\\Twitter\\Twitter\\", "**\\bin\\x.exe", output);
-			//var x = Directory.GetDirectories(@"d:\\2014Develop\", "*", SearchOption.AllDirectories);
-			//var y = new FileSystemHelper().GetFolders("d:\\2014Develop\\", "**\\AssemblaAPI\\**\\bin");
-			//var y = new FileSystemHelper().GetFolders("d:\\2014Develop\\", "**\\AssemblaAPI\\**\\bin");
-		}
-
-		[Test]
-		[TestCase("**/qwe")]
-		[TestCase("qwe")]
-		[TestCase("qwe/qwe")]
-		[TestCase("qwe/qwe/asd.asd")]
-		public void TestParseLineValidPath(string line)
-		{
-			FileSystemRule result = parser.ParseLine(line);
+			var result = parser.ParseLine(line);
+			Assert.IsTrue(result is FileRule);
+			Assert.AreEqual(CheckType.MustExist, result.UnitTestPeek.CheckType);
+			Assert.AreEqual(expectedIsRecursive, result.UnitTestPeek.IsRecursive);
 
 			result = parser.ParseLine("!" + line);
-			result = parser.ParseLine(line + "/");
-			result = parser.ParseLine("!" + line + "/");
+			Assert.IsTrue(result is FileRule);
+			Assert.AreEqual(CheckType.MustNotExist, result.UnitTestPeek.CheckType);
+			Assert.AreEqual(expectedIsRecursive, result.UnitTestPeek.IsRecursive);
+
+			if (canBeFolder)
+			{
+				result = parser.ParseLine(line + "/");
+				Assert.IsTrue(result is FolderRule);
+				Assert.AreEqual(CheckType.MustExist, result.UnitTestPeek.CheckType);
+				Assert.AreEqual(expectedIsRecursive, result.UnitTestPeek.IsRecursive);
+
+				result = parser.ParseLine("!" + line + "/");
+				Assert.IsTrue(result is FolderRule);
+				Assert.AreEqual(CheckType.MustNotExist, result.UnitTestPeek.CheckType);
+				Assert.AreEqual(expectedIsRecursive, result.UnitTestPeek.IsRecursive);
+			}
 		}
+
 
 		[Test]
 		[TestCase("#")]
