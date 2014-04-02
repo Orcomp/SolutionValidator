@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using SolutionValidator.Core.Validator.Common;
 
@@ -6,26 +7,28 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 {
 	public class FileRule : FileSystemRule
 	{
-		public FileRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper) : base(relativePath, checkType, fileSystemHelper )
+		public FileRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
+			: base(relativePath, checkType, fileSystemHelper)
 		{
 		}
 
-		public override ValidationResult Validate(ProjectInfo projectInfo)
+		public override ValidationResult Validate(RepositoryInfo repositoryInfo)
 		{
 			var result = new ValidationResult(true, ToString());
 			string searchPattern = RelativePath.Split('\\').Last();
 			string folderPattern = RelativePath.Replace(searchPattern, "");
 
 			var foldersToCheck = new List<string>();
-		
+
 
 			if (!IsRecursive)
 			{
-				foldersToCheck.Add(folderPattern.TrimEnd('\\'));
+				string folder = Path.Combine(repositoryInfo.RootPath, folderPattern);
+				foldersToCheck.Add(folder.TrimEnd('\\'));
 			}
 			else
 			{
-				foldersToCheck.AddRange(FileSystemHelper.GetFolders(projectInfo.ProjectFullPath, folderPattern));
+				foldersToCheck.AddRange(FileSystemHelper.GetFolders(repositoryInfo.RootPath, folderPattern));
 			}
 
 			bool exist = false;

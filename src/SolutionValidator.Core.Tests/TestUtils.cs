@@ -6,7 +6,7 @@ namespace SolutionValidator.Core.Tests
 {
 	internal static class TestUtils
 	{
-		public static string[] MockFileSystemDefinition =
+		public static readonly string[] MockFileSystemDefinition =
 		{
 			"folder100/",
 			"folder200/",
@@ -36,7 +36,7 @@ namespace SolutionValidator.Core.Tests
 			"fileFolder/.file.txt"
 		};
 
-		public static string CreateTempRootFolder()
+		private static string CreateTempRootFolder()
 		{
 			string result = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 			DeleteFolder(result);

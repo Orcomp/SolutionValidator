@@ -11,22 +11,16 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 		// Not used currently: public const string OneLevelWildCardToken = "*";
 
 		protected readonly CheckType CheckType;
+		protected readonly IFileSystemHelper FileSystemHelper;
 		protected readonly bool IsRecursive;
 		protected readonly string RelativePath;
-		protected readonly IFileSystemHelper FileSystemHelper;
 
 		protected FileSystemRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
 		{
-			RelativePath = relativePath;
+			RelativePath = relativePath.Replace("/", @"\");
 			CheckType = checkType;
 			FileSystemHelper = fileSystemHelper;
 			IsRecursive = relativePath.IndexOf(RecursionToken, StringComparison.InvariantCulture) != -1;
-		}
-
-		public override string ToString()
-		{
-			return string.Format("{0} Path: {1}, Recursive: {2}, CheckType: {3}", GetType().Name, RelativePath, IsRecursive,
-				CheckType);
 		}
 
 		// Custom Whitebox sorry...
@@ -39,6 +33,12 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 				result.IsRecursive = IsRecursive;
 				return result;
 			}
+		}
+
+		public override string ToString()
+		{
+			return string.Format("{0} Path: {1}, Recursive: {2}, CheckType: {3}", GetType().Name, RelativePath, IsRecursive,
+				CheckType);
 		}
 	}
 }

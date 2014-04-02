@@ -1,12 +1,19 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using CommandLine;
+
+[assembly: AssemblyUsage(
+	" ",
+	"Usage: SolutionValidator",
+	"       SolutionValidator -rc:\\myreporoot\\ -fmyfoldercheckrulefile.txt"
+	)]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("SolutionValidator.UI.Console")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SolutionValidator")]
+[assembly: AssemblyDescription("SolutionValidator Console")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

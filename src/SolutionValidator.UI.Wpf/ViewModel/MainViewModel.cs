@@ -135,14 +135,7 @@ namespace SolutionValidator.UI.Wpf.ViewModel
 			MainWindowLeft = Settings.Default.MainWindowLeft;
 			MainWindowHeight = Settings.Default.MainWindowHeight;
 			MainWindowWidth = Settings.Default.MainWindowWidth;
-			if (Settings.Default.MainWindowMaximized)
-			{
-				MainWindowState = WindowState.Maximized;
-			}
-			else
-			{
-				MainWindowState = WindowState.Normal;
-			}
+			MainWindowState = Settings.Default.MainWindowMaximized ? WindowState.Maximized : WindowState.Normal;
 		}
 
 		/// <summary>

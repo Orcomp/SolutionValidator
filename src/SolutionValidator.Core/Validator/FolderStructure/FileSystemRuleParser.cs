@@ -2,31 +2,46 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace SolutionValidator.Core.Validator.FolderStructure
 {
 	public class FileSystemRuleParser
 	{
-		private IFileSystemHelper fileSystemHelper;
 		private const string RecursionTokenReplacement = "T_o@k@e_n";
 		private const string FileWildCardTokenReplacement = "W_T_o@k@e_n";
+		private readonly IFileSystemHelper fileSystemHelper;
 
 		public FileSystemRuleParser(IFileSystemHelper fileSystemHelper)
 		{
 			this.fileSystemHelper = fileSystemHelper;
 		}
 
+		public IEnumerable<FileSystemRule> Parse(string path)
+		{
+			using (var stream = File.OpenRead(path))
+			{
+				return Parse(stream);
+			}
+		}
+
+		public IEnumerable<FileSystemRule> Parse(Stream stream)
+		{
+			using (var reader = new StreamReader(stream))
+			{
+				return Parse(reader);
+			}
+		}
+
 		public IEnumerable<FileSystemRule> Parse(StreamReader reader)
 		{
 			var result = new List<FileSystemRule>();
-			string line;
 			int lineNumber = 1;
 			try
 			{
+				string line;
 				while (null != (line = reader.ReadLine()))
 				{
-					FileSystemRule rule = ParseLine(line);
+					var rule = ParseLine(line);
 					if (rule != null)
 					{
 						result.Add(rule);
@@ -105,10 +120,10 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 					.Replace(FileSystemRule.RecursionToken, RecursionTokenReplacement);
 				if (!path.EndsWith(@"\"))
 				{
-					var split = pathToCheck.Split('\\');
+					string[] split = pathToCheck.Split('\\');
 					if (split.Length > 0)
 					{
-						split[split.Length-1] = split[split.Length-1]
+						split[split.Length - 1] = split[split.Length - 1]
 							.Replace(FileSystemRule.FileWildCardToken, FileWildCardTokenReplacement);
 						pathToCheck = String.Join(@"\", split);
 					}
@@ -117,7 +132,7 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 				Path.GetFullPath(pathToCheck);
 				return true;
 			}
-			catch 
+			catch
 			{
 				return false;
 			}

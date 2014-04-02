@@ -1,71 +1,102 @@
-﻿//using Moq;
-//using NUnit.Framework;
-//using SolutionValidator.Core.Validator.Common;
-//using SolutionValidator.Core.Validator.FolderStructure;
+﻿using Moq;
+using NUnit.Framework;
+using SolutionValidator.Core.Validator.Common;
+using SolutionValidator.Core.Validator.FolderStructure;
 
-//namespace SolutionValidator.Core.Tests.Validator.FolderStructure
-//{
-//	[TestFixture]
-//	public class FileRuleTest
-//	{
-//		const string Root = "should not matter what is this content";
-//		const string FolderPattern = "also should not matter what is this content";
-//		static readonly string[] Count0 = new string[0];
-//		static readonly string[] Count1 = { "anything" };
-//		static readonly string[] Count2 = { "anything", "something" };
-//		static readonly string[][] Counts = {Count0, Count1, Count2};
+namespace SolutionValidator.Core.Tests.Validator.FolderStructure
+{
+	[TestFixture]
+	public class FileRuleTest
+	{
+		#region Setup/Teardown
 
-//		private ProjectInfo projectInfo;
-//		Mock<IFileSystemHelper> fshMock;
-		
-//		[TestFixtureSetUp]
-//		public void TestFixtureSetUp()
-//		{
-//			projectInfo = new ProjectInfo(Root, Root);
-//		}
+		[SetUp]
+		public void SetUp()
+		{
+			fshMock = new Mock<IFileSystemHelper>();
+		}
 
-//		[SetUp]
-//		public void SetUp()
-//		{
-//			fshMock = new Mock<IFileSystemHelper>();
-//		}
+		#endregion
+
+		private const string RootPath = "should not matter what is this content";
+		private static readonly string[] Count0 = new string[0];
+		private static readonly string[] Count1 = {"anything"};
+		private static readonly string[] Count2 = {"anything", "something"};
+		private static readonly string[][] Counts = {Count0, Count1, Count2};
+
+		private RepositoryInfo repositoryInfo;
+		private Mock<IFileSystemHelper> fshMock;
+
+		[TestFixtureSetUp]
+		public void TestFixtureSetUp()
+		{
+			repositoryInfo = new RepositoryInfo(RootPath);
+		}
 
 
-//		[Test]
-//		[TestCase(0, false)]
-//		[TestCase(1, true)]
-//		[TestCase(2, true)]
-//		public void TestValidateExist(int countIndex, bool existReturnValue, bool expectedIsValid)
-//		{
-//			// Arrange:
-//			fshMock.Setup(f => f.GetFolders(Root, FolderPattern)).Returns(Counts[countIndex]);
-			
-			
-//			// Act:
-//			var rule = new FolderRule(FolderPattern, CheckType.MustExist, fshMock.Object);
-//			ValidationResult validationResult = rule.Validate(projectInfo);
-			
-//			// Assert:
-//			fshMock.Verify(f => f.GetFolders(Root, FolderPattern), Times.Once);
-//			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
-			
-//		}
+		[Test]
+		[TestCase(0, true, "qwe.txt", false, true)]
+		[TestCase(0, false, "qwe.txt", false, false)]
+		[TestCase(0, true, "qwe/qwe.txt", false, true)]
+		[TestCase(0, false, "qwe/qwe.txt", false, false)]
+		[TestCase(0, true, "qwe/*.txt", false, true)]
+		[TestCase(0, false, "qwe/*.txt", false, false)]
+		[TestCase(0, true, "**/*.txt", true, false)]
+		[TestCase(1, true, "**/*.txt", true, true)]
+		[TestCase(2, true, "**/*.txt", true, true)]
+		[TestCase(0, false, "**/*.txt", true, false)]
+		[TestCase(1, false, "**/*.txt", true, false)]
+		[TestCase(2, false, "**/*.txt", true, false)]
+		public void TestValidateExist(int countIndex, bool existResult, string pattern, bool isRecursive, bool expectedIsValid)
+		{
+			// Arrange:
+			fshMock.Setup(f => f.GetFolders(RootPath, It.IsAny<string>())).Returns(Counts[countIndex]);
+			fshMock.Setup(f => f.Exists(It.IsAny<string>(), It.IsAny<string>())).Returns(existResult);
 
-//		[Test]
-//		[TestCase(0, true)]
-//		[TestCase(1, false)]
-//		[TestCase(2, false)]
-//		public void TestValidateNotExist(int countIndex, bool expectedIsValid)
-//		{
-//			// Arrange:
-//			fshMock.Setup(f => f.GetFolders(Root, FolderPattern)).Returns(Counts[countIndex]);
+			// Act:
+			var rule = new FileRule(pattern, CheckType.MustExist, fshMock.Object);
+			ValidationResult validationResult = rule.Validate(repositoryInfo);
 
-//			// Act:
-//			var rule = new FolderRule(FolderPattern, CheckType.MustNotExist, fshMock.Object);
-//			ValidationResult validationResult = rule.Validate(projectInfo);
+			// Assert:
+			fshMock.Verify(f => f.GetFolders(RootPath, It.IsAny<string>()), isRecursive ? Times.Once() : Times.Never());
+			fshMock.Verify(f => f.Exists(It.IsAny<string>(), It.IsAny<string>()),
+				isRecursive ? (countIndex == 0 ? Times.Never() : Times.AtLeastOnce()) : Times.Once());
+			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
+		}
 
-//			// Assert:
-//			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
-//		}
-//	}
-//}
+
+		[Test]
+		[TestCase(0, true, "qwe.txt", false, false)]
+		[TestCase(0, false, "qwe.txt", false, true)]
+		[TestCase(0, true, "qwe/qwe.txt", false, false)]
+		[TestCase(0, false, "qwe/qwe.txt", false, true)]
+		[TestCase(0, true, "qwe/*.txt", false, false)]
+		[TestCase(0, false, "qwe/*.txt", false, true)]
+		[TestCase(0, true, "**/*.txt", true, true)]
+		[TestCase(1, true, "**/*.txt", true, false)]
+		[TestCase(2, true, "**/*.txt", true, false)]
+		[TestCase(0, false, "**/*.txt", true, true)]
+		[TestCase(1, false, "**/*.txt", true, true)]
+		[TestCase(2, false, "**/*.txt", true, true)]
+		public void TestValidateNotExist(int countIndex,
+			bool existResult,
+			string pattern,
+			bool isRecursive,
+			bool expectedIsValid)
+		{
+			// Arrange:
+			fshMock.Setup(f => f.GetFolders(RootPath, It.IsAny<string>())).Returns(Counts[countIndex]);
+			fshMock.Setup(f => f.Exists(It.IsAny<string>(), It.IsAny<string>())).Returns(existResult);
+
+			// Act:
+			var rule = new FileRule(pattern, CheckType.MustNotExist, fshMock.Object);
+			ValidationResult validationResult = rule.Validate(repositoryInfo);
+
+			// Assert:
+			fshMock.Verify(f => f.GetFolders(RootPath, It.IsAny<string>()), isRecursive ? Times.Once() : Times.Never());
+			fshMock.Verify(f => f.Exists(It.IsAny<string>(), It.IsAny<string>()),
+				isRecursive ? (countIndex == 0 ? Times.Never() : Times.AtLeastOnce()) : Times.Once());
+			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
+		}
+	}
+}

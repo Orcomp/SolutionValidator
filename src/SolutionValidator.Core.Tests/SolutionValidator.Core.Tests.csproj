@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="Validator\FolderStructure\FileRuleTest.cs" />
+    <Compile Include="Validator\FolderStructure\IntegrationTest.cs" />
     <Compile Include="Validator\FolderStructure\FolderRuleTest.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemHelperTest.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemRuleParserTest.cs" />

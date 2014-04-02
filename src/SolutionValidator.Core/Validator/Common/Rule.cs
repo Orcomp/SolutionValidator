@@ -2,6 +2,6 @@
 {
 	public abstract class Rule
 	{
-		public abstract ValidationResult Validate(ProjectInfo projectInfo);
+		public abstract ValidationResult Validate(RepositoryInfo repositoryInfo);
 	}
 }

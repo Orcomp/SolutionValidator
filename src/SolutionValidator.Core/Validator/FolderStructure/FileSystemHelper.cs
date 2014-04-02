@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 
-
 namespace SolutionValidator.Core.Validator.FolderStructure
 {
-	
 	public class FileSystemHelper : IFileSystemHelper
 	{
 		#region IFileSystemHelper Members
@@ -24,17 +23,17 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 		{
 			var result = new List<string>();
 			root = root.Trim().ToLower();
-			pattern = pattern.Replace('/','\\').Trim('\\')+'\\';
+			pattern = pattern.Replace('/', '\\').Trim('\\') + '\\';
 			string[] folders = Directory.GetDirectories(root, "*", SearchOption.AllDirectories);
-			
+
 			string regexPattern = EscapeRegexSpecial(pattern);
 			regexPattern = regexPattern
 				.Replace(FileSystemRule.RecursionToken, @".+")
 				// Not used currently: .Replace(FileSystemRule.OneLevelWildCardToken, @"[^\\]+")
-			;
-			
+				;
+
 			regexPattern = string.Format(@"^{0}$", regexPattern);
-			
+
 
 			foreach (string folder in folders)
 			{
@@ -42,10 +41,6 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 				if (Regex.IsMatch(relativePart, regexPattern, RegexOptions.IgnoreCase))
 				{
 					result.Add(folder);
-				}
-				else
-				{
-					var i = 0;
 				}
 			}
 			return result;
@@ -60,7 +55,7 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 			const string regexSpecials = @".$^{}[]()|+?\";
 			foreach (char regexSpecial in regexSpecials)
 			{
-				result = result.Replace(regexSpecial.ToString(), @"\" + regexSpecial);
+				result = result.Replace(regexSpecial.ToString(CultureInfo.InvariantCulture), @"\" + regexSpecial);
 			}
 			return result;
 		}

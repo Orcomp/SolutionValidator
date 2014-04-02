@@ -8,26 +8,30 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 	[TestFixture]
 	public class FolderRuleTest
 	{
-		const string Root = "should not matter what is this content";
-		const string FolderPattern = "also should not matter what is this content";
-		static readonly string[] Count0 = new string[0];
-		static readonly string[] Count1 = { "anything" };
-		static readonly string[] Count2 = { "anything", "something" };
-		static readonly string[][] Counts = { Count0, Count1, Count2 };
-
-		private ProjectInfo projectInfo;
-		Mock<IFileSystemHelper> fshMock;
-
-		[TestFixtureSetUp]
-		public void TestFixtureSetUp()
-		{
-			projectInfo = new ProjectInfo(Root, Root);
-		}
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
 		{
 			fshMock = new Mock<IFileSystemHelper>();
+		}
+
+		#endregion
+
+		private const string RootPath = "should not matter what is this content";
+		private const string FolderPattern = "also should not matter what is this content";
+		private static readonly string[] Count0 = new string[0];
+		private static readonly string[] Count1 = {"anything"};
+		private static readonly string[] Count2 = {"anything", "something"};
+		private static readonly string[][] Counts = {Count0, Count1, Count2};
+
+		private RepositoryInfo repositoryInfo;
+		private Mock<IFileSystemHelper> fshMock;
+
+		[TestFixtureSetUp]
+		public void TestFixtureSetUp()
+		{
+			repositoryInfo = new RepositoryInfo(RootPath);
 		}
 
 
@@ -38,16 +42,15 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 		public void TestValidateExist(int countIndex, bool expectedIsValid)
 		{
 			// Arrange:
-			fshMock.Setup(f => f.GetFolders(Root, FolderPattern)).Returns(Counts[countIndex]);
+			fshMock.Setup(f => f.GetFolders(RootPath, FolderPattern)).Returns(Counts[countIndex]);
 
 			// Act:
 			var rule = new FolderRule(FolderPattern, CheckType.MustExist, fshMock.Object);
-			ValidationResult validationResult = rule.Validate(projectInfo);
+			ValidationResult validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
-			fshMock.Verify(f => f.GetFolders(Root, FolderPattern), Times.Once);
+			fshMock.Verify(f => f.GetFolders(RootPath, FolderPattern), Times.Once);
 			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
-
 		}
 
 		[Test]
@@ -57,13 +60,14 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 		public void TestValidateNotExist(int countIndex, bool expectedIsValid)
 		{
 			// Arrange:
-			fshMock.Setup(f => f.GetFolders(Root, FolderPattern)).Returns(Counts[countIndex]);
+			fshMock.Setup(f => f.GetFolders(RootPath, FolderPattern)).Returns(Counts[countIndex]);
 
 			// Act:
 			var rule = new FolderRule(FolderPattern, CheckType.MustNotExist, fshMock.Object);
-			ValidationResult validationResult = rule.Validate(projectInfo);
+			ValidationResult validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
+			fshMock.Verify(f => f.GetFolders(RootPath, FolderPattern), Times.Once);
 			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
 		}
 	}

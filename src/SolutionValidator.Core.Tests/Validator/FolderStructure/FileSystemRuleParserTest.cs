@@ -24,7 +24,7 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 		[TestCase("qwe/*.*", false, false)]
 		public void TestParseLineValidPath(string line, bool expectedIsRecursive, bool canBeFolder)
 		{
-			var result = parser.ParseLine(line);
+			FileSystemRule result = parser.ParseLine(line);
 			Assert.IsTrue(result is FileRule);
 			Assert.AreEqual(CheckType.MustExist, result.UnitTestPeek.CheckType);
 			Assert.AreEqual(expectedIsRecursive, result.UnitTestPeek.IsRecursive);
