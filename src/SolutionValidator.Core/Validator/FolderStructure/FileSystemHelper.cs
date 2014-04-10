@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
+using SolutionValidator.Core.Validator.FolderStructure.Rules;
 
 namespace SolutionValidator.Core.Validator.FolderStructure
 {

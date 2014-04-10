@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using SolutionValidator.Core.Validator.Common;
 using SolutionValidator.Core.Validator.FolderStructure;
+using SolutionValidator.Core.Validator.FolderStructure.Rules;
 
 namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 {

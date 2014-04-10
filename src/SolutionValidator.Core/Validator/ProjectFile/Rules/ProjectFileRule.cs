@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Dynamic;
 using SolutionValidator.Core.Validator.Common;
+using SolutionValidator.Core.Validator.FolderStructure;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Core.Validator.ProjectFile.Rules
 {
-	public abstract class FileSystemRule : Rule
+	public abstract class ProjectFileRule : Rule
 	{
 		public const string RecursionToken = "**";
 		public const string FileWildCardToken = "*";
@@ -15,7 +16,7 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 		protected readonly bool IsRecursive;
 		protected readonly string RelativePath;
 
-		protected FileSystemRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
+		protected ProjectFileRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
 		{
 			RelativePath = relativePath.Replace("/", @"\");
 			CheckType = checkType;

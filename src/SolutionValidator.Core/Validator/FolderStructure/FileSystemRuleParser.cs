@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SolutionValidator.Core.Validator.FolderStructure.Rules;
 
 namespace SolutionValidator.Core.Validator.FolderStructure
 {
@@ -18,7 +19,7 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 
 		public IEnumerable<FileSystemRule> Parse(string path)
 		{
-			using (var stream = File.OpenRead(path))
+			using (FileStream stream = File.OpenRead(path))
 			{
 				return Parse(stream);
 			}
@@ -41,7 +42,7 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 				string line;
 				while (null != (line = reader.ReadLine()))
 				{
-					var rule = ParseLine(line);
+					FileSystemRule rule = ParseLine(line);
 					if (rule != null)
 					{
 						result.Add(rule);

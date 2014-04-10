@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CommandLine;
 using SolutionValidator.Core.Validator.Common;
 using SolutionValidator.Core.Validator.FolderStructure;
+using SolutionValidator.Core.Validator.FolderStructure.Rules;
 using SolutionValidator.UI.Console.CommanLineParsing;
 
 namespace SolutionValidator.UI.Console
@@ -64,15 +66,15 @@ namespace SolutionValidator.UI.Console
 			}
 
 			var fileSystemRuleParser = new FileSystemRuleParser(new FileSystemHelper());
-			var rules = fileSystemRuleParser.Parse(folderCheckRulesPath);
+			IEnumerable<FileSystemRule> rules = fileSystemRuleParser.Parse(folderCheckRulesPath);
 
 			var repositoryInfo = new RepositoryInfo(repoRootPath);
 
 			System.Console.WriteLine("Found {0} rules, processing...", rules.Count());
 			int errorCount = 0;
-			foreach (var rule in rules)
+			foreach (FileSystemRule rule in rules)
 			{
-				var validationResult = rule.Validate(repositoryInfo);
+				ValidationResult validationResult = rule.Validate(repositoryInfo);
 				if (!validationResult.IsValid)
 				{
 					System.Console.Error.WriteLine("Error, the following rule is not satisfied: {0}", validationResult.Description);

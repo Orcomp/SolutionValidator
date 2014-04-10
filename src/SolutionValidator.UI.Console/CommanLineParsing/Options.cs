@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CommandLine;
+﻿using CommandLine;
 using CommandLine.Text;
 
 namespace SolutionValidator.UI.Console.CommanLineParsing
@@ -12,10 +8,12 @@ namespace SolutionValidator.UI.Console.CommanLineParsing
 		[Option('r', "repoRoot", DefaultValue = ".", HelpText = "Path to repository root.")]
 		public string RepoRootPath { get; set; }
 
-		[Option('f', "folderCheckRules", DefaultValue = ".folderCheckRules", HelpText = "Path to folder and file check rule file")]
+		[Option('f', "folderCheckRules", DefaultValue = ".folderCheckRules",
+			HelpText = "Path to folder and file check rule file")]
 		public string FolderCheckFile { get; set; }
 
-		[Option('v', "verbose", DefaultValue = true, HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
+		[Option('v', "verbose", DefaultValue = true,
+			HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
 		public bool Verbose { get; set; }
 
 		[ParserState]
@@ -25,8 +23,6 @@ namespace SolutionValidator.UI.Console.CommanLineParsing
 		public string GetUsage()
 		{
 			return HelpText.AutoBuild(this, (HelpText current) => HelpText.DefaultParsingErrorsHandler(this, current));
-				
 		}
 	}
-
 }

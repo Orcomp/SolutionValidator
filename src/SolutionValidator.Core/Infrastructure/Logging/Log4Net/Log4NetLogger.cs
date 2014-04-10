@@ -87,7 +87,6 @@ namespace SolutionValidator.Core.Infrastructure.Logging.Log4Net
 				}
 				catch
 				{
-
 				}
 			}
 		}
