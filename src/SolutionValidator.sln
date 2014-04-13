@@ -12,19 +12,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.UI.Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.Core.Tests", "SolutionValidator.Core.Tests\SolutionValidator.Core.Tests.csproj", "{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{49DD0255-0F79-4264-AD05-4BF7FD54BE11}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{025902C4-3FB2-420C-98D5-16738319ED53}"
 	ProjectSection(SolutionItems) = preProject
 		..\build.bat = ..\build.bat
 		..\build.fsx = ..\build.fsx
 		..\clean.bat = ..\clean.bat
 		..\version.txt = ..\version.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{6DEEDD13-7614-4B37-BDCF-FC79A83AC77F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{9B677E68-A47B-41E3-8DB8-5D6EDB2DF9E0}"
+	ProjectSection(SolutionItems) = preProject
+		..\tools\nuget\NuGet.exe = ..\tools\nuget\NuGet.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{DAF9732E-D1DE-4E91-B6EE-13B1CCC30BDA}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Global
@@ -55,5 +60,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B} = {52F55AB9-C171-473F-837C-9D958B10B030}
+		{9B677E68-A47B-41E3-8DB8-5D6EDB2DF9E0} = {6DEEDD13-7614-4B37-BDCF-FC79A83AC77F}
 	EndGlobalSection
 EndGlobal
