@@ -1,30 +1,21 @@
 using System.Reflection;
 using System.Windows;
-using GalaSoft.MvvmLight;
+using Catel.MVVM;
 using SolutionValidator.Core.Infrastructure.Logging;
 using SolutionValidator.UI.Wpf.Properties;
 
-namespace SolutionValidator.UI.Wpf.ViewModel
+namespace SolutionValidator.UI.Wpf.ViewModels
 {
-	public class MainViewModel : ViewModelBase
+	public class MainWindowViewModel : ViewModelBase
 	{
-		private ILogger logger;
-		private int mainWindowHeight;
-		private int mainWindowLeft;
-		private WindowState mainWindowState;
-		private int mainWindowTop;
-		private int mainWindowWidth;
-		private Rect restoreBounds;
-		private IViewService viewService;
+	    private Rect restoreBounds;
 
-		/// <summary>
-		///     Initializes a new instance of the MainViewModel class.
+	    /// <summary>
+		///     Initializes a new instance of the MainWindowViewModel class.
 		/// </summary>
-		public MainViewModel(ILogger logger, IViewService viewService)
+		public MainWindowViewModel(ILogger logger)
 		{
-			this.logger = logger;
-			this.viewService = viewService;
-			RestoreMainWindow();
+	        RestoreMainWindow();
 		}
 
 		/// <summary>
@@ -40,72 +31,31 @@ namespace SolutionValidator.UI.Wpf.ViewModel
 		///     Observable property for MVVM binding. Gets or sets the main window top.
 		/// </summary>
 		/// <value>The main window top.</value>
-		public int MainWindowTop
-		{
-			get { return mainWindowTop; }
-			set
-			{
-				mainWindowTop = value;
-				RaisePropertyChanged(() => MainWindowTop);
-			}
-		}
+        public int MainWindowTop { get; set; }		
 
 		/// <summary>
 		///     Observable property for MVVM binding. Gets or sets the main window left.
 		/// </summary>
 		/// <value>The main window left.</value>
-		public int MainWindowLeft
-		{
-			get { return mainWindowLeft; }
-			set
-			{
-				mainWindowLeft = value;
-				RaisePropertyChanged(() => MainWindowLeft);
-			}
-		}
+		public int MainWindowLeft { get; set; }		
 
 		/// <summary>
 		///     Observable property for MVVM binding. Gets or sets the width of the main window.
 		/// </summary>
 		/// <value>The width of the main window.</value>
-		public int MainWindowWidth
-		{
-			get { return mainWindowWidth; }
-			set
-			{
-				mainWindowWidth = value;
-				RaisePropertyChanged(() => MainWindowWidth);
-			}
-		}
+		public int MainWindowWidth { get; set; }
 
 		/// <summary>
 		///     Observable property for MVVM binding. Gets or sets the height of the main window.
 		/// </summary>
 		/// <value>The height of the main window.</value>
-		public int MainWindowHeight
-		{
-			get { return mainWindowHeight; }
-			set
-			{
-				mainWindowHeight = value;
-				RaisePropertyChanged(() => MainWindowHeight);
-			}
-		}
-
+		public int MainWindowHeight { get; set; }		
 
 		/// <summary>
 		///     Observable property for MVVM binding. Gets or sets the state of the main window.
 		/// </summary>
 		/// <value>The state of the main window.</value>
-		public WindowState MainWindowState
-		{
-			get { return mainWindowState; }
-			set
-			{
-				mainWindowState = value;
-				RaisePropertyChanged(() => MainWindowState);
-			}
-		}
+		public WindowState MainWindowState { get; set; }
 
 		/// <summary>
 		///     Observable property for MVVM binding. Gets or sets the restore bounds.
@@ -117,16 +67,21 @@ namespace SolutionValidator.UI.Wpf.ViewModel
 			set { restoreBounds = value; }
 		}
 
+        /// <summary>
+        /// Called when the view model has just been closed.
+        ///             
+        /// <para />
+        ///             This method also raises the 
+        /// <see cref="E:Catel.MVVM.ViewModelBase.Closed" /> event.
+        /// </summary>
+        /// <param name="result">The result to pass to the view. This will, for example, be used as <c>DialogResult</c>.</param>
+	    protected override void OnClosed(bool? result)
+	    {
+	        base.OnClosed(result);
+            SaveMainWindow();
+	    }
 
-		/// <summary>
-		///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
-		public void Dispose()
-		{
-			SaveMainWindow();
-		}
-
-		/// <summary>
+	    /// <summary>
 		///     Restores the main window position an size
 		/// </summary>
 		private void RestoreMainWindow()

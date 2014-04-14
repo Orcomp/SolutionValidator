@@ -32,11 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Catel.Core">
+      <HintPath>..\..\lib\Catel.Core.3.9.0.1404101914-beta\lib\net40\Catel.Core.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\lib\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\..\lib\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
@@ -51,9 +51,9 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Infrastructure\DependencyInjection\CatelResolver.cs" />
     <Compile Include="Infrastructure\DependencyInjection\Dependency.cs" />
     <Compile Include="Infrastructure\DependencyInjection\IResolver.cs" />
-    <Compile Include="Infrastructure\DependencyInjection\NinjectResolver.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />
     <Compile Include="Infrastructure\Logging\Log4Net\Log4NetLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

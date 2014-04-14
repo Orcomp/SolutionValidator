@@ -1,0 +1,25 @@
+﻿<catel:DataWindow x:Class="SolutionValidator.UI.Wpf.Views.MainWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:behaviors="clr-namespace:SolutionValidator.UI.Wpf.View.Behaviors"
+                xmlns:catel="http://catel.codeplex.com"
+                FontSize="14"
+                Title="{Binding Title}"
+                Top="{Binding Path=MainWindowTop, Mode=TwoWay}"
+                Left="{Binding Path=MainWindowLeft, Mode=TwoWay}"
+                Width="{Binding Path=MainWindowWidth, Mode=TwoWay}"
+                Height="{Binding Path=MainWindowHeight, Mode=TwoWay}"
+                WindowState="{Binding Path=MainWindowState, Mode=TwoWay}"
+                Icon="/SolutionValidator.UI.Wpf;component/App.ico"
+                  ResizeMode="CanResize">
+    
+
+    <behaviors:Piper.DataPipes>
+        <behaviors:DataPipeCollection>
+            <behaviors:DataPipe
+                Source="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=RestoreBounds}"
+                Target="{Binding Path=RestoreBounds, Mode=OneWayToSource}" />
+        </behaviors:DataPipeCollection>
+    </behaviors:Piper.DataPipes>
+    <Grid />
+</catel:DataWindow>

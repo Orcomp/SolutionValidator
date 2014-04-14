@@ -3,7 +3,6 @@ using System.Threading;
 using System.Windows;
 using SolutionValidator.Core.Infrastructure.DependencyInjection;
 using SolutionValidator.Core.Infrastructure.Logging;
-using SolutionValidator.UI.Wpf.ViewModel;
 
 namespace SolutionValidator.UI.Wpf
 {
@@ -27,9 +26,6 @@ namespace SolutionValidator.UI.Wpf
 			base.OnExit(e);
 			try
 			{
-				Dependency.Resolve<MainViewModel>().Dispose();
-
-				// Informational log message
 				Dependency.Resolve<ILogger>().Info("Application terminated normally.");
 			}
 			catch (Exception exception)
@@ -50,9 +46,8 @@ namespace SolutionValidator.UI.Wpf
 		{
 			base.OnStartup(e);
 			try
-			{
-				// Creates DI kernel
-				BootStrapper.CreateKernel();
+			{				
+				BootStrapper.RegisterServices();
 
 				// This is only for verbose logging info and debug info
 				Thread.CurrentThread.Name = "UI";
