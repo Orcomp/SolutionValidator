@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using NUnit.Framework;
 using SolutionValidator.Core.Validator.ProjectFile;
 
@@ -16,12 +17,14 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		public void SetUp()
 		{
 			testee = new ProjectFileHelper();
+			messages = new StringBuilder();
 		}
 
 		#endregion
 
 		private const string TestDataPath = "TestData";
 		private ProjectFileHelper testee;
+		private StringBuilder messages;
 
 		[Test]
 		[TestCase(@"GetAllProjectFilePath\F0", 0)]
@@ -45,9 +48,9 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		[Test]
 		public void TestLoad()
 		{
-			string p1Csproj = "TestData\\p1.csproj";
+			string p1Csproj = "TestData\\p2.csproj";
 			testee.LoadProject(p1Csproj);
-			testee.Check("", "");
+			testee.Check("", "", messages);
 		}
 
 		[Test]
@@ -61,7 +64,7 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		[Test]
 		[TestCase(@"Bad?Path*")]
 		[TestCase(@"Not Existing Path")]
-		[ExpectedException(typeof (OutputPathException))]
+		[ExpectedException(typeof (ProjectFileException))]
 		public void TestParseLineWithBadArgument(string path)
 		{
 			testee.GetAllProjectFilePath(path);

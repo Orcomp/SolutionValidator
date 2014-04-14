@@ -2,13 +2,14 @@
 
 namespace SolutionValidator.Core.Validator.ProjectFile
 {
-	public class OutputPathException : Exception
+	public class ProjectFileException : ApplicationException
 	{
-		public OutputPathException(string message) : base(message)
+		public ProjectFileException(string message) : base(message)
 		{
 		}
 
-		public OutputPathException(string message, Exception innerException) : base(message, innerException)
+		public ProjectFileException(string message, Exception innerException)
+			: base(message, innerException)
 		{
 		}
 	}

@@ -4,7 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Evaluation;
+using SolutionValidator.Core.Properties;
+using Project = Microsoft.Build.Evaluation.Project;
 
 namespace SolutionValidator.Core.Validator.ProjectFile
 {
@@ -12,8 +15,9 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 	{
 		private const string SearchPattern = "*.csproj";
 		private ProjectCollection collection;
-		private string fullPath;
+		private string projectFileFullName;
 		private Project project;
+		private string assemblyName;
 
 		#region IProjectFileHelper Members
 
@@ -34,7 +38,7 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 			}
 			catch (Exception e)
 			{
-				throw new OutputPathException(string.Format("GetAllProjectPath was called with bad argument. root: {0}", root), e);
+				throw new ProjectFileException(string.Format(Resources.ProjectFileHelper_GetAllProjectFilePath_GetAllProjectPath_was_called_with_bad_argument, root), e);
 			}
 
 			return result;
@@ -45,16 +49,17 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 			LoadProject(path, null);
 		}
 
-		public bool Check(string root, string expectedOutputPath)
+		public int Check(string repoRoot, string expectedOutputPath, StringBuilder messages)
 		{
-			foreach (string configurationName in project.ConditionedProperties["Configuration"])
+			var result = 0;
+			assemblyName = project.GetPropertyValue("AssemblyName");
+			var configurationNames = project.ConditionedProperties["Configuration"];
+			
+			foreach (string configurationName in configurationNames)
 			{
-				if (!CheckOne(configurationName, root, expectedOutputPath))
-				{
-					return false;
-				}
+				result += CheckOne(configurationName, repoRoot, expectedOutputPath, messages) ? 0 : 1;
 			}
-			return true;
+			return result;
 		}
 
 		public bool Modify(string expectedOutputPath)
@@ -67,23 +72,94 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 		private void LoadProject(string path, string configuration)
 		{
 			collection = new ProjectCollection {DefaultToolsVersion = "4.0"};
-			fullPath = Path.GetFullPath(path);
+			projectFileFullName = Path.GetFullPath(path);
 			if (configuration != null)
 			{
 				collection.SetGlobalProperty("Configuration", configuration);
 			}
-			project = collection.LoadProject(fullPath);
+			project = collection.LoadProject(projectFileFullName);
 		}
 
-		private bool CheckOne(string configuration, string root, string expectedOutputPath)
+		private bool CheckOne(string configuration, string repoRoot, string expectedOutputPath, StringBuilder messages)
 		{
-			LoadProject(fullPath, configuration);
+			// Must reload the project to make the eveluated values in sync with 
+			// the configuration under test:
 
-			ProjectItem item = project.GetItems("_OutputPathItem").FirstOrDefault();
+			try
+			{
+				LoadProject(projectFileFullName, configuration);
+
+				ProjectItem item = project.GetItems("_OutputPathItem").FirstOrDefault();
+				if (item == null)
+				{
+					var message = string.Format(Resources.ProjectFileHelper_CheckOne_Can_not_get_output_path, GetProjectInfo(configuration));
+					messages.AppendLine(message);
+					return false;
+				}
+				var outputPath = item.EvaluatedInclude;
+				if (Path.IsPathRooted(outputPath) || !outputPath.StartsWith("."))
+				{
+					var message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_must_be_a_relative_path, outputPath, GetProjectInfo(configuration));
+					messages.AppendLine(message);
+					return false;
+				}
+				//($repoRoot)\($expectedOutputPath)\($configuration)\($targetFrameworkVersion)\($projectName)
+
+				repoRoot = repoRoot.Trim('\\');
+				expectedOutputPath = expectedOutputPath.Trim('\\');
+				var targetFrameworkVersion = GetTargetFrameworkVersion(project);
+				
+				// We are using the assembly name here for the sake of simplicity. However please note
+				// that other rules are forcing project file name to be identical with assembly name and root namespace name
+
+				var projectName = assemblyName;
+				var projectFolder = Path.GetDirectoryName(projectFileFullName).Trim('\\');
+				
+				var expectedValue = string.Format(@"{0}\{1}\{2}\{3}\{4}", repoRoot, expectedOutputPath, configuration,
+					targetFrameworkVersion, projectName).ToLower();
+
+				var actualValue = Path.GetFullPath(Path.Combine(projectFolder, outputPath)).Trim('\\').ToLower();
+
+				if (String.Compare(expectedValue, actualValue, StringComparison.Ordinal) != 0)
+				{
+					var message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_was_evaluated_to, actualValue, expectedValue, GetProjectInfo(configuration));
+					messages.AppendLine(message);
+					return false;
+				}
+				return true;
+			}
+			catch (ProjectFileException e)
+			{
+				messages.AppendLine(e.Message);
+				return false;
+			}
+			catch (Exception e)
+			{
+				messages.AppendLine(string.Format("Unexpected exception: {0}", e.Message));
+				return false;
+			}
+
+
+
 
 
 			Dump();
 			return false;
+		}
+
+		private string GetTargetFrameworkVersion(Project project)
+		{
+			try
+			{
+				var value = project.GetProperty("TargetFrameworkVersion").EvaluatedValue;
+				return string.Format("NET{0}", value.Replace(".", "").Replace("v", ""));
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+
+
 		}
 
 		private void Dump()
@@ -114,6 +190,11 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 			}
 			string r = sb.ToString();
 			Debug.WriteLine(r);
+		}
+
+		private string GetProjectInfo(string configuration = "N/A")
+		{
+			return string.Format("Project File: '{0}', Configuration '{1}'", projectFileFullName, configuration);
 		}
 	}
 }

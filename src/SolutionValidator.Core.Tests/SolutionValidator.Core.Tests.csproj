@@ -59,6 +59,7 @@
     <Compile Include="Validator\FolderStructure\FolderRuleTest.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemHelperTest.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemRuleParserTest.cs" />
+    <Compile Include="Validator\ProjectFile\IntegrationTest.cs" />
     <Compile Include="Validator\ProjectFile\ProjectFileHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +131,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\p1.csproj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\p2.csproj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

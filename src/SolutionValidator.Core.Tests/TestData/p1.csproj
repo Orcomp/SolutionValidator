@@ -61,8 +61,8 @@
     <Compile Include="Validator\Common\RepositoryInfo.cs" />
     <Compile Include="Validator\FolderStructure\CheckType.cs" />
     <Compile Include="Validator\FolderStructure\FileRule.cs" />
-    <Compile Include="Validator\FolderStructure\FileSystemHelper.cs" />
-    <Compile Include="Validator\FolderStructure\IFileSystemHelper.cs" />
+    <Compile Include="Validator\FolderStructure\projectFileHelper.cs" />
+    <Compile Include="Validator\FolderStructure\IprojectFileHelper.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemRule.cs" />
     <Compile Include="Validator\Common\Rule.cs" />
     <Compile Include="Validator\Common\ValidationResult.cs" />
