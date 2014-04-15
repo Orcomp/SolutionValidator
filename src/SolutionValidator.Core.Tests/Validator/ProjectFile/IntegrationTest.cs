@@ -56,6 +56,7 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		[TestCase("output", "p2.csproj", @"level1\level2\level3", @"..\..", @"..\..\..", 0, null)]
 		[TestCase("output", "p2.csproj", @"level1\level2", @"..\..", @"c:\\", 2, "must be a relative path")]
 		[TestCase("output", "p2.csproj", @"level1\level2", @"..\..\output\Debug", @"..\..\output\xxx", 1, "debug;xxx")]
+		[TestCase(@"output\custom", "p2.csproj", @"level1\level2", @"..\..\output", @"..\..\output\custom", 0, null)]
 		public void TestAndCount(string outputPath, string projectNames, string subFolder, string patchFrom, string patchTo, int expectedCount, string expectedContains)
 		{
 			// Arrange:
