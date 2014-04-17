@@ -5,7 +5,7 @@ using CommandLine;
 [assembly: AssemblyUsage(
 	" ",
 	"Usage: SolutionValidator",
-	"       SolutionValidator -rc:\\myreporoot\\ -fmyfoldercheckrulefile.txt"
+	"       SolutionValidator -v -rc:\\myreporoot\\ -cc:\\myconfig.config"
 	)]
 
 // General Information about an assembly is controlled through the following 

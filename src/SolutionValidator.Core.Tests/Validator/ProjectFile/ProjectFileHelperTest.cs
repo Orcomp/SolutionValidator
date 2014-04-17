@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using SolutionValidator.Core.Validator.Common;
 using SolutionValidator.Core.Validator.ProjectFile;
 
 namespace SolutionValidator.Core.Tests.Validator.ProjectFile
@@ -17,14 +18,14 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		public void SetUp()
 		{
 			testee = new ProjectFileHelper();
-			messages = new StringBuilder();
+			result = new ValidationResult(null);
 		}
 
 		#endregion
 
 		private const string TestDataPath = "TestData";
 		private ProjectFileHelper testee;
-		private StringBuilder messages;
+		private ValidationResult result;
 
 		[Test]
 		[TestCase(@"GetAllProjectFilePath\F0", 0)]
@@ -50,7 +51,7 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		{
 			string p1Csproj = "TestData\\p2.csproj";
 			testee.LoadProject(p1Csproj);
-			testee.Check("", "", messages);
+			testee.CheckOutputPath("", "", result);
 		}
 
 		[Test]

@@ -7,8 +7,8 @@
     <ProjectGuid>{F65803B8-681C-4318-978F-32A7ADCA3CA0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NUnitBenchmarker.UI</RootNamespace>
-    <AssemblyName>NUnitBenchmarker.UI</AssemblyName>
+    <RootNamespace>AnyName.Dummy</RootNamespace>
+    <AssemblyName>AnyName.Dummy</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\Debug\NET40\NUnitBenchmarker.UI\</OutputPath>
+    <OutputPath>..\..\output\Debug\NET40\AnyName.Dummy\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,13 +45,13 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\output\Release\NET40\NUnitBenchmarker.UI\</OutputPath>
+    <OutputPath>..\..\output\Release\NET40\AnyName.Dummy\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>NunitBenchmarker.ico</ApplicationIcon>
+    <ApplicationIcon>AnyName.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fasterflect">
@@ -184,21 +184,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NUnitBenchmarker.Benchmark\NUnitBenchmarker.Benchmark.csproj">
+    <ProjectReference Include="..\AnyName.Benchmark\AnyName.Benchmark.csproj">
       <Project>{957ddc89-4e75-db09-9590-cb56f3bd5269}</Project>
-      <Name>NUnitBenchmarker.Benchmark</Name>
+      <Name>AnyName.Benchmark</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NUnitBenchmarker.Core\NUnitBenchmarker.Core.csproj">
+    <ProjectReference Include="..\AnyName.Core\AnyName.Core.csproj">
       <Project>{CB56F3BD-DB09-4E75-9590-957DDC895269}</Project>
-      <Name>NUnitBenchmarker.Core</Name>
+      <Name>AnyName.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NUnitBenchmarker.UIService\NUnitBenchmarker.UIService.csproj">
+    <ProjectReference Include="..\AnyName.DummyService\AnyName.DummyService.csproj">
       <Project>{E5D0D050-596E-44FE-A068-2268266DA6FB}</Project>
-      <Name>NUnitBenchmarker.UIService</Name>
+      <Name>AnyName.DummyService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="NunitBenchmarker.ico" />
+    <Resource Include="AnyName.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -230,10 +230,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <PropertyGroup>
-    <PostBuildEvent>rem This is not working because other referenced assemblies + config file etc also should be copied there... so overcomplicated
-rem copy "$(TargetPath)" "..\..\$(ConfigurationName)\NUnitBenchmarker.Benchmark.Tests"</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

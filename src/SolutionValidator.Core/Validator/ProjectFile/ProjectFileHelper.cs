@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Evaluation;
 using SolutionValidator.Core.Properties;
+using SolutionValidator.Core.Validator.Common;
 using Project = Microsoft.Build.Evaluation.Project;
 
 namespace SolutionValidator.Core.Validator.ProjectFile
@@ -49,22 +50,17 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 			LoadProject(path, null);
 		}
 
-		public int Check(string repoRoot, string expectedOutputPath, StringBuilder messages)
+
+
+		public void CheckOutputPath(string repoRoot, string expectedOutputPath, ValidationResult result, Action<ValidationResult> notify = null)
 		{
-			var result = 0;
 			assemblyName = project.GetPropertyValue("AssemblyName");
 			var configurationNames = project.ConditionedProperties["Configuration"];
 			
 			foreach (string configurationName in configurationNames)
 			{
-				result += CheckOne(configurationName, repoRoot, expectedOutputPath, messages) ? 0 : 1;
+				CheckOneOutputPath(configurationName, repoRoot, expectedOutputPath, result, notify);
 			}
-			return result;
-		}
-
-		public bool Modify(string expectedOutputPath)
-		{
-			throw new NotImplementedException();
 		}
 
 		#endregion
@@ -80,9 +76,9 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 			project = collection.LoadProject(projectFileFullName);
 		}
 
-		private bool CheckOne(string configuration, string repoRoot, string expectedOutputPath, StringBuilder messages)
+		private void CheckOneOutputPath(string configuration, string repoRoot, string expectedOutputPath, ValidationResult result, Action<ValidationResult> notify)
 		{
-			// Must reload the project to make the eveluated values in sync with 
+			// Must reload the project to make the evaluated values in sync with 
 			// the configuration under test:
 
 			try
@@ -90,18 +86,19 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 				LoadProject(projectFileFullName, configuration);
 
 				ProjectItem item = project.GetItems("_OutputPathItem").FirstOrDefault();
+				string message;
 				if (item == null)
 				{
-					var message = string.Format(Resources.ProjectFileHelper_CheckOne_Can_not_get_output_path, GetProjectInfo(configuration));
-					messages.AppendLine(message);
-					return false;
+					message = string.Format(Resources.ProjectFileHelper_CheckOne_Can_not_get_output_path, GetProjectInfo(configuration));
+					result.AddResult(ResultLevel.Error, message, notify);			
+					return;
 				}
 				var outputPath = item.EvaluatedInclude;
 				if (Path.IsPathRooted(outputPath) || !outputPath.StartsWith("."))
 				{
-					var message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_must_be_a_relative_path, outputPath, GetProjectInfo(configuration));
-					messages.AppendLine(message);
-					return false;
+					message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_must_be_a_relative_path, outputPath, GetProjectInfo(configuration));
+					result.AddResult(ResultLevel.Error, message, notify);
+					return;
 				}
 				//($repoRoot)\($expectedOutputPath)\($configuration)\($targetFrameworkVersion)\($projectName)
 
@@ -120,31 +117,26 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 
 				var actualValue = Path.GetFullPath(Path.Combine(projectFolder, outputPath)).Trim('\\').ToLower();
 
+				
 				if (String.Compare(expectedValue, actualValue, StringComparison.Ordinal) != 0)
 				{
-					var message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_was_evaluated_to, actualValue, expectedValue, GetProjectInfo(configuration));
-					messages.AppendLine(message);
-					return false;
+					message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_was_evaluated_to, actualValue, expectedValue, GetProjectInfo(configuration));
+					result.AddResult(ResultLevel.Error, message, notify);
+					return;
+
 				}
-				return true;
+				message = string.Format(Resources.ProjectFileHelper_CheckOneOutputPath_OutputPath_conforms_to_the_required_standards, GetProjectInfo(configuration));
+				result.AddResult(ResultLevel.Passed, message, notify);
+				
 			}
 			catch (ProjectFileException e)
 			{
-				messages.AppendLine(e.Message);
-				return false;
+				result.AddResult(ResultLevel.Error, e.Message, notify);
 			}
 			catch (Exception e)
 			{
-				messages.AppendLine(string.Format("Unexpected exception: {0}", e.Message));
-				return false;
+				result.AddResult(ResultLevel.Error, string.Format("Unexpected exception: {0}", e.Message), notify);
 			}
-
-
-
-
-
-			Dump();
-			return false;
 		}
 
 		private string GetTargetFrameworkVersion(Project project)
@@ -158,8 +150,6 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 			{
 				return null;
 			}
-
-
 		}
 
 		private void Dump()

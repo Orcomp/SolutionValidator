@@ -5,15 +5,17 @@ namespace SolutionValidator.UI.Console.CommanLineParsing
 {
 	internal class Options
 	{
+		public const string ConfigFilePathDefaultValue = "%app.config%";
+
 		[Option('r', "repoRoot", DefaultValue = ".", HelpText = "Path to repository root.")]
 		public string RepoRootPath { get; set; }
 
-		[Option('f', "folderCheckRules", DefaultValue = ".folderCheckRules",
-			HelpText = "Path to folder and file check rule file")]
-		public string FolderCheckFile { get; set; }
+		[Option('c', "config", DefaultValue = ConfigFilePathDefaultValue,
+			HelpText = "Path to configuration file.")]
+		public string ConfigFilePath { get; set; }
 
-		[Option('v', "verbose", DefaultValue = true,
-			HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
+		[Option('v', "verbose", DefaultValue = false,
+			HelpText = "Prints verbose messages to standard output.")]
 		public bool Verbose { get; set; }
 
 		[ParserState]

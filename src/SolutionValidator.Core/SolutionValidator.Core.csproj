@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,18 +54,24 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Infrastructure\Configuration\ConfigurationHelper.cs" />
+    <Compile Include="Infrastructure\Configuration\SolutionValidatorConfigurationSection.cs" />
     <Compile Include="Infrastructure\DependencyInjection\Dependency.cs" />
     <Compile Include="Infrastructure\DependencyInjection\IResolver.cs" />
     <Compile Include="Infrastructure\DependencyInjection\NinjectResolver.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />
     <Compile Include="Infrastructure\Logging\Log4Net\Log4NetLogger.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Validator\Common\ResultLevel.cs" />
     <Compile Include="Validator\Common\RepositoryInfo.cs" />
+    <Compile Include="Validator\Common\RuleProcessor.cs" />
+    <Compile Include="Validator\Common\ValidationMessage.cs" />
     <Compile Include="Validator\FolderStructure\CheckType.cs" />
     <Compile Include="Validator\FolderStructure\Rules\FileRule.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemHelper.cs" />

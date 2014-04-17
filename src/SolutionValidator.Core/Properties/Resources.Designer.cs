@@ -61,6 +61,78 @@ namespace SolutionValidator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to does not exist.
+        /// </summary>
+        internal static string FileRule_Validate_does_not_exist_ {
+            get {
+                return ResourceManager.GetString("FileRule_Validate_does_not_exist_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to does not exist. This file must exist.
+        /// </summary>
+        internal static string FileRule_Validate_does_not_exist__This_file_must_exist_ {
+            get {
+                return ResourceManager.GetString("FileRule_Validate_does_not_exist__This_file_must_exist_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exists.
+        /// </summary>
+        internal static string FileRule_Validate_exists_ {
+            get {
+                return ResourceManager.GetString("FileRule_Validate_exists_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exists. This file should not exist.
+        /// </summary>
+        internal static string FileRule_Validate_exists__This_file_should_not_exist_ {
+            get {
+                return ResourceManager.GetString("FileRule_Validate_exists__This_file_should_not_exist_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to does not exist.
+        /// </summary>
+        internal static string FolderRule_Validate_does_not_exist {
+            get {
+                return ResourceManager.GetString("FolderRule_Validate_does_not_exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to does not exist. This folder must exist.
+        /// </summary>
+        internal static string FolderRule_Validate_does_not_exist_This_folder_must_exist {
+            get {
+                return ResourceManager.GetString("FolderRule_Validate_does_not_exist_This_folder_must_exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exists.
+        /// </summary>
+        internal static string FolderRule_Validate_exists {
+            get {
+                return ResourceManager.GetString("FolderRule_Validate_exists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exists. This folder should not exist.
+        /// </summary>
+        internal static string FolderRule_Validate_exists_This_folder_should_not_exist {
+            get {
+                return ResourceManager.GetString("FolderRule_Validate_exists_This_folder_should_not_exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not get output path. {0}.
         /// </summary>
         internal static string ProjectFileHelper_CheckOne_Can_not_get_output_path {
@@ -88,12 +160,67 @@ namespace SolutionValidator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OutputPath conforms to the required standards. {0}.
+        /// </summary>
+        internal static string ProjectFileHelper_CheckOneOutputPath_OutputPath_conforms_to_the_required_standards {
+            get {
+                return ResourceManager.GetString("ProjectFileHelper_CheckOneOutputPath_OutputPath_conforms_to_the_required_standard" +
+                        "s", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GetAllProjectPath was called with bad argument. root: {0}.
         /// </summary>
         internal static string ProjectFileHelper_GetAllProjectFilePath_GetAllProjectPath_was_called_with_bad_argument {
             get {
                 return ResourceManager.GetString("ProjectFileHelper_GetAllProjectFilePath_GetAllProjectPath_was_called_with_bad_arg" +
                         "ument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking repository: {0}.
+        /// </summary>
+        internal static string RuleProcessor_Process_Checking_repository {
+            get {
+                return ResourceManager.GetString("RuleProcessor_Process_Checking_repository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected error while processing rule: {0}.
+        /// </summary>
+        internal static string RuleProcessor_Process_Unexpected_error_while_processing_rule {
+            get {
+                return ResourceManager.GetString("RuleProcessor_Process_Unexpected_error_while_processing_rule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder structure check was set to &apos;true&apos; but folder structure definition file was not found: {0}.
+        /// </summary>
+        internal static string RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found {
+            get {
+                return ResourceManager.GetString("RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repository root folder does not exists: {0}.
+        /// </summary>
+        internal static string RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists {
+            get {
+                return ResourceManager.GetString("RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown rule.
+        /// </summary>
+        internal static string ValidationResult_ValidationResult_Unknown_rule {
+            get {
+                return ResourceManager.GetString("ValidationResult_ValidationResult_Unknown_rule", resourceCulture);
             }
         }
     }

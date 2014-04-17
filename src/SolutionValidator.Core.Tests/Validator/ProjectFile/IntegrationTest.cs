@@ -1,8 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
+using Ninject;
 using NUnit.Framework;
+using SolutionValidator.Core.Infrastructure.DependencyInjection;
+using SolutionValidator.Core.Infrastructure.Logging;
+using SolutionValidator.Core.Infrastructure.Logging.Log4Net;
 using SolutionValidator.Core.Validator.Common;
+using SolutionValidator.Core.Validator.FolderStructure;
 using SolutionValidator.Core.Validator.ProjectFile;
 using SolutionValidator.Core.Validator.ProjectFile.Rules;
 
@@ -13,12 +19,17 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 	{
 		#region Setup/Teardown
 
+		[TestFixtureSetUp]
+		public void TestFixtureSetUp()
+		{
+			CreateKernel();
+		}
+
+
 		[SetUp]
 		public void SetUp()
 		{
 			helper = new ProjectFileHelper();
-			messages = new StringBuilder();
-			
 		}
 
 		[TearDown]
@@ -45,7 +56,6 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 
 		private const string TestDataPath = "TestData";
 		private ProjectFileHelper helper;
-		private StringBuilder messages;
 		private OutPutPathProjectFileRule rule;
 		private string tempRepoRoot;
 
@@ -68,13 +78,15 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 			var result = rule.Validate(new RepositoryInfo(tempRepoRoot));
 
 			// Assert:
-			Assert.AreEqual(expectedCount, result.InternalErrorCount, result.Description);
+			Assert.AreEqual(expectedCount, result.ErrorCount, result.RuleDescription);
 			Assert.AreEqual(expectedCount == 0, result.IsValid);
+			
 			if (!string.IsNullOrEmpty(expectedContains))
 			{
 				foreach (var expected in expectedContains.Split(';'))
 				{
-					Assert.IsTrue(result.Description.Contains(expected), string.Format("Expected contains: {0}, but was: {1}", expected, result.Description));
+					var errorMessages = string.Concat(result.Messages.Where(m=>m.ResultLevel == ResultLevel.Error).Select(m => m.Message)).Contains(expected);
+					Assert.IsTrue(errorMessages, string.Format("Expected contains: {0}, but was: {1}", expected, result.RuleDescription));
 				}
 			}
 		}
@@ -106,5 +118,25 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 			text = text.Replace(patchFrom, patchTo);
 			File.WriteAllText(fileName, text);
 		}
+
+		private static bool isInitialized;
+		private static IKernel CreateKernel()
+		{
+			if (isInitialized)
+			{
+				isInitialized = true;
+				return null;
+			}
+			var kernel = new StandardKernel();
+			RegisterServices(kernel);
+			Dependency.Initialize(new NinjectResolver(kernel));
+			return kernel;
+		}
+
+		private static void RegisterServices(IKernel kernel)
+		{
+			kernel.Bind<ILogger>().To<Log4NetLogger>().InThreadScope();
+		}
+
 	}
 }

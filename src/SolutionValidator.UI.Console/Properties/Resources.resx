@@ -98,58 +98,34 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-  <data name="ProjectFileHelper_CheckOne_Can_not_get_output_path" xml:space="preserve">
-    <value>Can not get output path. {0}</value>
+  <data name="Program_Run_Repository_root_path__does_not_exist" xml:space="preserve">
+    <value>Repository root path &gt;{0}&lt; does not exist.</value>
   </data>
-  <data name="ProjectFileHelper_GetAllProjectFilePath_GetAllProjectPath_was_called_with_bad_argument" xml:space="preserve">
-    <value>GetAllProjectPath was called with bad argument. root: {0}</value>
+  <data name="Program_Main_SolutionValidator_started" xml:space="preserve">
+    <value>SolutionValidator started.</value>
   </data>
-  <data name="ProjectFileHelper_CheckOne_Output_path_must_be_a_relative_path" xml:space="preserve">
-    <value>Output path must be a relative path. Output path was: '{0}'. {1}</value>
+  <data name="Program_Run_SolutionValidator_exited_with_code" xml:space="preserve">
+    <value>SolutionValidator exited with code {0}.</value>
   </data>
-  <data name="ProjectFileHelper_CheckOne_Output_path_was_evaluated_to" xml:space="preserve">
-    <value>Output path was evaluated to: '{0}'. Expected value: '{1}' (in relative path form, beginning with '.'. {2}</value>
+  <data name="Program_Run_Configuration_file_does_not_exist" xml:space="preserve">
+    <value>Configuration file: &gt;{0}&lt; does not exist.</value>
   </data>
-  <data name="ProjectFileHelper_CheckOneOutputPath_OutputPath_conforms_to_the_required_standards" xml:space="preserve">
-    <value>OutputPath conforms to the required standards. {0}</value>
+  <data name="Program_Run_Unexpected_error" xml:space="preserve">
+    <value>Unexpected error: {0}</value>
   </data>
-  <data name="ValidationResult_ValidationResult_Unknown_rule" xml:space="preserve">
-    <value>Unknown rule</value>
+  <data name="Program_Run_Press_any_key_to_continue" xml:space="preserve">
+    <value>Press any key to continue . . .</value>
   </data>
-  <data name="RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found" xml:space="preserve">
-    <value>Folder structure check was set to 'true' but folder structure definition file was not found: {0}</value>
+  <data name="Program_Run_Total_checks_Total_errors_found" xml:space="preserve">
+    <value>Total checks: {0}. Total errors found: {1}</value>
   </data>
-  <data name="RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists" xml:space="preserve">
-    <value>Repository root folder does not exists: {0}</value>
+  <data name="Program_Run_Error" xml:space="preserve">
+    <value>Error: {0}</value>
   </data>
-  <data name="RuleProcessor_Process_Unexpected_error_while_processing_rule" xml:space="preserve">
-    <value>Unexpected error while processing rule: {0}</value>
+  <data name="Program_Run_Passed" xml:space="preserve">
+    <value>Passed: {0}</value>
   </data>
-  <data name="FileRule_Validate_exists__This_file_should_not_exist_" xml:space="preserve">
-    <value>exists. This file should not exist</value>
-  </data>
-  <data name="FileRule_Validate_does_not_exist__This_file_must_exist_" xml:space="preserve">
-    <value>does not exist. This file must exist</value>
-  </data>
-  <data name="FileRule_Validate_exists_" xml:space="preserve">
-    <value>exists</value>
-  </data>
-  <data name="FileRule_Validate_does_not_exist_" xml:space="preserve">
-    <value>does not exist</value>
-  </data>
-  <data name="FolderRule_Validate_exists_This_folder_should_not_exist" xml:space="preserve">
-    <value>exists. This folder should not exist</value>
-  </data>
-  <data name="FolderRule_Validate_does_not_exist_This_folder_must_exist" xml:space="preserve">
-    <value>does not exist. This folder must exist</value>
-  </data>
-  <data name="FolderRule_Validate_exists" xml:space="preserve">
-    <value>exists</value>
-  </data>
-  <data name="FolderRule_Validate_does_not_exist" xml:space="preserve">
-    <value>does not exist</value>
-  </data>
-  <data name="RuleProcessor_Process_Checking_repository" xml:space="preserve">
-    <value>Checking repository: {0}</value>
+  <data name="Program_Run_Error_when_processing_Repository_root_path" xml:space="preserve">
+    <value>Error when processing Repository root path: &gt;{0}&lt;.</value>
   </data>
 </root>

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using SolutionValidator.Core.Validator.Common;
 
 namespace SolutionValidator.Core.Validator.ProjectFile
 {
@@ -7,7 +9,6 @@ namespace SolutionValidator.Core.Validator.ProjectFile
 	{
 		IEnumerable<string> GetAllProjectFilePath(string root);
 		void LoadProject(string path);
-		int Check(string repoRoot, string expectedOutputPath, StringBuilder messages);
-		bool Modify(string expectedOutputPath);
+		void CheckOutputPath(string repoRoot, string expectedOutputPath, ValidationResult result, Action<ValidationResult> notify = null);
 	}
 }
