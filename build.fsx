@@ -33,8 +33,8 @@ let outputBinFiles = !! (outputBinDir @@ @"\**\*.*")
                             -- ignoreBinFilesPattern
 
 let tests = srcDir @@ @"\**\*.Tests.csproj" 
-let allProjects = srcDir @@ @"\**\*.csproj" 
-
+// Note: We do not want to find the test input .csproj files in TestData folder
+let allProjects = srcDir @@ @"\**\SolutionValidator*.csproj" 
 let testProjects  = !! tests
 let otherProjects = !! allProjects
                         -- tests
@@ -137,4 +137,4 @@ Target "Release" DoNothing
 "BuildOtherProjects" ==> "Release"
 
 // RunTargetOrDefault "Release"
-RunTargetOrDefault "Tests"
+RunTargetOrDefault "Release"

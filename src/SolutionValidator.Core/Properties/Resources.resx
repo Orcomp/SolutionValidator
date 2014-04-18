@@ -152,4 +152,19 @@
   <data name="RuleProcessor_Process_Checking_repository" xml:space="preserve">
     <value>Checking repository: {0}</value>
   </data>
+  <data name="ConfigurationExistsProjectFileRule_Validate_Project contains_expected_configuration" xml:space="preserve">
+    <value>Project '{0}' contains expected configuration '{1}'. {2}</value>
+  </data>
+  <data name="FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath" xml:space="preserve">
+    <value>Error getting EvaluatedDefinitionFilePath.</value>
+  </data>
+  <data name="FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath2" xml:space="preserve">
+    <value>Error getting EvaluatedDefinitionFilePath</value>
+  </data>
+  <data name="CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_identical" xml:space="preserve">
+    <value>Properties in project {0} '{1}' and '{2}' are identical ('{3}'). {4}</value>
+  </data>
+  <data name="CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identical" xml:space="preserve">
+    <value>Properties in project {0} '{1}' and '{2}' are not identical ('{3}' &lt;&gt; '{4}'). {5}</value>
+  </data>
 </root>

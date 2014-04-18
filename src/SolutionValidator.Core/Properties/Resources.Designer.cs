@@ -61,6 +61,35 @@ namespace SolutionValidator.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Properties in project {0} &apos;{1}&apos; and &apos;{2}&apos; are identical (&apos;{3}&apos;). {4}.
+        /// </summary>
+        internal static string CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_identical {
+            get {
+                return ResourceManager.GetString("CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_identical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties in project {0} &apos;{1}&apos; and &apos;{2}&apos; are not identical (&apos;{3}&apos; &lt;&gt; &apos;{4}&apos;). {5}.
+        /// </summary>
+        internal static string CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identical {
+            get {
+                return ResourceManager.GetString("CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identica" +
+                        "l", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project &apos;{0}&apos; contains expected configuration &apos;{1}&apos;. {2}.
+        /// </summary>
+        internal static string ConfigurationExistsProjectFileRule_Validate_Project_contains_expected_configuration {
+            get {
+                return ResourceManager.GetString("ConfigurationExistsProjectFileRule_Validate_Project contains_expected_configurati" +
+                        "on", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to does not exist.
         /// </summary>
         internal static string FileRule_Validate_does_not_exist_ {
@@ -129,6 +158,26 @@ namespace SolutionValidator.Core.Properties {
         internal static string FolderRule_Validate_exists_This_folder_should_not_exist {
             get {
                 return ResourceManager.GetString("FolderRule_Validate_exists_This_folder_should_not_exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error getting EvaluatedDefinitionFilePath..
+        /// </summary>
+        internal static string FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath {
+            get {
+                return ResourceManager.GetString("FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinit" +
+                        "ionFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error getting EvaluatedDefinitionFilePath.
+        /// </summary>
+        internal static string FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath2 {
+            get {
+                return ResourceManager.GetString("FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinit" +
+                        "ionFilePath2", resourceCulture);
             }
         }
         

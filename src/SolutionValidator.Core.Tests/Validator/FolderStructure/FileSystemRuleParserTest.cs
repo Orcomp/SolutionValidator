@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using SolutionValidator.Core.Infrastructure.Logging.Log4Net;
 using SolutionValidator.Core.Validator.FolderStructure;
 using SolutionValidator.Core.Validator.FolderStructure.Rules;
 
@@ -13,7 +14,7 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 		[TestFixtureSetUp]
 		public void Setup()
 		{
-			parser = new FileSystemRuleParser(null);
+			parser = new FileSystemRuleParser(null, new Log4NetLogger());
 		}
 
 		[Test]

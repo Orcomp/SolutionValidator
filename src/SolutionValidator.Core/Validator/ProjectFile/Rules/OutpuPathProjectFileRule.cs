@@ -1,31 +1,26 @@
 ﻿using System;
-using System.Dynamic;
-using System.Text;
-using log4net.Repository.Hierarchy;
-using SolutionValidator.Core.Infrastructure.DependencyInjection;
+using System.Collections.Generic;
 using SolutionValidator.Core.Infrastructure.Logging;
 using SolutionValidator.Core.Validator.Common;
-using SolutionValidator.Core.Validator.FolderStructure;
 
 namespace SolutionValidator.Core.Validator.ProjectFile.Rules
 {
 	public class OutPutPathProjectFileRule : ProjectFileRule
 	{
-		private string expectedOutputPath;
-		private ILogger logger;
+		private readonly string expectedOutputPath;
 
-		public OutPutPathProjectFileRule(string expectedOutputPath, IProjectFileHelper projectFileHelper) : base(projectFileHelper)
+		public OutPutPathProjectFileRule(string expectedOutputPath, IProjectFileHelper projectFileHelper, ILogger logger)
+			: base(projectFileHelper, logger)
 		{
-			logger = Dependency.Resolve<ILogger>();
 			this.expectedOutputPath = expectedOutputPath;
 		}
 
 		public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
 		{
 			var result = new ValidationResult(this);
-			var projectFilePaths = projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
+			IEnumerable<string> projectFilePaths = projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
 
-			foreach (var projectFilePath in projectFilePaths)
+			foreach (string projectFilePath in projectFilePaths)
 			{
 				try
 				{
@@ -38,6 +33,11 @@ namespace SolutionValidator.Core.Validator.ProjectFile.Rules
 				}
 			}
 			return result;
+		}
+
+		protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+		{
+			projectFileHelper.CheckOutputPath(repositoryInfo.RootPath, expectedOutputPath, result, notify);
 		}
 	}
 }

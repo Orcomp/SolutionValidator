@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using SolutionValidator.Core.Infrastructure.Logging.Log4Net;
 using SolutionValidator.Core.Validator.Common;
 using SolutionValidator.Core.Validator.FolderStructure;
 using SolutionValidator.Core.Validator.FolderStructure.Rules;
@@ -23,7 +24,7 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 			repositoryInfo = new RepositoryInfo(rootPath);
 
 			fileSystemHelper = new FileSystemHelper();
-			fileSystemRuleParser = new FileSystemRuleParser(fileSystemHelper);
+			fileSystemRuleParser = new FileSystemRuleParser(fileSystemHelper, new Log4NetLogger());
 		}
 
 		[TestFixtureTearDown]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SolutionValidator.Core.Infrastructure.Logging;
 using SolutionValidator.Core.Validator.FolderStructure.Rules;
 
 namespace SolutionValidator.Core.Validator.FolderStructure
@@ -11,9 +12,11 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 		private const string RecursionTokenReplacement = "T_o@k@e_n";
 		private const string FileWildCardTokenReplacement = "W_T_o@k@e_n";
 		private readonly IFileSystemHelper fileSystemHelper;
+		private readonly ILogger logger;
 
-		public FileSystemRuleParser(IFileSystemHelper fileSystemHelper)
+		public FileSystemRuleParser(IFileSystemHelper fileSystemHelper, ILogger logger)
 		{
+			this.logger = logger;
 			this.fileSystemHelper = fileSystemHelper;
 		}
 
@@ -108,9 +111,9 @@ namespace SolutionValidator.Core.Validator.FolderStructure
 
 			if (line.EndsWith("\\"))
 			{
-				return new FolderRule(line, checkType, fileSystemHelper);
+				return new FolderRule(line, checkType, fileSystemHelper, logger);
 			}
-			return new FileRule(line, checkType, fileSystemHelper);
+			return new FileRule(line, checkType, fileSystemHelper, logger);
 		}
 
 		private bool IsPathValid(string path)

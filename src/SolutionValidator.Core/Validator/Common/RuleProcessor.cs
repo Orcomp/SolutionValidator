@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using SolutionValidator.Core.Infrastructure.Configuration;
 using SolutionValidator.Core.Infrastructure.DependencyInjection;
 using SolutionValidator.Core.Infrastructure.Logging;
@@ -13,20 +14,23 @@ namespace SolutionValidator.Core.Validator.Common
 {
 	public class RuleProcessor
 	{
-		private int totalCheckCount;
-		private int totalErrorCount;
-		private ILogger logger;
+		private readonly ILogger logger;
 		private readonly RepositoryInfo repositoryInfo;
-		private SolutionValidatorConfigurationSection configuration;
 		private readonly List<Rule> rules;
 		private List<ValidationResult> allValidationResults;
+		private SolutionValidatorConfigurationSection configuration;
+		private int totalCheckCount;
+		private int totalErrorCount;
 
-		public RuleProcessor(string repoRootPath, SolutionValidatorConfigurationSection configuration)
+		public RuleProcessor(string repoRootPath, SolutionValidatorConfigurationSection configuration, ILogger logger)
 		{
-			logger = Dependency.Resolve<ILogger>();
+			this.logger = logger;
 			this.configuration = configuration;
+
+			var projectFileHelper = Dependency.Resolve<IProjectFileHelper>();
+
 			rules = new List<Rule>();
-			
+
 			if (!Directory.Exists(repoRootPath))
 			{
 				logger.Error(Resources.RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists, repoRootPath);
@@ -38,21 +42,64 @@ namespace SolutionValidator.Core.Validator.Common
 			{
 				if (File.Exists(configuration.FolderStructure.EvaluatedDefinitionFilePath()))
 				{
-					var fileSystemRuleParser = new FileSystemRuleParser(Dependency.Resolve<IFileSystemHelper>());
+					var fileSystemRuleParser = new FileSystemRuleParser(Dependency.Resolve<IFileSystemHelper>(), logger);
 					rules.AddRange(fileSystemRuleParser.Parse(configuration.FolderStructure.DefinitionFilePath));
 				}
 				else
 				{
-					throw new ParseException(string.Format(Resources.RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found, configuration.FolderStructure.EvaluatedDefinitionFilePath()), 0, 0);
+					throw new ParseException(
+						string.Format(Resources.RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found,
+							configuration.FolderStructure.EvaluatedDefinitionFilePath()), 0, 0);
 				}
 			}
 
-			if (configuration.ProjectFile.outputPath.Check)
+			if (configuration.ProjectFile.OutputPath.Check)
 			{
-				var rule = new OutPutPathProjectFileRule(configuration.ProjectFile.outputPath.Value,
-					Dependency.Resolve<IProjectFileHelper>());
+				var rule = new OutPutPathProjectFileRule(
+					configuration.ProjectFile.OutputPath.Value,
+					projectFileHelper, logger);
 				rules.Add(rule);
 			}
+
+			if (configuration.ProjectFile.RequiredConfigurations.Check)
+			{
+				foreach (string requiredConfigurationName in
+					configuration.ProjectFile.RequiredConfigurations.Cast<ConfigurationNameElement>().Select(e => e.Name))
+				{
+					var rule = new ConfigurationExistsProjectFileRule(requiredConfigurationName, projectFileHelper, logger);
+					rules.Add(rule);
+				}
+			}
+
+			if (configuration.ProjectFile.CheckIdentical.Check)
+			{
+				foreach (var propertiesToMatch in
+					configuration.ProjectFile.CheckIdentical.Cast<PropertiesToMatchElement>())
+				{
+					var rule = new CheckIdenticalProjectFileRule(propertiesToMatch.PropertyName, propertiesToMatch.OtherPropertyName, projectFileHelper, logger);
+					rules.Add(rule);
+				}
+			}
+
+			if (configuration.ProjectFile.CheckForValue.Check)
+			{
+				foreach (var propertyToCheck in
+					configuration.ProjectFile.CheckForValue.Cast<PropertyToCheckElement>())
+				{
+					var rule = new CheckForValueProjectFileRule(propertyToCheck.PropertyName, propertyToCheck.Value, projectFileHelper, logger);
+					rules.Add(rule);
+				}
+			}
+		}
+
+		public int TotalCheckCount
+		{
+			get { return totalCheckCount; }
+		}
+
+		public int TotalErrorCount
+		{
+			get { return totalErrorCount; }
 		}
 
 		public void Process(Action<ValidationResult> notify = null)
@@ -63,11 +110,11 @@ namespace SolutionValidator.Core.Validator.Common
 
 			OnNotifyInfo(notify, Resources.RuleProcessor_Process_Checking_repository, repositoryInfo.RootPath);
 
-			foreach (var rule in rules)
+			foreach (Rule rule in rules)
 			{
 				try
 				{
-					var validationResult = rule.Validate(repositoryInfo, notify);
+					ValidationResult validationResult = rule.Validate(repositoryInfo, notify);
 					OnNotify(notify, validationResult);
 				}
 				catch (Exception e)
@@ -103,16 +150,5 @@ namespace SolutionValidator.Core.Validator.Common
 		{
 			return allValidationResults;
 		}
-
-		public int TotalCheckCount
-		{
-			get { return totalCheckCount; }
-		}
-
-		public int TotalErrorCount
-		{
-			get { return totalErrorCount; }
-		}
-
 	}
 }

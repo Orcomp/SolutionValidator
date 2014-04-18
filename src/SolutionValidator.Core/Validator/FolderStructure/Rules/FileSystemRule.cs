@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Dynamic;
+using SolutionValidator.Core.Infrastructure.Logging;
 using SolutionValidator.Core.Validator.Common;
 
 namespace SolutionValidator.Core.Validator.FolderStructure.Rules
@@ -15,7 +16,8 @@ namespace SolutionValidator.Core.Validator.FolderStructure.Rules
 		protected readonly bool IsRecursive;
 		protected readonly string RelativePath;
 
-		protected FileSystemRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
+		protected FileSystemRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper, ILogger logger)
+			: base(logger)
 		{
 			RelativePath = relativePath.Replace("/", @"\");
 			CheckType = checkType;

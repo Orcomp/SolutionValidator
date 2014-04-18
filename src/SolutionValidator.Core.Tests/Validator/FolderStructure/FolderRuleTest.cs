@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
+using SolutionValidator.Core.Infrastructure.Logging.Log4Net;
 using SolutionValidator.Core.Validator.Common;
 using SolutionValidator.Core.Validator.FolderStructure;
 using SolutionValidator.Core.Validator.FolderStructure.Rules;
@@ -46,7 +47,7 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 			fshMock.Setup(f => f.GetFolders(RootPath, FolderPattern)).Returns(Counts[countIndex]);
 
 			// Act:
-			var rule = new FolderRule(FolderPattern, CheckType.MustExist, fshMock.Object);
+			var rule = new FolderRule(FolderPattern, CheckType.MustExist, fshMock.Object, new Log4NetLogger());
 			ValidationResult validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
@@ -64,7 +65,7 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 			fshMock.Setup(f => f.GetFolders(RootPath, FolderPattern)).Returns(Counts[countIndex]);
 
 			// Act:
-			var rule = new FolderRule(FolderPattern, CheckType.MustNotExist, fshMock.Object);
+			var rule = new FolderRule(FolderPattern, CheckType.MustNotExist, fshMock.Object, new Log4NetLogger());
 			ValidationResult validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:

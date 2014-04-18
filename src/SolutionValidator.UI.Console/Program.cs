@@ -69,7 +69,7 @@ namespace SolutionValidator.UI.Console
 				}
 
 				SolutionValidatorConfigurationSection configuration = ConfigurationHelper.Load(configFilePath);
-				var ruleProcessor = new RuleProcessor(repoRootPath, configuration);
+				var ruleProcessor = new RuleProcessor(repoRootPath, configuration, logger);
 
 				ruleProcessor.Process(validationResult =>
 				{

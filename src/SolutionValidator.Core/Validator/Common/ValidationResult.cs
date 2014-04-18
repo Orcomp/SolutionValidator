@@ -16,14 +16,14 @@ namespace SolutionValidator.Core.Validator.Common
 			// Validation Result metainfo is prepared:
 			if (rule != null)
 			{
-				ruleDescription = rule.ToString();	
+				ruleDescription = rule.ToString();
 			}
 			else
 			{
 				ruleDescription = Resources.ValidationResult_ValidationResult_Unknown_rule;
 			}
-			
-			
+
+
 			messages = new List<ValidationMessage>();
 			ErrorCount = 0;
 			CheckCount = 0;
@@ -36,7 +36,7 @@ namespace SolutionValidator.Core.Validator.Common
 
 		public string RuleDescription
 		{
-			get { return ruleDescription; } 
+			get { return ruleDescription; }
 		}
 
 		public int ErrorCount { get; private set; }

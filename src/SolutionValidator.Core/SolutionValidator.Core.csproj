@@ -55,6 +55,15 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Infrastructure\Configuration\ConfigurationHelper.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigurationNameCollection.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigurationNameElement.cs" />
+    <Compile Include="Infrastructure\Configuration\FolderStructureElement.cs" />
+    <Compile Include="Infrastructure\Configuration\OutputPathElement.cs" />
+    <Compile Include="Infrastructure\Configuration\ProjectFileElement.cs" />
+    <Compile Include="Infrastructure\Configuration\PropertiesToCheckCollection.cs" />
+    <Compile Include="Infrastructure\Configuration\PropertyToCheckElement.cs" />
+    <Compile Include="Infrastructure\Configuration\PropertiesToMatchCollection.cs" />
+    <Compile Include="Infrastructure\Configuration\PropertiesToMatchElement.cs" />
     <Compile Include="Infrastructure\Configuration\SolutionValidatorConfigurationSection.cs" />
     <Compile Include="Infrastructure\DependencyInjection\Dependency.cs" />
     <Compile Include="Infrastructure\DependencyInjection\IResolver.cs" />
@@ -82,6 +91,9 @@
     <Compile Include="Validator\FolderStructure\FileSystemRuleParser.cs" />
     <Compile Include="Validator\FolderStructure\Rules\FolderRule.cs" />
     <Compile Include="Validator\FolderStructure\ParseException.cs" />
+    <Compile Include="Validator\ProjectFile\Rules\CheckForValueProjectFileRule.cs" />
+    <Compile Include="Validator\ProjectFile\Rules\CheckIdenticalProjectFileRule.cs" />
+    <Compile Include="Validator\ProjectFile\Rules\ConfigurationExistsProjectFileRule.cs" />
     <Compile Include="Validator\ProjectFile\Rules\OutpuPathProjectFileRule.cs" />
     <Compile Include="Validator\ProjectFile\Rules\ProjectFileRule.cs" />
     <Compile Include="Validator\ProjectFile\IProjectFileHelper.cs" />
