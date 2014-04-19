@@ -1,12 +1,18 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using Catel.Logging;
-using NUnit.Framework;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Log4NetLoggerTest.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.Tests.Infrastructure.Logging
+namespace SolutionValidator.Core.Tests.Infrastructure.Logging
 {
-	[TestFixture]
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using Catel.Logging;
+    using NUnit.Framework;
+
+    [TestFixture]
 	public class Log4NetLoggerTest
 	{
         /// <summary>

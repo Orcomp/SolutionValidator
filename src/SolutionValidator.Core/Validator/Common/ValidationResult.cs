@@ -1,14 +1,70 @@
-﻿namespace SolutionValidator.Validator
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ValidationMessage.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace SolutionValidator.Validator.Common
 {
-	public class ValidationResult
+    using System;
+    using System.Collections.Generic;
+    using Properties;
+
+    public class ValidationResult
 	{
-		public ValidationResult(bool isValid, string description)
+		private readonly List<ValidationMessage> messages;
+		private readonly string ruleDescription;
+
+		public ValidationResult(Rule rule)
 		{
-			IsValid = isValid;
-			Description = description;
+			// Currently we do not need to reference the rule itself, and hopefully we will not
+			// However it sounds practical to spare the calling client to know how the complete 
+			// Validation Result metainfo is prepared:
+			if (rule != null)
+			{
+				ruleDescription = rule.ToString();
+			}
+			else
+			{
+				ruleDescription = Resources.ValidationResult_ValidationResult_Unknown_rule;
+			}
+
+
+			messages = new List<ValidationMessage>();
+			ErrorCount = 0;
+			CheckCount = 0;
 		}
 
-		public bool IsValid { get; set; }
-		public string Description { get; set; }
+		public bool IsValid
+		{
+			get { return ErrorCount == 0; }
+		}
+
+		public string RuleDescription
+		{
+			get { return ruleDescription; }
+		}
+
+		public int ErrorCount { get; private set; }
+		public int CheckCount { get; private set; }
+
+		public IEnumerable<ValidationMessage> Messages
+		{
+			get { return messages.AsReadOnly(); }
+		}
+
+		public void AddResult(ResultLevel resultLevel, string message, Action<ValidationResult> notify = null)
+		{
+			if (resultLevel == ResultLevel.Error)
+			{
+				ErrorCount++;
+			}
+			CheckCount++;
+			messages.Add(new ValidationMessage {ResultLevel = resultLevel, Message = message});
+			if (notify != null)
+			{
+				notify(this);
+			}
+		}
 	}
 }

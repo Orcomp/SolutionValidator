@@ -36,7 +36,7 @@ namespace SolutionValidator.Tests
 			"fileFolder/.file.txt"
 		};
 
-		private static string CreateTempRootFolder()
+		public static string CreateTempRootFolder()
 		{
 			string result = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 			DeleteFolder(result);

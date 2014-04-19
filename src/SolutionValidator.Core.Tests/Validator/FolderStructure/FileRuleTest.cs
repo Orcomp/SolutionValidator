@@ -1,11 +1,18 @@
-﻿using Moq;
-using NUnit.Framework;
-using SolutionValidator.Validator;
-using SolutionValidator.Validator.FolderStructure;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FileRuleTest.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.Tests.Validator.FolderStructure
+namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 {
-	[TestFixture]
+    using Moq;
+    using NUnit.Framework;
+    using SolutionValidator.Validator.Common;
+    using SolutionValidator.Validator.FolderStructure;
+    using SolutionValidator.Validator.FolderStructure.Rules;
+
+    [TestFixture]
 	public class FileRuleTest
 	{
 		#region Setup/Teardown

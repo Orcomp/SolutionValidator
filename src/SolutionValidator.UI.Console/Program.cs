@@ -4,7 +4,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
 namespace SolutionValidator
 {
     using System;
@@ -12,91 +11,150 @@ namespace SolutionValidator
     using System.Linq;
     using Catel.Logging;
     using CommandLine;
-    using SolutionValidator.CommanLineParsing;
-    using SolutionValidator.Validator;
-    using SolutionValidator.Validator.FolderStructure;
+    using CommanLineParsing;
+    using Core.Infrastructure.Configuration;
+    using Infrastructure;
+    using Properties;
+    using Validator.Common;
 
     internal static class Program
-    {
+	{
         #region Constants
         private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
         #endregion
 
         #region Methods
-        private static void Main(string[] args)
-        {
-            var options = new Options();
+		private static void Main(string[] args)
+		{
+            Logger.Info(Resources.Program_Main_SolutionValidator_started);
 
-            var parser = new Parser(with => with.HelpWriter = System.Console.Error);
+            BootStrapper.RegisterServices();
 
-            if (parser.ParseArgumentsStrict(args, options, () => Environment.Exit(-1)))
-            {
-                Run(options);
-            }
-        }
+			var options = new Options();
 
-        private static void Run(Options options)
-        {
-            string repoRootPath = string.Empty;
-            string folderCheckRulesPath = string.Empty;
+			var parser = new Parser(with => with.HelpWriter = Console.Error);
+
+			if (parser.ParseArgumentsStrict(args, options, () => Environment.Exit(-1)))
+			{
+				Run(options);
+			}
+		}
+
+		private static void Run(Options options)
+		{
+			string repoRootPath = string.Empty;
+			string configFilePath = string.Empty;
+			
             try
-            {
-                repoRootPath = Path.GetFullPath(options.RepoRootPath);
-                if (!Directory.Exists(repoRootPath))
-                {
-                    // TODO: Move message to resource
-                    Logger.Info("Repository root path >{0}< does not exist.", repoRootPath);
-                    Environment.Exit(-2);
-                }
-            }
+			{
+				repoRootPath = Path.GetFullPath(options.RepoRootPath);
+				if (!Directory.Exists(repoRootPath))
+				{
+					string message = string.Format(Resources.Program_Run_Repository_root_path__does_not_exist, repoRootPath);
+					Exit(message, -2);
+				}
+			}
             catch (Exception ex)
-            {
-                // TODO: Move message to resource
-                Logger.Error("Error when processing Repository root path: >{0}<.", options.RepoRootPath);
-                Logger.Error(ex.ToString());
-                Environment.Exit(-2);
-            }
+			{
+				string message = string.Format(Resources.Program_Run_Error_when_processing_Repository_root_path, options.RepoRootPath);
+				Exit(message, -2, ex);
+			}
 
-            try
-            {
-                folderCheckRulesPath = Path.GetFullPath(options.FolderCheckFile);
-                if (!File.Exists(folderCheckRulesPath))
-                {
-                    // TODO: Move message to resource
-                    Logger.Info("Folder and file check rule file: >{0}< does not exist.", folderCheckRulesPath);
-                    Environment.Exit(-3);
-                }
-            }
-            catch (Exception e)
-            {
-                // TODO: Move message to resource
-                Logger.Error("Error when processing 'folder and file check rule file' path >{0}<.", options.FolderCheckFile);
-                Logger.Error(e.ToString());
-                Environment.Exit(-3);
-            }
+			try
+			{
+				if (options.ConfigFilePath == Options.ConfigFilePathDefaultValue)
+				{
+					configFilePath = null;
+				}
+				else
+				{
+					configFilePath = Path.GetFullPath(options.ConfigFilePath);
+					if (!File.Exists(configFilePath))
+					{
+						string message = string.Format(Resources.Program_Run_Configuration_file_does_not_exist, configFilePath);
+						Exit(message, -3);
+			        }
+				}
 
-            var fileSystemRuleParser = new FileSystemRuleParser(new FileSystemHelper());
-            var rules = fileSystemRuleParser.Parse(folderCheckRulesPath);
+				SolutionValidatorConfigurationSection configuration = ConfigurationHelper.Load(configFilePath);
+				var ruleProcessor = new RuleProcessor(repoRootPath, configuration);
 
-            var repositoryInfo = new RepositoryInfo(repoRootPath);
+				ruleProcessor.Process(validationResult =>
+			    {
+					foreach (ValidationMessage validationMessage in validationResult.Messages.Where(vm => !vm.Processed))
+					{
+						validationMessage.Processed = true;
+						switch (validationMessage.ResultLevel)
+						{
+							case ResultLevel.Error:
+							{
+								using (new ColorChanger(ConsoleColor.Red))
+								{
+									Logger.Info(Resources.Program_Run_Error, validationMessage.Message);
+			                    }
+							}
+								break;
 
-            Logger.Info("Found {0} rules, processing...", rules.Count());
-            int errorCount = 0;
-            foreach (var rule in rules)
-            {
-                var validationResult = rule.Validate(repositoryInfo);
-                if (!validationResult.IsValid)
-                {
-                    Logger.Info("Error, the following rule is not satisfied: {0}", validationResult.Description);
-                    errorCount++;
-                }
-            }
+							case ResultLevel.Warning:
+							{
+								using (new ColorChanger(ConsoleColor.Yellow))
+								{
+                                    Logger.Info(Resources.Program_Run_Error, validationMessage.Message);
+								}
+							}
+								break;
 
-            Logger.Info("{0} rules, processed. Errors found: {1}", rules.Count(), errorCount);
-            // TODO: Move message to resource
-            Logger.Info("Press any key to continue...");
-            System.Console.ReadKey(true);
-        }
+							case ResultLevel.Passed:
+							{
+								if (options.Verbose)
+								{
+									using (new ColorChanger(ConsoleColor.Green))
+			                        {
+										Logger.Info(Resources.Program_Run_Passed, validationMessage.Message);
+									}
+								}
+							}
+								break;
+							
+							case ResultLevel.Info:
+				            {
+                                Logger.Info(validationMessage.Message);
+							}
+								        break;
+				        }
+			        }
+				});
+
+				string totalMessage = string.Format(Resources.Program_Run_Total_checks_Total_errors_found, ruleProcessor.TotalCheckCount, ruleProcessor.TotalErrorCount);
+                Logger.Info(totalMessage);
+                Logger.Info(Resources.Program_Run_Press_any_key_to_continue);
+			    Console.ReadKey(true);
+				Environment.Exit(ruleProcessor.TotalErrorCount);
+			}
+			catch (Exception e)
+			{
+				string message = string.Format(Resources.Program_Run_Unexpected_error, e.Message);
+                Logger.Error(e, message);
+				Exit(message, -4, e);
+			}
+		}
+
+		private static void Exit(string message, int exitCode, Exception e = null)
+		{
+			Logger.Info(message);
+			
+            if (e == null)
+			{
+                Logger.Error(message);
+			}
+			else
+			{
+                Logger.Error(e, message);
+			}
+            
+            Logger.Info(Resources.Program_Run_SolutionValidator_exited_with_code, exitCode);
+			Environment.Exit(exitCode);
+		}
         #endregion
-    }
+	}
 }

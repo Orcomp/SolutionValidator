@@ -1,5 +1,7 @@
 ﻿namespace SolutionValidator.Infrastructure.DependencyInjection
 {
+    using Catel.IoC;
+
 	/// <summary>
 	///     Very simple Inversion of Control class for global DI resolving.
 	///     NOTE: This class is DI container independent
@@ -30,7 +32,7 @@
 		/// <returns>Resolved concrete instance (service)</returns>
 		public static T Resolve<T>()
 		{
-			return resolver.Resolve<T>();
+			return ServiceLocator.Default.ResolveType<T>();
 		}
 
 		#endregion

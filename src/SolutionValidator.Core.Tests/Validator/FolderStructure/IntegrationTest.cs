@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using NUnit.Framework;
-using SolutionValidator.Validator;
-using SolutionValidator.Validator.FolderStructure;
-
-namespace SolutionValidator.Tests.Validator.FolderStructure
+﻿namespace SolutionValidator.Tests.Validator.FolderStructure
 {
-	[TestFixture]
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using NUnit.Framework;
+    using SolutionValidator.Validator;
+    using SolutionValidator.Validator.Common;
+    using SolutionValidator.Validator.FolderStructure;
+    using SolutionValidator.Validator.FolderStructure.Rules;
+
+    [TestFixture]
 	public class IntegrationTest
 	{
 		private string rootPath;

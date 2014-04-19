@@ -1,10 +1,17 @@
-﻿using System;
-using System.Dynamic;
-using SolutionValidator.Validator;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FileSystemRule.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure.Rules
 {
-	public abstract class FileSystemRule : Rule
+    using System;
+    using System.Dynamic;
+    using Common;
+    using FolderStructure;
+
+    public abstract class FileSystemRule : Rule
 	{
 		public const string RecursionToken = "**";
 		public const string FileWildCardToken = "*";
@@ -16,6 +23,7 @@ namespace SolutionValidator.Validator.FolderStructure
 		protected readonly string RelativePath;
 
 		protected FileSystemRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
+			: base()
 		{
 			RelativePath = relativePath.Replace("/", @"\");
 			CheckType = checkType;

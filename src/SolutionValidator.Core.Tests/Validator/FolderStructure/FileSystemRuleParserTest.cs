@@ -3,11 +3,12 @@ using SolutionValidator.Validator.FolderStructure;
 
 namespace SolutionValidator.Tests.Validator.FolderStructure
 {
-	[TestFixture]
+    using SolutionValidator.Validator.FolderStructure.Rules;
+
+    [TestFixture]
 	public class FileSystemRuleParserTest
 	{
 		private FileSystemRuleParser parser;
-
 
 		[TestFixtureSetUp]
 		public void Setup()

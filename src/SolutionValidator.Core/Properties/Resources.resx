@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  <data name="ProjectFileHelper_CheckOne_Can_not_get_output_path" xml:space="preserve">
+    <value>Can not get output path. {0}</value>
+  </data>
+  <data name="ProjectFileHelper_GetAllProjectFilePath_GetAllProjectPath_was_called_with_bad_argument" xml:space="preserve">
+    <value>GetAllProjectPath was called with bad argument. root: {0}</value>
+  </data>
+  <data name="ProjectFileHelper_CheckOne_Output_path_must_be_a_relative_path" xml:space="preserve">
+    <value>Output path must be a relative path. Output path was: '{0}'. {1}</value>
+  </data>
+  <data name="ProjectFileHelper_CheckOne_Output_path_was_evaluated_to" xml:space="preserve">
+    <value>Output path was evaluated to: '{0}'. Expected value: '{1}' (in relative path form, beginning with '.'. {2}</value>
+  </data>
+  <data name="ProjectFileHelper_CheckOneOutputPath_OutputPath_conforms_to_the_required_standards" xml:space="preserve">
+    <value>OutputPath conforms to the required standards. {0}</value>
+  </data>
+  <data name="ValidationResult_ValidationResult_Unknown_rule" xml:space="preserve">
+    <value>Unknown rule</value>
+  </data>
+  <data name="RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found" xml:space="preserve">
+    <value>Folder structure check was set to 'true' but folder structure definition file was not found: {0}</value>
+  </data>
+  <data name="RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists" xml:space="preserve">
+    <value>Repository root folder does not exists: {0}</value>
+  </data>
+  <data name="RuleProcessor_Process_Unexpected_error_while_processing_rule" xml:space="preserve">
+    <value>Unexpected error while processing rule: {0}</value>
+  </data>
+  <data name="FileRule_Validate_exists__This_file_should_not_exist_" xml:space="preserve">
+    <value>exists. This file should not exist</value>
+  </data>
+  <data name="FileRule_Validate_does_not_exist__This_file_must_exist_" xml:space="preserve">
+    <value>does not exist. This file must exist</value>
+  </data>
+  <data name="FileRule_Validate_exists_" xml:space="preserve">
+    <value>exists</value>
+  </data>
+  <data name="FileRule_Validate_does_not_exist_" xml:space="preserve">
+    <value>does not exist</value>
+  </data>
+  <data name="FolderRule_Validate_exists_This_folder_should_not_exist" xml:space="preserve">
+    <value>exists. This folder should not exist</value>
+  </data>
+  <data name="FolderRule_Validate_does_not_exist_This_folder_must_exist" xml:space="preserve">
+    <value>does not exist. This folder must exist</value>
+  </data>
+  <data name="FolderRule_Validate_exists" xml:space="preserve">
+    <value>exists</value>
+  </data>
+  <data name="FolderRule_Validate_does_not_exist" xml:space="preserve">
+    <value>does not exist</value>
+  </data>
+  <data name="RuleProcessor_Process_Checking_repository" xml:space="preserve">
+    <value>Checking repository: {0}</value>
+  </data>
+  <data name="ConfigurationExistsProjectFileRule_Validate_Project contains_expected_configuration" xml:space="preserve">
+    <value>Project '{0}' contains expected configuration '{1}'. {2}</value>
+  </data>
+  <data name="FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath" xml:space="preserve">
+    <value>Error getting EvaluatedDefinitionFilePath.</value>
+  </data>
+  <data name="FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath2" xml:space="preserve">
+    <value>Error getting EvaluatedDefinitionFilePath</value>
+  </data>
+  <data name="CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_identical" xml:space="preserve">
+    <value>Properties in project {0} '{1}' and '{2}' are identical ('{3}'). {4}</value>
+  </data>
+  <data name="CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identical" xml:space="preserve">
+    <value>Properties in project {0} '{1}' and '{2}' are not identical ('{3}' &lt;&gt; '{4}'). {5}</value>
+  </data>
+</root>

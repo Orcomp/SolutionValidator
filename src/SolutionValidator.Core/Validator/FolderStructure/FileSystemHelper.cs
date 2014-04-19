@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text.RegularExpressions;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CheckType.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace SolutionValidator.Validator.FolderStructure
 {
-	public class FileSystemHelper : IFileSystemHelper
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Text.RegularExpressions;
+    using Rules;
+
+    public class FileSystemHelper : IFileSystemHelper
 	{
 		#region IFileSystemHelper Members
 
@@ -27,10 +34,8 @@ namespace SolutionValidator.Validator.FolderStructure
 			string[] folders = Directory.GetDirectories(root, "*", SearchOption.AllDirectories);
 
 			string regexPattern = EscapeRegexSpecial(pattern);
-			regexPattern = regexPattern
-				.Replace(FileSystemRule.RecursionToken, @".+")
+		    regexPattern = regexPattern.Replace(FileSystemRule.RecursionToken, @".+");
 				// Not used currently: .Replace(FileSystemRule.OneLevelWildCardToken, @"[^\\]+")
-				;
 
 			regexPattern = string.Format(@"^{0}$", regexPattern);
 

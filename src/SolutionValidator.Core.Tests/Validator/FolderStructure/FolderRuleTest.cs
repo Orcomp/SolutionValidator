@@ -5,7 +5,10 @@ using SolutionValidator.Validator.FolderStructure;
 
 namespace SolutionValidator.Tests.Validator.FolderStructure
 {
-	[TestFixture]
+    using SolutionValidator.Validator.Common;
+    using SolutionValidator.Validator.FolderStructure.Rules;
+
+    [TestFixture]
 	public class FolderRuleTest
 	{
 		#region Setup/Teardown
