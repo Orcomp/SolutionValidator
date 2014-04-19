@@ -1,9 +1,16 @@
-using System.Configuration;
-using SolutionValidator.Core.Properties;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ProjectFileElement.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.Core.Infrastructure.Configuration
+namespace SolutionValidator.Infrastructure.Configuration
 {
-	[UsedImplicitly]
+    using System.Configuration;
+    using Core.Infrastructure.Configuration;
+    using Core.Properties;
+
+    [UsedImplicitly]
 	public class ProjectFileElement : ConfigurationElement
 	{
 		private const string OutputPathElementName = "outputPath";

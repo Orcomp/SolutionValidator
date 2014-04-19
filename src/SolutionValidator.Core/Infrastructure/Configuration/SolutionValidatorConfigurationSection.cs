@@ -2,7 +2,9 @@
 
 namespace SolutionValidator.Core.Infrastructure.Configuration
 {
-	public class SolutionValidatorConfigurationSection : ConfigurationSection
+    using SolutionValidator.Infrastructure.Configuration;
+
+    public class SolutionValidatorConfigurationSection : ConfigurationSection
 	{
 		public const string SectionName = "solutionValidatorConfigSection";
 		public const string CheckAttributeName = "check";

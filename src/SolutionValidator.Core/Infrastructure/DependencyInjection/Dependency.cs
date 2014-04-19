@@ -1,4 +1,10 @@
-﻿namespace SolutionValidator.Infrastructure.DependencyInjection
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Dependency.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace SolutionValidator.Infrastructure.DependencyInjection
 {
     using Catel.IoC;
 
@@ -6,26 +12,13 @@
 	///     Very simple Inversion of Control class for global DI resolving.
 	///     NOTE: This class is DI container independent
 	/// </summary>
-	public class Dependency
+	public static class Dependency
 	{
 		#region Constants and Fields
-
-		private static IResolver resolver;
-
-		#endregion
+	    #endregion
 
 		#region Public Methods and Operators
-
-		/// <summary>
-		///     Initializes the specified resolver.
-		/// </summary>
-		/// <param name="resolver">The resolver.</param>
-		public static void Initialize(IResolver resolver)
-		{
-			Dependency.resolver = resolver;
-		}
-
-		/// <summary>
+	    /// <summary>
 		///     Use this for all service / interface resolving
 		/// </summary>
 		/// <typeparam name="T">Interface to resolve</typeparam>

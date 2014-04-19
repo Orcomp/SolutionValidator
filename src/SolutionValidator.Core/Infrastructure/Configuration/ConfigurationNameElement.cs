@@ -1,8 +1,14 @@
-using System.Configuration;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConfigurationNameCollection.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.Core.Infrastructure.Configuration
+namespace SolutionValidator.Infrastructure.Configuration
 {
-	public class ConfigurationNameElement : ConfigurationElement
+    using System.Configuration;
+
+    public class ConfigurationNameElement : ConfigurationElement
 	{
 		// MS Parser: property cannot have the name 'configurationName' because it
 		// starts with the reserved prefix 'config' or 'lock'. 

@@ -12,6 +12,7 @@ namespace SolutionValidator.Validator.Common
     using System.Linq;
     using Catel.Logging;
     using Core.Infrastructure.Configuration;
+    using Infrastructure.Configuration;
     using Infrastructure.DependencyInjection;
     using ProjectFile;
     using ProjectFile.Rules;

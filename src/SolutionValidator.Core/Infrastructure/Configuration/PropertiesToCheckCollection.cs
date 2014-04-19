@@ -2,7 +2,9 @@
 
 namespace SolutionValidator.Core.Infrastructure.Configuration
 {
-	[ConfigurationCollection(typeof (ConfigurationNameElement))]
+    using SolutionValidator.Infrastructure.Configuration;
+
+    [ConfigurationCollection(typeof (ConfigurationNameElement))]
 	public class PropertiesToCheckCollection : ConfigurationElementCollection
 	{
 		[ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]

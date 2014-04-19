@@ -1,8 +1,15 @@
-﻿using System.Configuration;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConfigurationNameCollection.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.Core.Infrastructure.Configuration
+namespace SolutionValidator.Infrastructure.Configuration
 {
-	[ConfigurationCollection(typeof (ConfigurationNameElement))]
+    using System.Configuration;
+    using Core.Infrastructure.Configuration;
+
+    [ConfigurationCollection(typeof (ConfigurationNameElement))]
 	public class ConfigurationNameCollection : ConfigurationElementCollection
 	{
 		[ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]

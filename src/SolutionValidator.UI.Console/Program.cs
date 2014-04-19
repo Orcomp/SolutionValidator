@@ -14,6 +14,7 @@ namespace SolutionValidator
     using CommanLineParsing;
     using Core.Infrastructure.Configuration;
     using Infrastructure;
+    using Infrastructure.Configuration;
     using Properties;
     using Validator.Common;
 

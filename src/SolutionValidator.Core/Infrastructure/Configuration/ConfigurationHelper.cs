@@ -1,9 +1,16 @@
-﻿using System.Configuration;
-using System.Reflection;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConfigurationHelper.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.Core.Infrastructure.Configuration
+namespace SolutionValidator.Infrastructure.Configuration
 {
-	/// <summary>
+    using System.Configuration;
+    using System.Reflection;
+    using Core.Infrastructure.Configuration;
+
+    /// <summary>
 	///     ConfigurationHelper is a simple static helper to ease loading SolutionValidator configuration
 	/// </summary>
 	public static class ConfigurationHelper
@@ -20,13 +27,10 @@ namespace SolutionValidator.Core.Infrastructure.Configuration
 		{
 			if (configFileName == null)
 			{
-				SolutionValidatorConfigurationSection.ConfigFilePath = Assembly.GetExecutingAssembly()
-					.CodeBase.Replace("file:///", "");
-				return
-					Check(
-						(SolutionValidatorConfigurationSection)
-							ConfigurationManager.GetSection(SolutionValidatorConfigurationSection.SectionName));
+				SolutionValidatorConfigurationSection.ConfigFilePath = Assembly.GetExecutingAssembly().CodeBase.Replace("file:///", "");
+				return Check((SolutionValidatorConfigurationSection)ConfigurationManager.GetSection(SolutionValidatorConfigurationSection.SectionName));
 			}
+
 			SolutionValidatorConfigurationSection.ConfigFilePath = configFileName;
 
 			var configMap = new ExeConfigurationFileMap
@@ -34,11 +38,9 @@ namespace SolutionValidator.Core.Infrastructure.Configuration
 				ExeConfigFilename = configFileName
 			};
 
-			System.Configuration.Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap,
-				ConfigurationUserLevel.None);
+			Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
 
-			return
-				Check((SolutionValidatorConfigurationSection) config.GetSection(SolutionValidatorConfigurationSection.SectionName));
+			return Check((SolutionValidatorConfigurationSection) config.GetSection(SolutionValidatorConfigurationSection.SectionName));
 		}
 
 		/// <summary>

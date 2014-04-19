@@ -9,8 +9,9 @@ namespace SolutionValidator.Core.Tests.Infrastructure.Configuration
     using System.IO;
     using Core.Infrastructure.Configuration;
     using NUnit.Framework;
+    using SolutionValidator.Infrastructure.Configuration;
 
-	[TestFixture]
+    [TestFixture]
 	public class ConfigurationTest
 	{
 		private const string TestFolder = @"TestData\TestConfigurations";
