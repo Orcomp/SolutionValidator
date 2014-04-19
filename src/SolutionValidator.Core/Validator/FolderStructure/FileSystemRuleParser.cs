@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure
 {
 	public class FileSystemRuleParser
 	{

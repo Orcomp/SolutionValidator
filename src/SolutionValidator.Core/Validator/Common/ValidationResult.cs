@@ -1,4 +1,4 @@
-﻿namespace SolutionValidator.Core.Validator.Common
+﻿namespace SolutionValidator.Validator
 {
 	public class ValidationResult
 	{

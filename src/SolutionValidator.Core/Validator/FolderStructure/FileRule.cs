@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SolutionValidator.Core.Validator.Common;
+using SolutionValidator.Validator;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure
 {
 	public class FileRule : FileSystemRule
 	{

@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{52F55AB9-C171-473F-837C-9D958B10B030}"
 EndProject
@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.UI.Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionValidator.Core.Tests", "SolutionValidator.Core.Tests\SolutionValidator.Core.Tests.csproj", "{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{025902C4-3FB2-420C-98D5-16738319ED53}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{025902C4-3FB2-420C-98D5-16738319ED53}"
 	ProjectSection(SolutionItems) = preProject
 		..\build.bat = ..\build.bat
 		..\build.fsx = ..\build.fsx
@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{025902C4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{6DEEDD13-7614-4B37-BDCF-FC79A83AC77F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{9B677E68-A47B-41E3-8DB8-5D6EDB2DF9E0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{9B677E68-A47B-41E3-8DB8-5D6EDB2DF9E0}"
 	ProjectSection(SolutionItems) = preProject
 		..\tools\nuget\NuGet.exe = ..\tools\nuget\NuGet.exe
 	EndProjectSection
@@ -30,6 +30,26 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{DAF9732E-D1DE-4E91-B6EE-13B1CCC30BDA}"
 	ProjectSection(SolutionItems) = preProject
 		nuget.config = nuget.config
+		resharper.settings = resharper.settings
+		Settings.StyleCop = Settings.StyleCop
+		SolutionValidator.sln.DotSettings = SolutionValidator.sln.DotSettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1CE8C5B9-E3C1-4726-8BCD-2A95A2C5027C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DDF4D612-3BFF-48EB-A156-B732DB298D5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{FBEED533-8612-40BB-8B28-61CB5C4278A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{EBDDD101-347C-47B5-BF68-DE958FF0157D}"
+	ProjectSection(SolutionItems) = preProject
+		..\lib\repositories.config = ..\lib\repositories.config
+		..\lib\RestorePackages.bat = ..\lib\RestorePackages.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{29C530F2-7626-4643-ADF1-E7227E65C9E0}"
+	ProjectSection(SolutionItems) = preProject
+		..\doc\specs.md = ..\doc\specs.md
 	EndProjectSection
 EndProject
 Global
@@ -59,7 +79,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{52F55AB9-C171-473F-837C-9D958B10B030} = {1CE8C5B9-E3C1-4726-8BCD-2A95A2C5027C}
+		{B5CE3449-0AB7-41C6-AE6A-7B67CD2C7BF1} = {DDF4D612-3BFF-48EB-A156-B732DB298D5A}
+		{064A6825-00AB-4240-9544-463213938436} = {FBEED533-8612-40BB-8B28-61CB5C4278A0}
+		{918FD405-7BBE-4005-9710-EF70B6E254FE} = {FBEED533-8612-40BB-8B28-61CB5C4278A0}
 		{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B} = {52F55AB9-C171-473F-837C-9D958B10B030}
 		{9B677E68-A47B-41E3-8DB8-5D6EDB2DF9E0} = {6DEEDD13-7614-4B37-BDCF-FC79A83AC77F}
+		{DDF4D612-3BFF-48EB-A156-B732DB298D5A} = {1CE8C5B9-E3C1-4726-8BCD-2A95A2C5027C}
+		{FBEED533-8612-40BB-8B28-61CB5C4278A0} = {1CE8C5B9-E3C1-4726-8BCD-2A95A2C5027C}
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using SolutionValidator.Core.Validator.Common;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure
 {
 	public class FolderRule : FileSystemRule
 	{

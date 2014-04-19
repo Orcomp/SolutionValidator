@@ -1,4 +1,4 @@
-﻿namespace SolutionValidator.Core.Validator.FolderStructure
+﻿namespace SolutionValidator.Validator.FolderStructure
 {
 	public enum CheckType
 	{

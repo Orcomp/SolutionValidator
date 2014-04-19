@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Dynamic;
-using SolutionValidator.Core.Validator.Common;
+using SolutionValidator.Validator;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure
 {
 	public abstract class FileSystemRule : Rule
 	{

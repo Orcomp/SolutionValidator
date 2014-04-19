@@ -4,7 +4,7 @@ using System.IO;
 using Catel.Logging;
 using NUnit.Framework;
 
-namespace SolutionValidator.Core.Tests.Infrastructure.Logging
+namespace SolutionValidator.Tests.Infrastructure.Logging
 {
 	[TestFixture]
 	public class Log4NetLoggerTest

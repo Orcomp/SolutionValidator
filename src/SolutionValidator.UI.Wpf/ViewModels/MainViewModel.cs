@@ -1,18 +1,18 @@
 using System.Reflection;
 using System.Windows;
 using Catel.MVVM;
-using SolutionValidator.UI.Wpf.Properties;
+using SolutionValidator.Properties;
 
-namespace SolutionValidator.UI.Wpf.ViewModels
+namespace SolutionValidator.ViewModels
 {
-	public class MainWindowViewModel : ViewModelBase
+	public class MainViewModel : ViewModelBase
 	{
 	    private Rect restoreBounds;
 
 	    /// <summary>
 		///     Initializes a new instance of the MainWindowViewModel class.
 		/// </summary>
-		public MainWindowViewModel()
+		public MainViewModel()
 		{
 	        RestoreMainWindow();
             Title = string.Format("Solution Validator v{0}", Assembly.GetExecutingAssembly().GetName().Version);

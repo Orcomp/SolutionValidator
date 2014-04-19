@@ -1,8 +1,15 @@
-﻿using System.Windows;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DataPipeCollection.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.UI.Wpf.Behaviors
+
+namespace SolutionValidator.Behaviors
 {
-	public class DataPipeCollection : FreezableCollection<DataPipe>
-	{
-	}
+    using System.Windows;
+
+    public class DataPipeCollection : FreezableCollection<DataPipe>
+    {
+    }
 }

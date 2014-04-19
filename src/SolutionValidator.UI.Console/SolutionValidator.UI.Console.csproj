@@ -7,7 +7,7 @@
     <ProjectGuid>{918FD405-7BBE-4005-9710-EF70B6E254FE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolutionValidator.UI.Console</RootNamespace>
+    <RootNamespace>SolutionValidator</RootNamespace>
     <AssemblyName>SolutionValidator.UI.Console</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -57,9 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>Properties\SolutionAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="CommanLineParsing\Options.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="SolutionAssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SolutionValidator.Core\SolutionValidator.Core.csproj">

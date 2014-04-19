@@ -1,9 +1,9 @@
 ﻿using Moq;
 using NUnit.Framework;
-using SolutionValidator.Core.Validator.Common;
-using SolutionValidator.Core.Validator.FolderStructure;
+using SolutionValidator.Validator;
+using SolutionValidator.Validator.FolderStructure;
 
-namespace SolutionValidator.Core.Tests.Validator.FolderStructure
+namespace SolutionValidator.Tests.Validator.FolderStructure
 {
 	[TestFixture]
 	public class FolderRuleTest

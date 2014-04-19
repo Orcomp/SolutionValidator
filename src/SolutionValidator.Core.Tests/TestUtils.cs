@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace SolutionValidator.Core.Tests
+namespace SolutionValidator.Tests
 {
 	internal static class TestUtils
 	{

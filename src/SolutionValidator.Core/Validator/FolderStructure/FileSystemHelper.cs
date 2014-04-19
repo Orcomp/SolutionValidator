@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure
 {
 	public class FileSystemHelper : IFileSystemHelper
 	{

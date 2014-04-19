@@ -1,6 +1,6 @@
 ﻿using Catel.IoC;
 
-namespace SolutionValidator.Core.Infrastructure.DependencyInjection
+namespace SolutionValidator.Infrastructure.DependencyInjection
 {
     public class CatelResolver : IResolver
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure
 {
 	public interface IFileSystemHelper
 	{

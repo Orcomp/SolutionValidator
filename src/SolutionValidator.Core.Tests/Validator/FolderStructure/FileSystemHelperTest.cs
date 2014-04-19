@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using SolutionValidator.Core.Validator.FolderStructure;
+using SolutionValidator.Validator.FolderStructure;
 
-namespace SolutionValidator.Core.Tests.Validator.FolderStructure
+namespace SolutionValidator.Tests.Validator.FolderStructure
 {
 	[TestFixture]
 	public class FileSystemHelperTest

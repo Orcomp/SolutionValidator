@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SolutionValidator.Core.Validator.FolderStructure
+namespace SolutionValidator.Validator.FolderStructure
 {
 	public class ParseException : Exception
 	{

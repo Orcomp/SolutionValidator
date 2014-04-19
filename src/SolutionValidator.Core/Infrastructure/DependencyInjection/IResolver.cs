@@ -1,4 +1,4 @@
-﻿namespace SolutionValidator.Core.Infrastructure.DependencyInjection
+﻿namespace SolutionValidator.Infrastructure.DependencyInjection
 {
 	/// <summary>
 	///     Very simple Inversion of Control interface for global DI resolving.

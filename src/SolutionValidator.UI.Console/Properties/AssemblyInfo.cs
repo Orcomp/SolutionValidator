@@ -1,12 +1,19 @@
-﻿using System.Reflection;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 using CommandLine;
 
 [assembly: AssemblyUsage(
-	" ",
-	"Usage: SolutionValidator",
-	"       SolutionValidator -rc:\\myreporoot\\ -fmyfoldercheckrulefile.txt"
-	)]
+    " ",
+    "Usage: SolutionValidator",
+    "       SolutionValidator -rc:\\myreporoot\\ -fmyfoldercheckrulefile.txt"
+    )]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
