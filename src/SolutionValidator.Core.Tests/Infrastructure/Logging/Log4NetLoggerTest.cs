@@ -23,7 +23,7 @@ namespace SolutionValidator.Core.Tests.Infrastructure.Logging
 			string testMessage = string.Format("Test message: {0}", DateTime.Now.Ticks);
 			const string logFileName = @"SolutionValidator.log";
 			const string logFileCopyName = @"logCopy.txt";
-
+            
 			try
 			{
 				File.Delete(logFileCopyName);
@@ -32,7 +32,12 @@ namespace SolutionValidator.Core.Tests.Infrastructure.Logging
 			{
 			}
 
-			Logger.Warning(testMessage);   
+            // Catel does not write messages to log directly, but flushes to the log after 50 entries, or some elapsed time
+            // So to make this test work, i just added 50= items so everything is flushed to the log.
+		    for (int i = 0; i <= 50; i++)
+		    {
+		        Logger.Warning(testMessage);
+		    }   
          
 			File.Copy(logFileName, logFileCopyName);
 
