@@ -21,8 +21,8 @@ namespace SolutionValidator.Core.Tests.Infrastructure.Logging
 		public void ConfigurationTest()
 		{
 			string testMessage = string.Format("Test message: {0}", DateTime.Now.Ticks);
-			const string logFileName = @"D:\Sources\SolutionValidator\output\Debug\NET40\SolutionValidator.Core.Tests\SolutionValidator.log";
-			const string logFileCopyName = @"D:\Sources\SolutionValidator\output\Debug\NET40\SolutionValidator.Core.Tests\logCopy.txt";
+			const string logFileName = @"SolutionValidator.log";
+			const string logFileCopyName = @"logCopy.txt";
 
 			try
 			{
