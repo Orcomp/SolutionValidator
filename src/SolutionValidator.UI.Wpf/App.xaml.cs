@@ -40,6 +40,7 @@ namespace SolutionValidator
 
             try
             {
+                // Why is this in a try/catch? Expecting an exception with logging?
                 Logger.Info("Application terminated normally.");
             }
             catch (Exception exception)

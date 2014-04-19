@@ -7,8 +7,6 @@
 
 namespace SolutionValidator.Views
 {
-    using System;
-    using System.Windows;
     using Catel.Windows;
 
     /// <summary>
@@ -16,22 +14,10 @@ namespace SolutionValidator.Views
     /// </summary>
     public partial class MainWindow
     {
-        #region Constructors
         public MainWindow()
             : base(DataWindowMode.Custom)
         {
             InitializeComponent();
-            SizeToContent = SizeToContent.Manual;
         }
-        #endregion
-
-        #region Methods
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-
-            ViewModel.CloseViewModel(null);
-        }
-        #endregion
     }
 }

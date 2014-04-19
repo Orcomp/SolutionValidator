@@ -52,6 +52,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{29C530F2-762
 		..\doc\specs.md = ..\doc\specs.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubLink", "GitHubLink", "{151563F6-88FC-45FA-88C5-6E2771B955D9}"
+	ProjectSection(SolutionItems) = preProject
+		..\tools\GitHubLink\GitHubLink.exe = ..\tools\GitHubLink\GitHubLink.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{A28970E0-C7E1-49E6-908F-A6F7AD5B9B03}"
+	ProjectSection(SolutionItems) = preProject
+		..\design\logo.ico = ..\design\logo.ico
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,5 +97,6 @@ Global
 		{9B677E68-A47B-41E3-8DB8-5D6EDB2DF9E0} = {6DEEDD13-7614-4B37-BDCF-FC79A83AC77F}
 		{DDF4D612-3BFF-48EB-A156-B732DB298D5A} = {1CE8C5B9-E3C1-4726-8BCD-2A95A2C5027C}
 		{FBEED533-8612-40BB-8B28-61CB5C4278A0} = {1CE8C5B9-E3C1-4726-8BCD-2A95A2C5027C}
+		{151563F6-88FC-45FA-88C5-6E2771B955D9} = {6DEEDD13-7614-4B37-BDCF-FC79A83AC77F}
 	EndGlobalSection
 EndGlobal

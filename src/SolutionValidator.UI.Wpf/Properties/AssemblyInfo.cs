@@ -13,7 +13,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("SolutionValidator.UI.Wpf")]
+[assembly: AssemblyTitle("SolutionValidator")]
 [assembly: AssemblyDescription("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

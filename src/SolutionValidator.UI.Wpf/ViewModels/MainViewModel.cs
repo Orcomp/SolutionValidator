@@ -1,113 +1,26 @@
-using System.Reflection;
-using System.Windows;
-using Catel.MVVM;
-using SolutionValidator.Properties;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MainViewModel.cs" company="Orcomp development team">
+//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 
 namespace SolutionValidator.ViewModels
 {
-	public class MainViewModel : ViewModelBase
-	{
-	    private Rect restoreBounds;
+    using System.Reflection;
+    using Catel.MVVM;
+    using Catel.Reflection;
 
-	    /// <summary>
-		///     Initializes a new instance of the MainWindowViewModel class.
-		/// </summary>
-		public MainViewModel()
-		{
-	        RestoreMainWindow();
-            Title = string.Format("Solution Validator v{0}", Assembly.GetExecutingAssembly().GetName().Version);
-		}		
-
-		/// <summary>
-		///     Observable property for MVVM binding. Gets or sets the main window top.
-		/// </summary>
-		/// <value>The main window top.</value>
-        public int MainWindowTop { get; set; }		
-
-		/// <summary>
-		///     Observable property for MVVM binding. Gets or sets the main window left.
-		/// </summary>
-		/// <value>The main window left.</value>
-		public int MainWindowLeft { get; set; }		
-
-		/// <summary>
-		///     Observable property for MVVM binding. Gets or sets the width of the main window.
-		/// </summary>
-		/// <value>The width of the main window.</value>
-		public int MainWindowWidth { get; set; }
-
-		/// <summary>
-		///     Observable property for MVVM binding. Gets or sets the height of the main window.
-		/// </summary>
-		/// <value>The height of the main window.</value>
-		public int MainWindowHeight { get; set; }		
-
-		/// <summary>
-		///     Observable property for MVVM binding. Gets or sets the state of the main window.
-		/// </summary>
-		/// <value>The state of the main window.</value>
-		public WindowState MainWindowState { get; set; }
-
-		/// <summary>
-		///     Observable property for MVVM binding. Gets or sets the restore bounds.
-		/// </summary>
-		/// <value>The restore bounds.</value>
-		public Rect RestoreBounds
-		{
-			get { return restoreBounds; }
-			set { restoreBounds = value; }
-		}
-
+    public class MainViewModel : ViewModelBase
+    {
         /// <summary>
-        /// Called when the view model has just been closed.
-        ///             
-        /// <para />
-        ///             This method also raises the 
-        /// <see cref="E:Catel.MVVM.ViewModelBase.Closed" /> event.
+        ///     Initializes a new instance of the MainWindowViewModel class.
         /// </summary>
-        /// <param name="result">The result to pass to the view. This will, for example, be used as <c>DialogResult</c>.</param>
-	    protected override void OnClosed(bool? result)
-	    {
-	        base.OnClosed(result);
-            SaveMainWindow();
-	    }
+        public MainViewModel()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
 
-	    /// <summary>
-		///     Restores the main window position an size
-		/// </summary>
-		private void RestoreMainWindow()
-		{
-			MainWindowTop = Settings.Default.MainWindowTop;
-			MainWindowLeft = Settings.Default.MainWindowLeft;
-			MainWindowHeight = Settings.Default.MainWindowHeight;
-			MainWindowWidth = Settings.Default.MainWindowWidth;
-			MainWindowState = Settings.Default.MainWindowMaximized ? WindowState.Maximized : WindowState.Normal;
-		}
-
-		/// <summary>
-		///     Saves the main window position and size.
-		/// </summary>
-		private void SaveMainWindow()
-		{
-			if (MainWindowState == WindowState.Maximized)
-			{
-				// Using RestoreBounds as the current values will be 0, 0 and the size of the screen.
-				// As RestoreBounds is a read only property getting (binding) RestoreBounds done via data piping.
-				Settings.Default.MainWindowTop = (int) RestoreBounds.Top;
-				Settings.Default.MainWindowLeft = (int) RestoreBounds.Left;
-				Settings.Default.MainWindowHeight = (int) RestoreBounds.Height;
-				Settings.Default.MainWindowWidth = (int) RestoreBounds.Width;
-				Settings.Default.MainWindowMaximized = true;
-			}
-			else
-			{
-				Settings.Default.MainWindowTop = MainWindowTop;
-				Settings.Default.MainWindowLeft = MainWindowLeft;
-				Settings.Default.MainWindowHeight = MainWindowHeight;
-				Settings.Default.MainWindowWidth = MainWindowWidth;
-				Settings.Default.MainWindowMaximized = false;
-			}
-			Settings.Default.Save();
-		}
-	}
+            Title = string.Format("{0} v{1}", assembly.Title(), assembly.Version());
+        }
+    }
 }

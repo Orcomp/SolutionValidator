@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\Icons\App.ico</ApplicationIcon>
+    <ApplicationIcon>..\..\design\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -130,10 +130,12 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\App.ico" />
+    <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="FodyWeavers.xml" />
+    <Resource Include="..\..\design\logo.ico">
+      <Link>Resources\Icons\logo.ico</Link>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
