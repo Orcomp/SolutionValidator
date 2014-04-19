@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SolutionValidator.UI.Wpf.View.Behaviors
+namespace SolutionValidator.UI.Wpf.Behaviors
 {
 	public class DataPipe : Freezable
 	{

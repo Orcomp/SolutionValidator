@@ -1,7 +1,6 @@
 using System.Reflection;
 using System.Windows;
 using Catel.MVVM;
-using SolutionValidator.Core.Infrastructure.Logging;
 using SolutionValidator.UI.Wpf.Properties;
 
 namespace SolutionValidator.UI.Wpf.ViewModels
@@ -13,19 +12,11 @@ namespace SolutionValidator.UI.Wpf.ViewModels
 	    /// <summary>
 		///     Initializes a new instance of the MainWindowViewModel class.
 		/// </summary>
-		public MainWindowViewModel(ILogger logger)
+		public MainWindowViewModel()
 		{
 	        RestoreMainWindow();
-		}
-
-		/// <summary>
-		///     Observable property for MVVM binding. Gets the window title.
-		/// </summary>
-		/// <value>The title.</value>
-		public string Title
-		{
-			get { return string.Format("Solution Validator v{0}", Assembly.GetExecutingAssembly().GetName().Version); }
-		}
+            Title = string.Format("Solution Validator v{0}", Assembly.GetExecutingAssembly().GetName().Version);
+		}		
 
 		/// <summary>
 		///     Observable property for MVVM binding. Gets or sets the main window top.

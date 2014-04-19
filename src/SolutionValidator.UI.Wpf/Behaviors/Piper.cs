@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Interactivity;
 
-namespace SolutionValidator.UI.Wpf.View.Behaviors
+namespace SolutionValidator.UI.Wpf.Behaviors
 {
 	/// <summary>
 	///     Piper Class is a general solution/workaround for pushing read-only GUI properties back into ViewModel

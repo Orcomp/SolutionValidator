@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Windows;
+using Catel.Logging;
 using SolutionValidator.Core.Infrastructure.DependencyInjection;
-using SolutionValidator.Core.Infrastructure.Logging;
 
 namespace SolutionValidator.UI.Wpf
 {
@@ -11,6 +11,11 @@ namespace SolutionValidator.UI.Wpf
 	/// </summary>
 	public partial class App
 	{
+        /// <summary>
+        /// The log.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
+
 		#region Methods
 
 		/// <summary>
@@ -26,11 +31,11 @@ namespace SolutionValidator.UI.Wpf
 			base.OnExit(e);
 			try
 			{
-				Dependency.Resolve<ILogger>().Info("Application terminated normally.");
+				Logger.Info("Application terminated normally.");
 			}
 			catch (Exception exception)
 			{
-				Dependency.Resolve<ILogger>().Error(exception);
+				Logger.Error(exception);
 			}
 		}
 
@@ -53,11 +58,11 @@ namespace SolutionValidator.UI.Wpf
 				Thread.CurrentThread.Name = "UI";
 
 				// Informational log message
-				Dependency.Resolve<ILogger>().Info("Application started.");
+				Logger.Info("Application started.");
 			}
 			catch (Exception exception)
 			{
-				Dependency.Resolve<ILogger>().Error(exception);
+				Logger.Error(exception);
 			}
 		}
 

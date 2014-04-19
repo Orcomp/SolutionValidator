@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Catel.Logging;
 using NUnit.Framework;
-using SolutionValidator.Core.Infrastructure.Logging.Log4Net;
 
 namespace SolutionValidator.Core.Tests.Infrastructure.Logging
 {
 	[TestFixture]
 	public class Log4NetLoggerTest
 	{
+        /// <summary>
+        /// The log.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
+
 		// [assembly: log4net.Config.XmlConfigurator(ConfigFile = "SolutionValidator.log4net.config", Watch = true)]
 		// placed in SolutionValidator.Core assembly, now testing if simply referencing it makes the logging work.
 		// NOTE: The SolutionValidator.log4net.config project item is configured to be copied to the output folder when building
@@ -16,8 +21,8 @@ namespace SolutionValidator.Core.Tests.Infrastructure.Logging
 		public void ConfigurationTest()
 		{
 			string testMessage = string.Format("Test message: {0}", DateTime.Now.Ticks);
-			const string logFileName = "SolutionValidator.log";
-			const string logFileCopyName = "logCopy.txt";
+			const string logFileName = @"D:\Sources\SolutionValidator\output\Debug\NET40\SolutionValidator.Core.Tests\SolutionValidator.log";
+			const string logFileCopyName = @"D:\Sources\SolutionValidator\output\Debug\NET40\SolutionValidator.Core.Tests\logCopy.txt";
 
 			try
 			{
@@ -25,12 +30,10 @@ namespace SolutionValidator.Core.Tests.Infrastructure.Logging
 			}
 			catch (FileNotFoundException)
 			{
-				;
 			}
 
-			var logger = new Log4NetLogger();
-			logger.Info(testMessage);
-
+			Logger.Warning(testMessage);   
+         
 			File.Copy(logFileName, logFileCopyName);
 
 			string loggedText = File.ReadAllText(logFileCopyName);

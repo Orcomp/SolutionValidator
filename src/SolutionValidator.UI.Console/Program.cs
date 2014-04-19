@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Catel.Logging;
 using CommandLine;
 using SolutionValidator.Core.Validator.Common;
 using SolutionValidator.Core.Validator.FolderStructure;
@@ -10,6 +11,8 @@ namespace SolutionValidator.UI.Console
 {
 	internal static class Program
 	{
+        private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
+
 		private static void Main(string[] args)
 		{
 			var options = new Options();
@@ -32,15 +35,15 @@ namespace SolutionValidator.UI.Console
 				if (!Directory.Exists(repoRootPath))
 				{
 					// TODO: Move message to resource
-					System.Console.WriteLine("Repository root path >{0}< does not exist.", repoRootPath);
+                    Logger.Info("Repository root path >{0}< does not exist.", repoRootPath);
 					Environment.Exit(-2);
 				}
 			}
 			catch (Exception e)
 			{
 				// TODO: Move message to resource
-				System.Console.WriteLine("Error when processing Repository root path: >{0}<.", options.RepoRootPath);
-				System.Console.WriteLine(e.ToString());
+				Logger.Error("Error when processing Repository root path: >{0}<.", options.RepoRootPath);
+                Logger.Error(e.ToString());
 				Environment.Exit(-2);
 			}
 
@@ -50,16 +53,15 @@ namespace SolutionValidator.UI.Console
 				if (!File.Exists(folderCheckRulesPath))
 				{
 					// TODO: Move message to resource
-					System.Console.WriteLine("Folder and file check rule file: >{0}< does not exist.", folderCheckRulesPath);
+                    Logger.Info("Folder and file check rule file: >{0}< does not exist.", folderCheckRulesPath);
 					Environment.Exit(-3);
 				}
 			}
 			catch (Exception e)
 			{
 				// TODO: Move message to resource
-				System.Console.WriteLine("Error when processing 'folder and file check rule file' path >{0}<.",
-					options.FolderCheckFile);
-				System.Console.WriteLine(e.ToString());
+                Logger.Error("Error when processing 'folder and file check rule file' path >{0}<.", options.FolderCheckFile);
+                Logger.Error(e.ToString());
 				Environment.Exit(-3);
 			}
 
@@ -68,21 +70,21 @@ namespace SolutionValidator.UI.Console
 
 			var repositoryInfo = new RepositoryInfo(repoRootPath);
 
-			System.Console.WriteLine("Found {0} rules, processing...", rules.Count());
+            Logger.Info("Found {0} rules, processing...", rules.Count());
 			int errorCount = 0;
 			foreach (var rule in rules)
 			{
 				var validationResult = rule.Validate(repositoryInfo);
 				if (!validationResult.IsValid)
 				{
-					System.Console.Error.WriteLine("Error, the following rule is not satisfied: {0}", validationResult.Description);
+                    Logger.Info("Error, the following rule is not satisfied: {0}", validationResult.Description);
 					errorCount++;
 				}
 			}
 
-			System.Console.WriteLine("{0} rules, processed. Errors found: {1}", rules.Count(), errorCount);
+            Logger.Info("{0} rules, processed. Errors found: {1}", rules.Count(), errorCount);
 			// TODO: Move message to resource
-			System.Console.WriteLine("Press any key to continue...");
+            Logger.Info("Press any key to continue...");
 			System.Console.ReadKey(true);
 		}
 	}
