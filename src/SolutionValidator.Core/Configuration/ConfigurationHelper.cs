@@ -81,6 +81,8 @@ namespace SolutionValidator.Configuration
                     PropertyName = "AppDesignerFolder",
                     Value = "Properties"
                 });
+
+                // TODO: Check for more, such as "iPhoneSimulator"
                 configuration.ProjectFile.CheckForValue.Add(new PropertyToCheckElement
                 {
                     PropertyName = "Platform",

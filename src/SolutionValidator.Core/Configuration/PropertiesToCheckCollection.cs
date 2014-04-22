@@ -8,7 +8,6 @@
 namespace SolutionValidator.Configuration
 {
     using System.Configuration;
-    using SolutionValidator.Configuration;
 
     [ConfigurationCollection(typeof (ConfigurationNameElement))]
     public class PropertiesToCheckCollection : ConfigurationElementCollection
