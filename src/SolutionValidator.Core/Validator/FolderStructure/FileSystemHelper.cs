@@ -13,56 +13,56 @@ namespace SolutionValidator.Validator.FolderStructure
     using Rules;
 
     public class FileSystemHelper : IFileSystemHelper
-	{
-		#region IFileSystemHelper Members
+    {
+        #region IFileSystemHelper Members
 
-		public bool Exists(string folder, string searchPattern = null)
-		{
-			if (string.IsNullOrEmpty(searchPattern))
-			{
-				return Directory.Exists(folder);
-			}
+        public bool Exists(string folder, string searchPattern = null)
+        {
+            if (string.IsNullOrEmpty(searchPattern))
+            {
+                return Directory.Exists(folder);
+            }
 
-			return Directory.GetFiles(folder, searchPattern).Length != 0;
-		}
+            return Directory.GetFiles(folder, searchPattern).Length != 0;
+        }
 
-		public IEnumerable<string> GetFolders(string root, string pattern)
-		{
-			var result = new List<string>();
-			root = root.Trim().ToLower();
-			pattern = pattern.Replace('/', '\\').Trim('\\') + '\\';
-			string[] folders = Directory.GetDirectories(root, "*", SearchOption.AllDirectories);
+        public IEnumerable<string> GetFolders(string root, string pattern)
+        {
+            var result = new List<string>();
+            root = root.Trim().ToLower();
+            pattern = pattern.Replace('/', '\\').Trim('\\') + '\\';
+            string[] folders = Directory.GetDirectories(root, "*", SearchOption.AllDirectories);
 
-			string regexPattern = EscapeRegexSpecial(pattern);
-		    regexPattern = regexPattern.Replace(FileSystemRule.RecursionToken, @".+");
-				// Not used currently: .Replace(FileSystemRule.OneLevelWildCardToken, @"[^\\]+")
+            string regexPattern = EscapeRegexSpecial(pattern);
+            regexPattern = regexPattern.Replace(FileSystemRule.RecursionToken, @".+");
+            // Not used currently: .Replace(FileSystemRule.OneLevelWildCardToken, @"[^\\]+")
 
-			regexPattern = string.Format(@"^{0}$", regexPattern);
+            regexPattern = string.Format(@"^{0}$", regexPattern);
 
 
-			foreach (string folder in folders)
-			{
-				string relativePart = folder.ToLower().Replace(root, "").Trim('\\') + '\\';
-				if (Regex.IsMatch(relativePart, regexPattern, RegexOptions.IgnoreCase))
-				{
-					result.Add(folder);
-				}
-			}
-			return result;
-		}
+            foreach (string folder in folders)
+            {
+                string relativePart = folder.ToLower().Replace(root, "").Trim('\\') + '\\';
+                if (Regex.IsMatch(relativePart, regexPattern, RegexOptions.IgnoreCase))
+                {
+                    result.Add(folder);
+                }
+            }
+            return result;
+        }
 
-		#endregion
+        #endregion
 
-		private string EscapeRegexSpecial(string pattern)
-		{
-			string result = pattern;
-			//const string regexSpecials = @".$^{}[]()|*+?\";
-			const string regexSpecials = @".$^{}[]()|+?\";
-			foreach (char regexSpecial in regexSpecials)
-			{
-				result = result.Replace(regexSpecial.ToString(CultureInfo.InvariantCulture), @"\" + regexSpecial);
-			}
-			return result;
-		}
-	}
+        private string EscapeRegexSpecial(string pattern)
+        {
+            string result = pattern;
+            //const string regexSpecials = @".$^{}[]()|*+?\";
+            const string regexSpecials = @".$^{}[]()|+?\";
+            foreach (char regexSpecial in regexSpecials)
+            {
+                result = result.Replace(regexSpecial.ToString(CultureInfo.InvariantCulture), @"\" + regexSpecial);
+            }
+            return result;
+        }
+    }
 }

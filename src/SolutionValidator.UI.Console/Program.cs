@@ -12,8 +12,8 @@ namespace SolutionValidator
     using Catel.Logging;
     using CommandLine;
     using CommandLineParsing;
+    using Configuration;
     using Infrastructure;
-    using Infrastructure.Configuration;
     using Properties;
     using Validator.Common;
 

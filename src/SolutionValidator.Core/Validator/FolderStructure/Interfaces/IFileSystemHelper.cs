@@ -8,9 +8,9 @@ namespace SolutionValidator.Validator.FolderStructure
 {
     using System.Collections.Generic;
 
-	public interface IFileSystemHelper
-	{
-		bool Exists(string folder, string searchPattern = null);
-		IEnumerable<string> GetFolders(string root, string pattern);
-	}
+    public interface IFileSystemHelper
+    {
+        bool Exists(string folder, string searchPattern = null);
+        IEnumerable<string> GetFolders(string root, string pattern);
+    }
 }

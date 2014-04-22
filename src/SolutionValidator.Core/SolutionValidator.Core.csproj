@@ -55,19 +55,19 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Infrastructure\Configuration\ConfigurationHelper.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigurationNameCollection.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigurationNameElement.cs" />
-    <Compile Include="Infrastructure\Configuration\FolderStructureElement.cs" />
-    <Compile Include="Infrastructure\Configuration\OutputPathElement.cs" />
-    <Compile Include="Infrastructure\Configuration\ProjectFileElement.cs" />
-    <Compile Include="Infrastructure\Configuration\PropertiesToCheckCollection.cs" />
-    <Compile Include="Infrastructure\Configuration\PropertyToCheckElement.cs" />
-    <Compile Include="Infrastructure\Configuration\PropertiesToMatchCollection.cs" />
-    <Compile Include="Infrastructure\Configuration\PropertiesToMatchElement.cs" />
-    <Compile Include="Infrastructure\Configuration\SolutionValidatorConfigurationSection.cs" />
-    <Compile Include="Infrastructure\DependencyInjection\Dependency.cs" />
-    <Compile Include="Infrastructure\DependencyInjection\IResolver.cs" />
+    <Compile Include="Configuration\ConfigurationHelper.cs" />
+    <Compile Include="Configuration\ConfigurationNameCollection.cs" />
+    <Compile Include="Configuration\ConfigurationNameElement.cs" />
+    <Compile Include="Configuration\FolderStructureElement.cs" />
+    <Compile Include="Configuration\OutputPathElement.cs" />
+    <Compile Include="Configuration\ProjectFileElement.cs" />
+    <Compile Include="Configuration\PropertiesToCheckCollection.cs" />
+    <Compile Include="Configuration\PropertyToCheckElement.cs" />
+    <Compile Include="Configuration\PropertiesToMatchCollection.cs" />
+    <Compile Include="Configuration\PropertiesToMatchElement.cs" />
+    <Compile Include="Configuration\SolutionValidatorConfigurationSection.cs" />
+    <Compile Include="DependencyInjection\Dependency.cs" />
+    <Compile Include="DependencyInjection\Interfaces\IResolver.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -82,21 +82,21 @@
     <Compile Include="Validator\FolderStructure\CheckType.cs" />
     <Compile Include="Validator\FolderStructure\Rules\FileRule.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemHelper.cs" />
-    <Compile Include="Validator\FolderStructure\IFileSystemHelper.cs" />
+    <Compile Include="Validator\FolderStructure\Interfaces\IFileSystemHelper.cs" />
     <Compile Include="Validator\FolderStructure\Rules\FileSystemRule.cs" />
     <Compile Include="Validator\Common\Rule.cs" />
     <Compile Include="Validator\Common\ValidationResult.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemRuleParser.cs" />
     <Compile Include="Validator\FolderStructure\Rules\FolderRule.cs" />
-    <Compile Include="Validator\FolderStructure\ParseException.cs" />
+    <Compile Include="Validator\FolderStructure\Exceptions\ParseException.cs" />
     <Compile Include="Validator\ProjectFile\Rules\CheckForValueProjectFileRule.cs" />
     <Compile Include="Validator\ProjectFile\Rules\CheckIdenticalProjectFileRule.cs" />
     <Compile Include="Validator\ProjectFile\Rules\ConfigurationExistsProjectFileRule.cs" />
     <Compile Include="Validator\ProjectFile\Rules\OutpuPathProjectFileRule.cs" />
     <Compile Include="Validator\ProjectFile\Rules\ProjectFileRule.cs" />
-    <Compile Include="Validator\ProjectFile\IProjectFileHelper.cs" />
+    <Compile Include="Validator\ProjectFile\Interfaces\IProjectFileHelper.cs" />
     <Compile Include="Validator\ProjectFile\ProjectFileHelper.cs" />
-    <Compile Include="Validator\ProjectFile\ProjectFileException.cs" />
+    <Compile Include="Validator\ProjectFile\Exceptions\ProjectFileException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validator\CodeInspection\" />
@@ -105,9 +105,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="SolutionValidator.log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

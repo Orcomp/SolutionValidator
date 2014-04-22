@@ -9,7 +9,7 @@ namespace SolutionValidator.Validator.Common
     using System;
 
     public abstract class Rule
-	{
-		public abstract ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null);
-	}
+    {
+        public abstract ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null);
+    }
 }

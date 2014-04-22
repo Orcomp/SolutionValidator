@@ -4,58 +4,66 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+
 namespace SolutionValidator.Validator.ProjectFile.Rules
 {
     using System;
-    using Properties;
     using Common;
+    using Properties;
 
     public class CheckIdenticalProjectFileRule : ProjectFileRule
-	{        
-		private readonly string propertyName;
-		private readonly string otherPropertyName;
+    {
+        #region Fields
+        private readonly string _otherPropertyName;
+        private readonly string _propertyName;
+        #endregion
 
-		public CheckIdenticalProjectFileRule(string propertyName, string otherPropertyName, IProjectFileHelper projectFileHelper) : base(projectFileHelper)
-		{
-			if (string.IsNullOrEmpty(propertyName))
-			{
-				propertyName = EmptyPropertyName;
-			}
-			if (string.IsNullOrEmpty(otherPropertyName))
-			{
-				otherPropertyName = EmptyPropertyName;
-			}
+        #region Constructors
+        public CheckIdenticalProjectFileRule(string propertyName, string otherPropertyName, IProjectFileHelper projectFileHelper) : base(projectFileHelper)
+        {
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                propertyName = EmptyPropertyName;
+            }
 
-			this.propertyName = propertyName;
-			this.otherPropertyName = otherPropertyName;
-		}
+            if (string.IsNullOrEmpty(otherPropertyName))
+            {
+                otherPropertyName = EmptyPropertyName;
+            }
 
-		protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
-		{
-			var propertyValue = projectFileHelper.GetPropertyValue(propertyName);
-			var otherPropertyValue = projectFileHelper.GetPropertyValue(otherPropertyName);
+            _propertyName = propertyName;
+            _otherPropertyName = otherPropertyName;
+        }
+        #endregion
 
-			if (string.CompareOrdinal(propertyValue, otherPropertyValue) == 0 && propertyValue.Length > 0)
-			{
-				result.AddResult(ResultLevel.Passed,
-					string.Format(Resources.CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_identical,
-						projectFileHelper.GetProjectShortName(),
-						propertyName,
-						otherPropertyName,
-						propertyValue,
-						projectFileHelper.GetProjectInfo()), notify);
-			}
-			else
-			{
-				result.AddResult(ResultLevel.Error,
-					string.Format(Resources.CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identical,
-						projectFileHelper.GetProjectShortName(),
-						propertyName,
-						otherPropertyName,
-						propertyValue,
-						otherPropertyValue,
-						projectFileHelper.GetProjectInfo()), notify);
-			}
-		}
-	}
+        #region Methods
+        protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+        {
+            var propertyValue = _projectFileHelper.GetPropertyValue(_propertyName);
+            var otherPropertyValue = _projectFileHelper.GetPropertyValue(_otherPropertyName);
+
+            if (string.CompareOrdinal(propertyValue, otherPropertyValue) == 0 && propertyValue.Length > 0)
+            {
+                result.AddResult(ResultLevel.Passed,
+                    string.Format(Resources.CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_identical,
+                        _projectFileHelper.GetProjectShortName(),
+                        _propertyName,
+                        _otherPropertyName,
+                        propertyValue,
+                        _projectFileHelper.GetProjectInfo()), notify);
+            }
+            else
+            {
+                result.AddResult(ResultLevel.Error,
+                    string.Format(Resources.CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identical,
+                        _projectFileHelper.GetProjectShortName(),
+                        _propertyName,
+                        _otherPropertyName,
+                        propertyValue,
+                        otherPropertyValue,
+                        _projectFileHelper.GetProjectInfo()), notify);
+            }
+        }
+        #endregion
+    }
 }

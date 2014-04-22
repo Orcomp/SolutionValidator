@@ -8,15 +8,16 @@ namespace SolutionValidator.Validator.FolderStructure
 {
     using System;
 
-	public class ParseException : Exception
-	{
-		public ParseException(string message, int lineNumber, int column) : base(message)
-		{
-			LineNumber = lineNumber;
-			Column = column;
-		}
+    public class ParseException : Exception
+    {
+        public ParseException(string message, int lineNumber, int column)
+            : base(message)
+        {
+            LineNumber = lineNumber;
+            Column = column;
+        }
 
-		public int LineNumber { get; set; }
-		public int Column { get; set; }
-	}
+        public int LineNumber { get; set; }
+        public int Column { get; set; }
+    }
 }

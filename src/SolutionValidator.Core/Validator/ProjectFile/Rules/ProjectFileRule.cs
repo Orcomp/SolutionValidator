@@ -12,49 +12,50 @@ namespace SolutionValidator.Validator.ProjectFile.Rules
     using Common;
 
     public abstract class ProjectFileRule : Rule
-	{
+    {
         /// <summary>
         /// The log.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
-		protected const string EmptyPropertyName = "<empty>";
-		protected readonly IProjectFileHelper projectFileHelper;
+        protected const string EmptyPropertyName = "<empty>";
+        protected readonly IProjectFileHelper _projectFileHelper;
 
-		protected ProjectFileRule(IProjectFileHelper projectFileHelper) : base()
-		{
-			this.projectFileHelper = projectFileHelper;
-		}
+        protected ProjectFileRule(IProjectFileHelper projectFileHelper)
+            : base()
+        {
+            _projectFileHelper = projectFileHelper;
+        }
 
-		// Custom Whitebox sorry...
-		//public dynamic UnitTestPeek
-		//{
-		//	get
-		//	{
-		//		dynamic result = new ExpandoObject();
-		//		return result;
-		//	}
-		//}
-		public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
-		{
-			var result = new ValidationResult(this);
-			IEnumerable<string> projectFilePaths = projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
+        // Custom Whitebox sorry...
+        //public dynamic UnitTestPeek
+        //{
+        //	get
+        //	{
+        //		dynamic result = new ExpandoObject();
+        //		return result;
+        //	}
+        //}
+        public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+        {
+            var result = new ValidationResult(this);
+            IEnumerable<string> projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
 
-			foreach (string projectFilePath in projectFilePaths)
-			{
-				try
-				{
-					projectFileHelper.LoadProject(projectFilePath);
-					DoValidation(result, repositoryInfo, notify);
-				}
-				catch (Exception e)
-				{
-					Logger.Error(e);
-				}
-			}
-			return result;
-		}
+            foreach (string projectFilePath in projectFilePaths)
+            {
+                try
+                {
+                    _projectFileHelper.LoadProject(projectFilePath);
+                    DoValidation(result, repositoryInfo, notify);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                }
+            }
+            return result;
+        }
 
-		protected abstract void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null);
-	}
+        protected abstract void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null);
+    }
 }

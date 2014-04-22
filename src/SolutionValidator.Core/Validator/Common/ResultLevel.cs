@@ -6,11 +6,11 @@
 
 namespace SolutionValidator.Validator.Common
 {
-	public enum ResultLevel
-	{
-		Error,
-		Warning, // Not used currently
-		Passed,
-		Info
-	}
+    public enum ResultLevel
+    {
+        Error,
+        Warning, // Not used currently
+        Passed,
+        Info
+    }
 }

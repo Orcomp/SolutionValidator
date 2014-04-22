@@ -12,43 +12,43 @@ namespace SolutionValidator.Validator.ProjectFile.Rules
     using Common;
 
     public class OutPutPathProjectFileRule : ProjectFileRule
-	{
+    {
         /// <summary>
         /// The log.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
-		private readonly string expectedOutputPath;
+        private readonly string _expectedOutputPath;
 
-		public OutPutPathProjectFileRule(string expectedOutputPath, IProjectFileHelper projectFileHelper)
-			: base(projectFileHelper)
-		{
-			this.expectedOutputPath = expectedOutputPath;
-		}
+        public OutPutPathProjectFileRule(string expectedOutputPath, IProjectFileHelper projectFileHelper)
+            : base(projectFileHelper)
+        {
+            _expectedOutputPath = expectedOutputPath;
+        }
 
-		public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
-		{
-			var result = new ValidationResult(this);
-			IEnumerable<string> projectFilePaths = projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
+        public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+        {
+            var result = new ValidationResult(this);
+            IEnumerable<string> projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
 
-			foreach (string projectFilePath in projectFilePaths)
-			{
-				try
-				{
-					projectFileHelper.LoadProject(projectFilePath);
-					projectFileHelper.CheckOutputPath(repositoryInfo.RootPath, expectedOutputPath, result, notify);
-				}
-				catch (Exception e)
-				{
-                    Logger.Error(e);
-				}
-			}
-			return result;
-		}
+            foreach (string projectFilePath in projectFilePaths)
+            {
+                try
+                {
+                    _projectFileHelper.LoadProject(projectFilePath);
+                    _projectFileHelper.CheckOutputPath(repositoryInfo.RootPath, _expectedOutputPath, result, notify);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                }
+            }
+            return result;
+        }
 
-		protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
-		{
-			projectFileHelper.CheckOutputPath(repositoryInfo.RootPath, expectedOutputPath, result, notify);
-		}
-	}
+        protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+        {
+            _projectFileHelper.CheckOutputPath(repositoryInfo.RootPath, _expectedOutputPath, result, notify);
+        }
+    }
 }

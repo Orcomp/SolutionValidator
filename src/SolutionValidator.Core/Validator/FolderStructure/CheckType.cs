@@ -6,9 +6,9 @@
 
 namespace SolutionValidator.Validator.FolderStructure
 {
-	public enum CheckType
-	{
-		MustExist,
-		MustNotExist
-	}
+    public enum CheckType
+    {
+        MustExist,
+        MustNotExist
+    }
 }
