@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SolutionValidator.CommanLineParsing
+namespace SolutionValidator.CommandLineParsing
 {
     using CommandLine;
     using CommandLine.Text;
