@@ -62,16 +62,21 @@ namespace SolutionValidator.Configuration
 
             if (configuration.ProjectFile.CheckIdentical.Count == 0 && configuration.ProjectFile.CheckIdentical.Check)
             {
-                configuration.ProjectFile.CheckIdentical.Add(new PropertiesToMatchElement
-                {
-                    PropertyName = "AssemblyName",
-                    OtherPropertyName = "RootNamespace"
-                });
-                configuration.ProjectFile.CheckIdentical.Add(new PropertiesToMatchElement
-                {
-                    PropertyName = "AssemblyName",
-                    OtherPropertyName = "ProjectName"
-                });
+				// These expectations are commented out because they will not satisfied after namespace refactorings
+				// For example both SolutionValidator.Core and SolutionValidator.UI.Console root namespace is SolutionValidator
+				// so obviously can not identical with AssemblyName (we end with two identical assembly name)
+				// Also SolutionValidator.UI.Console's 
+				
+				//configuration.ProjectFile.CheckIdentical.Add(new PropertiesToMatchElement
+				//{
+				//	PropertyName = "AssemblyName",
+				//	OtherPropertyName = "RootNamespace"
+				//});
+				//configuration.ProjectFile.CheckIdentical.Add(new PropertiesToMatchElement
+				//{
+				//	PropertyName = "AssemblyName",
+				//	OtherPropertyName = "ProjectName"
+				//});
             }
 
             if (configuration.ProjectFile.CheckForValue.Count == 0 && configuration.ProjectFile.CheckForValue.Check)

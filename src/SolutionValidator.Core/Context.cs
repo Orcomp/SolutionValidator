@@ -15,8 +15,7 @@ namespace SolutionValidator
         public Context(string repositoryRootPath)
         {
             Argument.IsNotNullOrWhitespace(() => repositoryRootPath);
-
-            RepositoryRootPath = repositoryRootPath;
+			RepositoryRootPath = Path.GetFullPath(repositoryRootPath); 
             
         }
 
@@ -24,10 +23,9 @@ namespace SolutionValidator
 
         public void ValidateContext()
         {
-            var repositoryPath = Path.GetFullPath(RepositoryRootPath);
-            if (!Directory.Exists(repositoryPath))
+            if (!Directory.Exists(RepositoryRootPath))
             {
-                throw new SolutionValidatorException("Repository path '{0}' does not exist", repositoryPath);
+                throw new SolutionValidatorException("Repository path '{0}' does not exist", RepositoryRootPath);
             }
         }
     }
