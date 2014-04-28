@@ -48,52 +48,52 @@ namespace SolutionValidator
             {                 
                  var context = new Context(options.RepoRootPath, options.ConfigFilePath);
 
-                try
-                {
+            try
+            {
                     var ruleProcessor = new RuleProcessor(context);
 
-                    ruleProcessor.Process(validationResult =>
-                    {
-                        foreach (var validationMessage in validationResult.Messages.Where(vm => !vm.Processed))
-                        {
-                            validationMessage.Processed = true;
-                            switch (validationMessage.ResultLevel)
-                            {
-                                case ResultLevel.Error:
-                                    Logger.Error(Resources.Program_Run_Error, validationMessage.Message);
-                                    break;
-
-                                case ResultLevel.Warning:
-                                    Logger.Warning(Resources.Program_Run_Error, validationMessage.Message);
-                                    break;
-
-                                case ResultLevel.Passed:
-                                    if (options.Verbose)
-                                    {
-                                        Logger.Info(Resources.Program_Run_Passed, validationMessage.Message);
-                                    }
-                                    break;
-
-                                case ResultLevel.Info:
-                                    Logger.Info(validationMessage.Message);
-                                    break;
-                            }
-                        }
-                    });
-
-                    string totalMessage = string.Format(Resources.Program_Run_Total_checks_Total_errors_found, ruleProcessor.TotalCheckCount, ruleProcessor.TotalErrorCount);
-                    Logger.Info(totalMessage);
-                    Logger.Info(Resources.Program_Run_Press_any_key_to_continue);
-                    Console.ReadKey(true);
-                    Environment.Exit(ruleProcessor.TotalErrorCount);
-                }
-                catch (Exception ex)
+                ruleProcessor.Process(validationResult =>
                 {
-                    string message = string.Format(Resources.Program_Run_Unexpected_error, ex.Message);
-                    Logger.Error(ex, message);
-                    Exit(message, -4, ex);
-                }
+                    foreach (var validationMessage in validationResult.Messages.Where(vm => !vm.Processed))
+                    {
+                        validationMessage.Processed = true;
+                        switch (validationMessage.ResultLevel)
+                        {
+                            case ResultLevel.Error:
+                                Logger.Error(Resources.Program_Run_Error, validationMessage.Message);
+                                break;
+
+                            case ResultLevel.Warning:
+                                Logger.Warning(Resources.Program_Run_Error, validationMessage.Message);
+                                break;
+
+                            case ResultLevel.Passed:
+                                if (options.Verbose)
+                                {
+                                    Logger.Info(Resources.Program_Run_Passed, validationMessage.Message);
+                                }
+                                break;
+
+                            case ResultLevel.Info:
+                                Logger.Info(validationMessage.Message);
+                                break;
+                        }
+                    }
+                });
+
+                string totalMessage = string.Format(Resources.Program_Run_Total_checks_Total_errors_found, ruleProcessor.TotalCheckCount, ruleProcessor.TotalErrorCount);
+                Logger.Info(totalMessage);
+                Logger.Info(Resources.Program_Run_Press_any_key_to_continue);
+                Console.ReadKey(true);
+                Environment.Exit(ruleProcessor.TotalErrorCount);
             }
+            catch (Exception ex)
+            {
+                string message = string.Format(Resources.Program_Run_Unexpected_error, ex.Message);
+                Logger.Error(ex, message);
+                Exit(message, -4, ex);
+            }
+        }
             catch (SolutionValidatorException ex)
             {
                 Exit("An error occurred", -1, ex);

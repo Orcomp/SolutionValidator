@@ -30,7 +30,7 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
         [SetUp]
         public void SetUp()
         {
-            helper = new ProjectFileHelper();
+            helper = new ProjectFileHelper("*.csprojfortest");
         }
 
         [TearDown]
@@ -61,13 +61,13 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
         private string tempRepoRoot;
 
         [Test]
-        [TestCase("output", "p2.csproj", @"level1\level2", null, null, 0, null)]
-        [TestCase("notoutput", "p2.csproj", @"level1\level2", null, null, 2, "notoutput;release;debug")]
-        [TestCase("output", "p2.csproj", @"level1", @"..\..", @"..", 0, null)]
-        [TestCase("output", "p2.csproj", @"level1\level2\level3", @"..\..", @"..\..\..", 0, null)]
-        [TestCase("output", "p2.csproj", @"level1\level2", @"..\..", @"c:\\", 2, "must be a relative path")]
-        [TestCase("output", "p2.csproj", @"level1\level2", @"..\..\output\Debug", @"..\..\output\xxx", 1, "debug;xxx")]
-        [TestCase(@"output\custom", "p2.csproj", @"level1\level2", @"..\..\output", @"..\..\output\custom", 0, null)]
+		[TestCase("output", "p2.csprojfortest", @"level1\level2", null, null, 0, null)]
+		[TestCase("notoutput", "p2.csprojfortest", @"level1\level2", null, null, 2, "notoutput;release;debug")]
+		[TestCase("output", "p2.csprojfortest", @"level1", @"..\..", @"..", 0, null)]
+		[TestCase("output", "p2.csprojfortest", @"level1\level2\level3", @"..\..", @"..\..\..", 0, null)]
+		[TestCase("output", "p2.csprojfortest", @"level1\level2", @"..\..", @"c:\\", 2, "must be a relative path")]
+		[TestCase("output", "p2.csprojfortest", @"level1\level2", @"..\..\output\Debug", @"..\..\output\xxx", 1, "debug;xxx")]
+		[TestCase(@"output\custom", "p2.csprojfortest", @"level1\level2", @"..\..\output", @"..\..\output\custom", 0, null)]
         public void TestAndCountOutPutPath(string outputPath, string projectNames, string subFolder, string patchFrom, string patchTo, int expectedCount, string expectedContains)
         {
             // Arrange:
@@ -94,9 +94,9 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 
 
         [Test]
-        [TestCase("Debug", "p2.csproj", @"level1\level2", null, null, 0, "contains;Debug;p2")]
-        [TestCase("Release", "p2.csproj", @"level1\level2", null, null, 0, "contains;Release;p2")]
-        [TestCase("NotExisting", "p2.csproj", @"level1\level2", null, null, 1, "does not contain;NotExisting;p2")]
+		[TestCase("Debug", "p2.csprojfortest", @"level1\level2", null, null, 0, "contains;Debug;p2")]
+		[TestCase("Release", "p2.csprojfortest", @"level1\level2", null, null, 0, "contains;Release;p2")]
+		[TestCase("NotExisting", "p2.csprojfortest", @"level1\level2", null, null, 1, "does not contain;NotExisting;p2")]
         public void TestAndCountConfigurationExists(string configNameToCheck, string projectNames, string subFolder, string patchFrom, string patchTo, int expectedCount, string expectedContains)
         {
             // Arrange:
@@ -134,15 +134,15 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
         }
 
         [Test]
-        [TestCase("AssemblyName", "AssemblyName", "p2.csproj", @"level1\level2", null, null, 0, "are identical;AssemblyName")]
-        [TestCase("AssemblyName", "AssemblyName", "p1.csproj", @"level1\level2", null, null, 0, "are identical;AssemblyName")]
-        [TestCase("AssemblyName", "RootNamespace", "p1.csproj", @"level1\level2", null, null, 0, "are identical;AssemblyName;RootNamespace")]
-        [TestCase("AssemblyName", "RootNamespace", "p2.csproj", @"level1\level2", null, null, 0, "are identical;AssemblyName;RootNamespace")]
-        [TestCase("AssemblyName", "RootNamespace", "p1.csproj", @"level1\level2", "<AssemblyName>", "<AssemblyName>x", 1, "are not identical;AssemblyName;RootNamespace")]
-        [TestCase("AssemblyNamex", "AssemblyName", "p1.csproj", @"level1\level2", null, null, 1, "are not identical;AssemblyNamex")]
-        [TestCase("AssemblyNamex", "AssemblyNamex", "p1.csproj", @"level1\level2", null, null, 1, "are not identical;AssemblyNamex")]
-        [TestCase("", "AssemblyName", "p1.csproj", @"level1\level2", null, null, 1, "are not identical;AssemblyName;<empty>")]
-        [TestCase("AssemblyName", "", "p1.csproj", @"level1\level2", null, null, 1, "are not identical;AssemblyName;<empty>")]
+		[TestCase("AssemblyName", "AssemblyName", "p2.csprojfortest", @"level1\level2", null, null, 0, "are identical;AssemblyName")]
+		[TestCase("AssemblyName", "AssemblyName", "p1.csprojfortest", @"level1\level2", null, null, 0, "are identical;AssemblyName")]
+		[TestCase("AssemblyName", "RootNamespace", "p1.csprojfortest", @"level1\level2", null, null, 0, "are identical;AssemblyName;RootNamespace")]
+		[TestCase("AssemblyName", "RootNamespace", "p2.csprojfortest", @"level1\level2", null, null, 0, "are identical;AssemblyName;RootNamespace")]
+		[TestCase("AssemblyName", "RootNamespace", "p1.csprojfortest", @"level1\level2", "<AssemblyName>", "<AssemblyName>x", 1, "are not identical;AssemblyName;RootNamespace")]
+		[TestCase("AssemblyNamex", "AssemblyName", "p1.csprojfortest", @"level1\level2", null, null, 1, "are not identical;AssemblyNamex")]
+		[TestCase("AssemblyNamex", "AssemblyNamex", "p1.csprojfortest", @"level1\level2", null, null, 1, "are not identical;AssemblyNamex")]
+		[TestCase("", "AssemblyName", "p1.csprojfortest", @"level1\level2", null, null, 1, "are not identical;AssemblyName;<empty>")]
+		[TestCase("AssemblyName", "", "p1.csprojfortest", @"level1\level2", null, null, 1, "are not identical;AssemblyName;<empty>")]
         public void TestAndCountCheckIdentical(string propertyName, string otherPropertyName, string projectNames, string subFolder, string patchFrom, string patchTo, int expectedCount, string expectedContains)
         {
             // Arrange:
@@ -180,11 +180,11 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 
 
         [Test]
-        [TestCase("Platform", "AnyCPU", "p1.csproj", @"level1\level2", null, null, 0, "has the expected;Platform;AnyCPU")]
-        [TestCase("Platform", "BadValue", "p1.csproj", @"level1\level2", null, null, 1, "has unexpected value;Platform;AnyCPU;BadValue")]
-        [TestCase("BadProperty", "BadValue", "p1.csproj", @"level1\level2", null, null, 1, "has unexpected value;BadProperty;BadValue")]
-        [TestCase("", "BadValue", "p1.csproj", @"level1\level2", null, null, 1, "has unexpected value;<empty>;BadValue")]
-        [TestCase("", "", "p1.csproj", @"level1\level2", null, null, 1, "has unexpected value;<empty>")]
+        [TestCase("Platform", "AnyCPU", "p1.csprojfortest", @"level1\level2", null, null, 0, "has the expected;Platform;AnyCPU")]
+		[TestCase("Platform", "BadValue", "p1.csprojfortest", @"level1\level2", null, null, 1, "has unexpected value;Platform;AnyCPU;BadValue")]
+		[TestCase("BadProperty", "BadValue", "p1.csprojfortest", @"level1\level2", null, null, 1, "has unexpected value;BadProperty;BadValue")]
+		[TestCase("", "BadValue", "p1.csprojfortest", @"level1\level2", null, null, 1, "has unexpected value;<empty>;BadValue")]
+		[TestCase("", "", "p1.csprojfortest", @"level1\level2", null, null, 1, "has unexpected value;<empty>")]
         public void TestAndCountCheckForValue(string propertyName, string value, string projectNames, string subFolder, string patchFrom, string patchTo, int expectedCount, string expectedContains)
         {
             // Arrange:

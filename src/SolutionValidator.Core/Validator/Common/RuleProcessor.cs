@@ -43,7 +43,7 @@ namespace SolutionValidator.Validator.Common
             {
                 var folderPath = context.GetFullPath(folderStructure.DefinitionFilePath);
                 if (File.Exists(folderPath))
-                {
+            {
                     var fileSystemRuleParser = new FileSystemRuleParser(Dependency.Resolve<IFileSystemHelper>());
                     _rules.AddRange(fileSystemRuleParser.Parse(context.ValidatorContext.FolderStructure.DefinitionFilePath));
                 }
