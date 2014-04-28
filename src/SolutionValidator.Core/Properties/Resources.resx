@@ -120,7 +120,7 @@
     <value>Folder structure check was set to 'true' but folder structure definition file was not found: {0}</value>
   </data>
   <data name="RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists" xml:space="preserve">
-    <value>Repository root folder does not exists: {0}</value>
+    <value>Repository root folder does not exists: '{0}'</value>
   </data>
   <data name="RuleProcessor_Process_Unexpected_error_while_processing_rule" xml:space="preserve">
     <value>Unexpected error while processing rule: {0}</value>
@@ -150,7 +150,7 @@
     <value>does not exist</value>
   </data>
   <data name="RuleProcessor_Process_Checking_repository" xml:space="preserve">
-    <value>Checking repository: {0}</value>
+    <value>Checking repository: '{0}'</value>
   </data>
   <data name="ConfigurationExistsProjectFileRule_Validate_Project contains_expected_configuration" xml:space="preserve">
     <value>Project '{0}' contains expected configuration '{1}'. {2}</value>

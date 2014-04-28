@@ -42,19 +42,16 @@ namespace SolutionValidator
 
         private static void Run(Options options)
         {
-            string repoRootPath = string.Empty;
             string configFilePath = string.Empty;
 
-
-
-            try
+	        var context = new Context(options.RepoRootPath)
+	        {
+		        // TODO: Build context
+	        };
+	        
+			try
             {
-                var context = new Context(options.RepoRootPath)
-                {
-                    // TODO: Build context
-                };
-
-                context.ValidateContext();
+	            context.ValidateContext();
             }
             catch (SolutionValidatorException ex)
             {
@@ -65,13 +62,9 @@ namespace SolutionValidator
                 Exit("An unexpected error occurred", -2, ex);
             }
 
-
-
-
-
             try
             {
-                if (options.ConfigFilePath == Options.ConfigFilePathDefaultValue)
+                if (options.ConfigFilePath == SolutionValidatorEnvironment.ConfigFilePathDefaultValue)
                 {
                     configFilePath = null;
                 }
@@ -86,7 +79,7 @@ namespace SolutionValidator
                 }
 
                 var configuration = ConfigurationHelper.Load(configFilePath);
-                var ruleProcessor = new RuleProcessor(repoRootPath, configuration);
+                var ruleProcessor = new RuleProcessor(context.RepositoryRootPath, configuration);
 
                 ruleProcessor.Process(validationResult =>
                 {

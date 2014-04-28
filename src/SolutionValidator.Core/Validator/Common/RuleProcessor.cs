@@ -35,6 +35,7 @@ namespace SolutionValidator.Validator.Common
         public RuleProcessor(string repoRootPath, SolutionValidatorConfigurationSection configuration)
         {
             _configuration = configuration;
+			_repositoryInfo = new RepositoryInfo(repoRootPath);
 
             var projectFileHelper = Dependency.Resolve<IProjectFileHelper>();
 
@@ -45,7 +46,6 @@ namespace SolutionValidator.Validator.Common
                 Logger.Error(Resources.RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists, repoRootPath);
                 return;
             }
-            _repositoryInfo = new RepositoryInfo(repoRootPath);
 
             if (configuration.FolderStructure.Check)
             {
