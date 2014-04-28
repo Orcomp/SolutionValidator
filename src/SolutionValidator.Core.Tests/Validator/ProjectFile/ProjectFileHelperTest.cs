@@ -22,7 +22,7 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		[SetUp]
 		public void SetUp()
 		{
-			testee = new ProjectFileHelper();
+			testee = new ProjectFileHelper("*.csprojfortest");
 			result = new ValidationResult(null);
 		}
 
@@ -54,7 +54,7 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		[Test]
 		public void TestLoad()
 		{
-			string p1Csproj = "TestData\\p2.csproj";
+			string p1Csproj = "TestData\\p2.csprojfortest";
 			testee.LoadProject(p1Csproj);
 			testee.CheckOutputPath("", "", result);
 		}

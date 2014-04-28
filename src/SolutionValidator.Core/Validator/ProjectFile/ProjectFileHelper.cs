@@ -17,6 +17,7 @@ namespace SolutionValidator.Validator.ProjectFile
     public class ProjectFileHelper : IProjectFileHelper
     {
         private const string SearchPattern = "*.csproj";
+		private string _searchPattern = "*.csproj";
         private const string SpecialPropertyProjectName = "ProjectName";
 
         private string _assemblyName;
@@ -24,7 +25,12 @@ namespace SolutionValidator.Validator.ProjectFile
         private Project _project;
         private string _projectFileFullName;
 
-        #region IProjectFileHelper Members
+	    public ProjectFileHelper(string searchPattern = SearchPattern)
+	    {
+		    _searchPattern = searchPattern;
+	    }
+
+	    #region IProjectFileHelper Members
 
         public IEnumerable<string> GetAllProjectFilePath(string root)
         {
@@ -39,7 +45,7 @@ namespace SolutionValidator.Validator.ProjectFile
             {
                 string rootFullPath = Path.GetFullPath(root);
                 var directoryInfo = new DirectoryInfo(rootFullPath);
-                FileInfo[] fileInfos = directoryInfo.GetFiles(SearchPattern, SearchOption.AllDirectories);
+                FileInfo[] fileInfos = directoryInfo.GetFiles(_searchPattern, SearchOption.AllDirectories);
                 result.AddRange(fileInfos.Select(fileInfo => fileInfo.FullName));
             }
             catch (Exception e)

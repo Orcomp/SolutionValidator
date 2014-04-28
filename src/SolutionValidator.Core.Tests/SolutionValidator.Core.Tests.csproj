@@ -94,42 +94,42 @@
     <Content Include="TestData\GetAllProjectFilePath\F0\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F1Flat\p1.csproj">
+    <None Include="TestData\GetAllProjectFilePath\F1Flat\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="TestData\GetAllProjectFilePath\F1Sub\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\GetAllProjectFilePath\F1Sub\Sub1\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F1Sub\Sub1\p1.csproj">
+    <None Include="TestData\GetAllProjectFilePath\F1Sub\Sub1\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="TestData\GetAllProjectFilePath\F1Sub\Sub2\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\GetAllProjectFilePath\F2FlatAndSub\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F2FlatAndSub\p1.csproj">
+    <None Include="TestData\GetAllProjectFilePath\F2FlatAndSub\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="TestData\GetAllProjectFilePath\F2FlatAndSub\Sub1\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F2FlatAndSub\Sub1\p1.csproj">
+    <None Include="TestData\GetAllProjectFilePath\F2FlatAndSub\Sub1\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="TestData\GetAllProjectFilePath\F2FlatAndSub\Sub2\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F2Flat\p1.csproj">
+    <None Include="TestData\GetAllProjectFilePath\F2Flat\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F2Flat\p2.csproj">
+    </None>
+    <None Include="TestData\GetAllProjectFilePath\F2Flat\p2.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="TestData\GetAllProjectFilePath\F2Flat\Sub1\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -139,21 +139,21 @@
     <Content Include="TestData\GetAllProjectFilePath\F2Sub\Sub1\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F2Sub\Sub1\p1.csproj">
+    <None Include="TestData\GetAllProjectFilePath\F2Sub\Sub1\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="TestData\GetAllProjectFilePath\F2Sub\Sub2\nocount.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\GetAllProjectFilePath\F2Sub\Sub2\p1.csproj">
+    <None Include="TestData\GetAllProjectFilePath\F2Sub\Sub2\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\p1.csproj">
+    </None>
+    <None Include="TestData\p1.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\p2.csproj">
+    </None>
+    <None Include="TestData\p2.csprojfortest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
