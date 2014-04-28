@@ -17,6 +17,8 @@ namespace SolutionValidator.Configuration
             get { return (bool)base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
         }
 
+        //public CollectionValidateBehavior 
+
         public ConfigurationNameElement this[int idx]
         {
             get { return (ConfigurationNameElement)BaseGet(idx); }

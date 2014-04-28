@@ -21,8 +21,6 @@ namespace SolutionValidator.Configuration
         #endregion
 
         #region Properties
-        public static string ConfigFilePath { get; set; }
-
         [ConfigurationProperty(FolderStructureElementName)]
         public FolderStructureElement FolderStructure
         {

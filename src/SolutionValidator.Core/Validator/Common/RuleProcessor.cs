@@ -10,9 +10,11 @@ namespace SolutionValidator.Validator.Common
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Catel;
     using Catel.Logging;
     using Configuration;
     using Infrastructure.DependencyInjection;
+    using Models;
     using ProjectFile;
     using ProjectFile.Rules;
     using Properties;
@@ -20,80 +22,66 @@ namespace SolutionValidator.Validator.Common
 
     public class RuleProcessor
     {
-        /// <summary>
-        /// The log.
-        /// </summary>
         private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
-
         private readonly RepositoryInfo _repositoryInfo;
         private readonly List<Rule> _rules;
         private List<ValidationResult> _allValidationResults;
-        private SolutionValidatorConfigurationSection _configuration;
         private int _totalCheckCount;
         private int _totalErrorCount;
 
-        public RuleProcessor(string repoRootPath, SolutionValidatorConfigurationSection configuration)
+        public RuleProcessor(Context context)
         {
-            _configuration = configuration;
+            Argument.IsNotNull(() => context);
 
             var projectFileHelper = Dependency.Resolve<IProjectFileHelper>();
 
             _rules = new List<Rule>();
+            _repositoryInfo = new RepositoryInfo(context.RepositoryRootPath);
 
-            if (!Directory.Exists(repoRootPath))
+            var folderStructure = context.ValidatorContext.FolderStructure;
+            if (folderStructure.Check)
             {
-                Logger.Error(Resources.RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists, repoRootPath);
-                return;
-            }
-            _repositoryInfo = new RepositoryInfo(repoRootPath);
-
-            if (configuration.FolderStructure.Check)
-            {
-                if (File.Exists(configuration.FolderStructure.EvaluatedDefinitionFilePath()))
+                var folderPath = context.GetFullPath(folderStructure.DefinitionFilePath);
+                if (File.Exists(folderPath))
                 {
                     var fileSystemRuleParser = new FileSystemRuleParser(Dependency.Resolve<IFileSystemHelper>());
-                    _rules.AddRange(fileSystemRuleParser.Parse(configuration.FolderStructure.DefinitionFilePath));
+                    _rules.AddRange(fileSystemRuleParser.Parse(context.ValidatorContext.FolderStructure.DefinitionFilePath));
                 }
                 else
                 {
-                    throw new ParseException(
-                        string.Format(Resources.RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found,
-                            configuration.FolderStructure.EvaluatedDefinitionFilePath()), 0, 0);
+                    throw new ParseException(string.Format(Resources.RuleProcessor_RuleProcessor_Folder_structure_definition_file_not_found, folderPath), 0, 0);
                 }
             }
 
-            if (configuration.ProjectFile.OutputPath.Check)
+            if (context.ValidatorContext.ProjectFile.CheckOutPutPath)
             {
-                var rule = new OutPutPathProjectFileRule(configuration.ProjectFile.OutputPath.Value, projectFileHelper);
+                var rule = new OutPutPathProjectFileRule(context.ValidatorContext.ProjectFile.OutputPath, projectFileHelper);
                 _rules.Add(rule);
             }
 
-            if (configuration.ProjectFile.RequiredConfigurations.Check)
+            if (context.ValidatorContext.ProjectFile.CheckRequiredConfigurations)
             {
-                foreach (string requiredConfigurationName in
-                    configuration.ProjectFile.RequiredConfigurations.Cast<ConfigurationNameElement>().Select(e => e.Name))
+                foreach (string requiredConfigurationName in context.ValidatorContext.ProjectFile.RequiredConfigurations)
                 {
                     var rule = new ConfigurationExistsProjectFileRule(requiredConfigurationName, projectFileHelper);
                     _rules.Add(rule);
                 }
             }
 
-            if (configuration.ProjectFile.CheckIdentical.Check)
+            if (context.ValidatorContext.ProjectFile.CheckIdentical)
             {
-                foreach (var propertiesToMatch in
-                    configuration.ProjectFile.CheckIdentical.Cast<PropertiesToMatchElement>())
+                foreach (var propertiesToMatch in context.ValidatorContext.ProjectFile.IdenticalChecks)
                 {
                     var rule = new CheckIdenticalProjectFileRule(propertiesToMatch.PropertyName, propertiesToMatch.OtherPropertyName, projectFileHelper);
                     _rules.Add(rule);
                 }
             }
 
-            if (configuration.ProjectFile.CheckForValue.Check)
+            if (context.ValidatorContext.ProjectFile.CheckPropertyValues)
             {
-                foreach (var propertyToCheck in
-                    configuration.ProjectFile.CheckForValue.Cast<PropertyToCheckElement>())
+                foreach (var propertyToCheck in context.ValidatorContext.ProjectFile.Properties)
                 {
-                    var rule = new CheckForValueProjectFileRule(propertyToCheck.PropertyName, propertyToCheck.Value, projectFileHelper);
+                    var rule = new CheckForValueProjectFileRule(propertyToCheck.Name, propertyToCheck.Value, projectFileHelper);
                     _rules.Add(rule);
                 }
             }

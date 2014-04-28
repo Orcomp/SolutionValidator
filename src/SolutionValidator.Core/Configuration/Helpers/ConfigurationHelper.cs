@@ -6,14 +6,25 @@
 
 namespace SolutionValidator.Configuration
 {
+    using System;
     using System.Configuration;
     using System.Reflection;
+    using Catel;
+    using Models;
 
     /// <summary>
     ///     ConfigurationHelper is a simple static helper to ease loading SolutionValidator configuration
     /// </summary>
     public static class ConfigurationHelper
     {
+        public static ValidatorContext CreateContext(string configFileName = null)
+        {
+            Argument.IsNotNullOrWhitespace(() => configFileName);
+
+            var configSection = Load(configFileName);
+            return configSection.ToContext();
+        }
+
         /// <summary>
         ///     Loads the specified configuration from the given file name.
         /// </summary>
@@ -26,20 +37,18 @@ namespace SolutionValidator.Configuration
         {
             if (configFileName == null)
             {
-                SolutionValidatorConfigurationSection.ConfigFilePath = Assembly.GetExecutingAssembly().CodeBase.Replace("file:///", string.Empty);
-                return Check((SolutionValidatorConfigurationSection)ConfigurationManager.GetSection(SolutionValidatorConfigurationSection.SectionName));
+                var defaultSection = (SolutionValidatorConfigurationSection)ConfigurationManager.GetSection(SolutionValidatorConfigurationSection.SectionName);
+                return Check(defaultSection);
             }
-
-            SolutionValidatorConfigurationSection.ConfigFilePath = configFileName;
 
             var configMap = new ExeConfigurationFileMap
             {
                 ExeConfigFilename = configFileName
             };
 
-            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
-
-            return Check((SolutionValidatorConfigurationSection)config.GetSection(SolutionValidatorConfigurationSection.SectionName));
+            var config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
+            var section = (SolutionValidatorConfigurationSection) config.GetSection(SolutionValidatorConfigurationSection.SectionName);
+            return Check(section);
         }
 
         /// <summary>

@@ -38,24 +38,5 @@ namespace SolutionValidator.Configuration
             get { return (bool) base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
         }
         #endregion
-
-        #region Methods
-        public string EvaluatedDefinitionFilePath()
-        {
-            try
-            {
-                string folder = Path.GetDirectoryName(SolutionValidatorConfigurationSection.ConfigFilePath);
-                string combine = Path.Combine(folder, DefinitionFilePath);
-                return Path.GetFullPath(combine);
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e, Resources.FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath);
-                return
-                    Path.GetFullPath(
-                        Resources.FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath2);
-            }
-        }
-        #endregion
     }
 }

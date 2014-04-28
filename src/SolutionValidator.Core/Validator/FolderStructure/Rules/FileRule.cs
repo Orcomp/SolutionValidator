@@ -55,6 +55,7 @@ namespace SolutionValidator.Validator.FolderStructure.Rules
                 result.AddResult(ResultLevel.Error, message);
                 return result;
             }
+
             message = string.Format("File '{0}' {1}.", RelativePath, exist ? Resources.FileRule_Validate_exists_ : Resources.FileRule_Validate_does_not_exist_);
             result.AddResult(ResultLevel.Passed, message);
             return result;

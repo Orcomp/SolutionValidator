@@ -7,12 +7,10 @@
 namespace SolutionValidator
 {
     using System;
-    using System.IO;
     using System.Linq;
     using Catel.Logging;
     using CommandLine;
     using CommandLineParsing;
-    using Configuration;
     using Infrastructure;
     using Properties;
     using Validator.Common;
@@ -26,6 +24,10 @@ namespace SolutionValidator
         #region Methods
         private static void Main(string[] args)
         {
+#if DEBUG
+            LogManager.AddDebugListener(true);
+#endif
+
             Logger.Info(Resources.Program_Main_SolutionValidator_started);
 
             BootStrapper.RegisterServices();
@@ -42,19 +44,55 @@ namespace SolutionValidator
 
         private static void Run(Options options)
         {
-            string repoRootPath = string.Empty;
-            string configFilePath = string.Empty;
-
-
-
             try
-            {
-                var context = new Context(options.RepoRootPath)
-                {
-                    // TODO: Build context
-                };
+            {                 
+                 var context = new Context(options.RepoRootPath, options.ConfigFilePath);
 
-                context.ValidateContext();
+                try
+                {
+                    var ruleProcessor = new RuleProcessor(context);
+
+                    ruleProcessor.Process(validationResult =>
+                    {
+                        foreach (var validationMessage in validationResult.Messages.Where(vm => !vm.Processed))
+                        {
+                            validationMessage.Processed = true;
+                            switch (validationMessage.ResultLevel)
+                            {
+                                case ResultLevel.Error:
+                                    Logger.Error(Resources.Program_Run_Error, validationMessage.Message);
+                                    break;
+
+                                case ResultLevel.Warning:
+                                    Logger.Warning(Resources.Program_Run_Error, validationMessage.Message);
+                                    break;
+
+                                case ResultLevel.Passed:
+                                    if (options.Verbose)
+                                    {
+                                        Logger.Info(Resources.Program_Run_Passed, validationMessage.Message);
+                                    }
+                                    break;
+
+                                case ResultLevel.Info:
+                                    Logger.Info(validationMessage.Message);
+                                    break;
+                            }
+                        }
+                    });
+
+                    string totalMessage = string.Format(Resources.Program_Run_Total_checks_Total_errors_found, ruleProcessor.TotalCheckCount, ruleProcessor.TotalErrorCount);
+                    Logger.Info(totalMessage);
+                    Logger.Info(Resources.Program_Run_Press_any_key_to_continue);
+                    Console.ReadKey(true);
+                    Environment.Exit(ruleProcessor.TotalErrorCount);
+                }
+                catch (Exception ex)
+                {
+                    string message = string.Format(Resources.Program_Run_Unexpected_error, ex.Message);
+                    Logger.Error(ex, message);
+                    Exit(message, -4, ex);
+                }
             }
             catch (SolutionValidatorException ex)
             {
@@ -63,72 +101,7 @@ namespace SolutionValidator
             catch (Exception ex)
             {
                 Exit("An unexpected error occurred", -2, ex);
-            }
-
-
-
-
-
-            try
-            {
-                if (string.Equals(options.ConfigFilePath, SolutionValidatorEnvironment.ConfigFilePathDefaultValue))
-                {
-                    configFilePath = null;
-                }
-                else
-                {
-                    configFilePath = Path.GetFullPath(options.ConfigFilePath);
-                    if (!File.Exists(configFilePath))
-                    {
-                        string message = string.Format(Resources.Program_Run_Configuration_file_does_not_exist, configFilePath);
-                        Exit(message, -3);
-                    }
-                }
-
-                var configuration = ConfigurationHelper.Load(configFilePath);
-                var ruleProcessor = new RuleProcessor(repoRootPath, configuration);
-
-                ruleProcessor.Process(validationResult =>
-                {
-                    foreach (var validationMessage in validationResult.Messages.Where(vm => !vm.Processed))
-                    {
-                        validationMessage.Processed = true;
-                        switch (validationMessage.ResultLevel)
-                        {
-                            case ResultLevel.Error:
-                                Logger.Error(Resources.Program_Run_Error, validationMessage.Message);
-                                break;
-
-                            case ResultLevel.Warning:
-                                Logger.Warning(Resources.Program_Run_Error, validationMessage.Message);
-                                break;
-
-                            case ResultLevel.Passed:
-                                if (options.Verbose)
-                                {
-                                    Logger.Info(Resources.Program_Run_Passed, validationMessage.Message);
-                                }
-                                break;
-
-                            case ResultLevel.Info:
-                                Logger.Info(validationMessage.Message);
-                                break;
-                        }
-                    }
-                });
-
-                string totalMessage = string.Format(Resources.Program_Run_Total_checks_Total_errors_found, ruleProcessor.TotalCheckCount, ruleProcessor.TotalErrorCount);
-                Logger.Info(totalMessage);
-                Logger.Info(Resources.Program_Run_Press_any_key_to_continue);
-                Console.ReadKey(true);
-                Environment.Exit(ruleProcessor.TotalErrorCount);
-            }
-            catch (Exception ex)
-            {
-                string message = string.Format(Resources.Program_Run_Unexpected_error, ex.Message);
-                Logger.Error(ex, message);
-                Exit(message, -4, ex);
-            }
+            }            
         }
 
         private static void Exit(string message, int exitCode, Exception e = null)
