@@ -11,8 +11,6 @@ namespace SolutionValidator.CommandLineParsing
 
     internal class Options
     {
-        public const string ConfigFilePathDefaultValue = "%app.config%";
-
         #region Properties
         [Option('r', "repoRoot", DefaultValue = ".", HelpText = "Path to repository root.")]
         public string RepoRootPath { get; set; }
@@ -23,7 +21,7 @@ namespace SolutionValidator.CommandLineParsing
         [Option('v', "verbose", DefaultValue = true, HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
         public bool Verbose { get; set; }
 
-        [Option('c', "config", DefaultValue = ConfigFilePathDefaultValue, HelpText = "Path to configuration file.")]
+        [Option('c', "config", DefaultValue = SolutionValidatorEnvironment.ConfigFilePathDefaultValue, HelpText = "Path to configuration file.")]
         public string ConfigFilePath { get; set; }
 
         [ParserState]

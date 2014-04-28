@@ -11,27 +11,29 @@ namespace SolutionValidator.Infrastructure
     using Validator.ProjectFile;
 
     /// <summary>
-	///     Dependency Injection initializer class
-	/// </summary>
-	public static class BootStrapper
-	{
-		#region Constants and Fields
+    ///     Dependency Injection initializer class
+    /// </summary>
+    public static class BootStrapper
+    {
+        #region Constants and Fields
         #endregion
 
-		#region Public Methods and Operators		
-		#endregion
+        #region Public Methods and Operators
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		/// <summary>
-		///     Registers the services / interface bindings.		
-		/// </summary>
-		public static void RegisterServices()
-		{
-            ServiceLocator.Default.RegisterInstance<IFileSystemHelper>(new FileSystemHelper());
-            ServiceLocator.Default.RegisterInstance<IProjectFileHelper>(new ProjectFileHelper());
-		}
+        /// <summary>
+        ///     Registers the services / interface bindings.
+        /// </summary>
+        public static void RegisterServices()
+        {
+            var serviceLocator = ServiceLocator.Default;
 
-		#endregion
-	}
+            serviceLocator.RegisterInstance<IFileSystemHelper>(new FileSystemHelper());
+            serviceLocator.RegisterInstance<IProjectFileHelper>(new ProjectFileHelper());
+        }
+
+        #endregion
+    }
 }

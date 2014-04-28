@@ -45,20 +45,29 @@ namespace SolutionValidator
             string repoRootPath = string.Empty;
             string configFilePath = string.Empty;
 
+
+
             try
             {
-                repoRootPath = Path.GetFullPath(options.RepoRootPath);
-                if (!Directory.Exists(repoRootPath))
+                var context = new Context(options.RepoRootPath)
                 {
-                    string message = string.Format(Resources.Program_Run_Repository_root_path__does_not_exist, repoRootPath);
-                    Exit(message, -2);
-                }
+                    // TODO: Build context
+                };
+
+                context.ValidateContext();
+            }
+            catch (SolutionValidatorException ex)
+            {
+                Exit("An error occurred", -1, ex);
             }
             catch (Exception ex)
             {
-                string message = string.Format(Resources.Program_Run_Error_when_processing_Repository_root_path, options.RepoRootPath);
-                Exit(message, -2, ex);
+                Exit("An unexpected error occurred", -2, ex);
             }
+
+
+
+
 
             try
             {
