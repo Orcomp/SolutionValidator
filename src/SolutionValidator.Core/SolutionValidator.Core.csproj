@@ -55,12 +55,11 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CollectionValidateBehavior.cs" />
-    <Compile Include="Configuration\Extensions\ConfigurationExtensions.cs" />
-    <Compile Include="Configuration\Helpers\ConfigurationHelper.cs" />
     <Compile Include="Configuration\ConfigurationNameCollection.cs" />
     <Compile Include="Configuration\ConfigurationNameElement.cs" />
+    <Compile Include="Configuration\Extensions\ConfigurationExtensions.cs" />
     <Compile Include="Configuration\FolderStructureElement.cs" />
+    <Compile Include="Configuration\Helpers\ConfigurationHelper.cs" />
     <Compile Include="Configuration\OutputPathElement.cs" />
     <Compile Include="Configuration\ProjectFileElement.cs" />
     <Compile Include="Configuration\PropertiesToCheckCollection.cs" />
@@ -68,9 +67,9 @@
     <Compile Include="Configuration\PropertiesToMatchCollection.cs" />
     <Compile Include="Configuration\PropertiesToMatchElement.cs" />
     <Compile Include="Configuration\SolutionValidatorConfigurationSection.cs" />
-    <Compile Include="Models\Context.cs" />
     <Compile Include="DependencyInjection\Dependency.cs" />
     <Compile Include="Exceptions\SolutionValidatorException.cs" />
+    <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Extensions\ContextExtensions.cs" />
     <Compile Include="Models\FolderStructure.cs" />
     <Compile Include="Models\IdenticalCheck.cs" />
