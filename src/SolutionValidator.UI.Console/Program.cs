@@ -71,7 +71,7 @@ namespace SolutionValidator
 
             try
             {
-                if (options.ConfigFilePath == Options.ConfigFilePathDefaultValue)
+                if (string.Equals(options.ConfigFilePath, SolutionValidatorEnvironment.ConfigFilePathDefaultValue))
                 {
                     configFilePath = null;
                 }
