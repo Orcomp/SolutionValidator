@@ -41,10 +41,11 @@
   <ItemGroup>
     <Reference Include="Catel.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Catel.Core.3.9.0.1404181747-beta\lib\net40\Catel.Core.dll</HintPath>
+      <HintPath>..\..\lib\Catel.Core.3.9.0.1404241954-beta\lib\net40\Catel.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Catel.Fody.Attributes">
-      <HintPath>..\..\lib\Catel.Fody.1.10.0\lib\portable-net4+sl4+wp7+win8+wpa81+MonoAndroid14+MonoTouch40\Catel.Fody.Attributes.dll</HintPath>
+    <Reference Include="Catel.Fody.Attributes, Version=1.12.0.0, Culture=neutral, PublicKeyToken=1c8163524cbe02e6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Catel.Fody.1.12.0\lib\portable-net4+sl4+wp7+win8+wpa81+MonoAndroid14+MonoTouch40\Catel.Fody.Attributes.dll</HintPath>
     </Reference>
     <Reference Include="CommandLine">
       <HintPath>..\..\lib\CommandLineParser.1.9.71\lib\net40\CommandLine.dll</HintPath>
@@ -58,6 +59,7 @@
     <Compile Include="Infrastructure\BootStrapper.cs" />
     <Compile Include="CommandLineParsing\Options.cs" />
     <Compile Include="Logging\OutputLogListener.cs" />
+    <Compile Include="ModuleInitializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

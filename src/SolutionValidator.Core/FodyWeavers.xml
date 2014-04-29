@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Weavers>
-	<Catel/>
-  
+  <Catel/>
+  <ModuleInit/>
+  <Costura>
+    <IncludeAssemblies>
+      ICSharpCode.NRefactory
+      ICSharpCode.NRefactory.CSharp
+    </IncludeAssemblies>
+  </Costura>
 </Weavers>

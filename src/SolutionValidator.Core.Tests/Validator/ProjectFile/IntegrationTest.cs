@@ -247,8 +247,5 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
             text = text.Replace(patchFrom, patchTo);
             File.WriteAllText(fileName, text);
         }
-
-        private static bool isInitialized;
-
     }
 }
