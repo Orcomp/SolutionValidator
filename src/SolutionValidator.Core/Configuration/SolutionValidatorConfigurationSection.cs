@@ -16,6 +16,7 @@ namespace SolutionValidator.Configuration
         public const string CheckAttributeName = "check";
 
         private const string FolderStructureElementName = "folderStructure";
+		private const string CSharpFormattingElementName = "csharpFormatting";
 
         private const string ProjectFileElementName = "projectFile";
         #endregion
@@ -26,6 +27,13 @@ namespace SolutionValidator.Configuration
         {
             get { return (FolderStructureElement) base[FolderStructureElementName]; }
         }
+
+		[ConfigurationProperty(CSharpFormattingElementName)]
+		public CSharpFormattingElement CSharpFormatting
+		{
+			get { return (CSharpFormattingElement)base[CSharpFormattingElementName]; }
+		}
+
 
         [ConfigurationProperty(ProjectFileElementName)]
         public ProjectFileElement ProjectFile

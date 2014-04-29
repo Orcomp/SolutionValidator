@@ -103,7 +103,7 @@ namespace SolutionValidator.Validator.Common
             _totalErrorCount = 0;
             _allValidationResults = new List<ValidationResult>();
 
-            OnNotifyInfo(notify, Resources.RuleProcessor_Process_Checking_repository, _repositoryInfo.RootPath);
+            OnNotifyInfo(notify, Resources.RuleProcessor_Process_Checking_repository, _repositoryInfo.RepositoryRootPath);
 
             foreach (Rule rule in _rules)
             {

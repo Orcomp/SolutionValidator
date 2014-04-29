@@ -162,22 +162,12 @@ namespace SolutionValidator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error getting EvaluatedDefinitionFilePath..
+        ///   Looks up a localized string similar to Error getting EvaluatedDefinitionFilePath.
         /// </summary>
         internal static string FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath {
             get {
                 return ResourceManager.GetString("FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinit" +
                         "ionFilePath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error getting EvaluatedDefinitionFilePath.
-        /// </summary>
-        internal static string FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath2 {
-            get {
-                return ResourceManager.GetString("FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinit" +
-                        "ionFilePath2", resourceCulture);
             }
         }
         

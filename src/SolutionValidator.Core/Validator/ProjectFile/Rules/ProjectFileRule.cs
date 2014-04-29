@@ -39,7 +39,7 @@ namespace SolutionValidator.Validator.ProjectFile.Rules
         public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
         {
             var result = new ValidationResult(this);
-            IEnumerable<string> projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
+            IEnumerable<string> projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RepositoryRootPath);
 
             foreach (string projectFilePath in projectFilePaths)
             {

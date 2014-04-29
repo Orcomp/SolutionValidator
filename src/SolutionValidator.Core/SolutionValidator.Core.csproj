@@ -39,12 +39,19 @@
     <Reference Include="Catel.Fody.Attributes">
       <HintPath>..\..\lib\Catel.Fody.1.10.0\lib\portable-net4+sl4+wp7+win8+wpa81+MonoAndroid14+MonoTouch40\Catel.Fody.Attributes.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>..\..\binarydependencies\NRefactory.github.13b09287144b0c53e58399d735dd770d5dad653b\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp">
+      <HintPath>..\..\binarydependencies\NRefactory.github.13b09287144b0c53e58399d735dd770d5dad653b\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +65,10 @@
     <Compile Include="Configuration\ConfigurationNameCollection.cs" />
     <Compile Include="Configuration\ConfigurationNameElement.cs" />
     <Compile Include="Configuration\Extensions\ConfigurationExtensions.cs" />
+    <Compile Include="Configuration\CSharpFormattingElement.cs" />
+    <Compile Include="Configuration\CSharpFormattingProperties.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Configuration\FolderStructureElement.cs" />
     <Compile Include="Configuration\Helpers\ConfigurationHelper.cs" />
     <Compile Include="Configuration\OutputPathElement.cs" />

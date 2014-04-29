@@ -15,7 +15,14 @@ namespace SolutionValidator.Tests.Configuration
     {
         private const string TestFolder = @"TestData\TestConfigurations";
 
-        [Test]
+	    [Test]
+	    public void CSharpFormattingPropertiesEmpty()
+	    {
+		    var option = CSharpFormattingProperties.GetOptions();
+	    }
+
+
+	    [Test]
         public void LoadFullFromAppConfig()
         {
             var configuration = ConfigurationHelper.Load();
@@ -60,6 +67,10 @@ namespace SolutionValidator.Tests.Configuration
             Assert.AreEqual(".folderStructure", configuration.FolderStructure.DefinitionFilePath);
             Assert.IsTrue(configuration.FolderStructure.Check);
 
+			// C# formatting:
+			Assert.AreEqual("csharpformatting.xml", configuration.CSharpFormatting.OptionsFilePath);
+			Assert.IsTrue(configuration.CSharpFormatting.Check);
+
             // Project file / Output path:
             Assert.AreEqual("output", configuration.ProjectFile.OutputPath.Value);
             Assert.IsTrue(configuration.ProjectFile.OutputPath.Check);
@@ -70,13 +81,13 @@ namespace SolutionValidator.Tests.Configuration
             Assert.AreEqual("Debug", configuration.ProjectFile.RequiredConfigurations[0].Name);
             Assert.AreEqual("Release", configuration.ProjectFile.RequiredConfigurations[1].Name);
 
-            // Project file / check identical:
-            Assert.IsTrue(configuration.ProjectFile.CheckIdentical.Check);
-            Assert.AreEqual(2, configuration.ProjectFile.CheckIdentical.Count);
-            Assert.AreEqual("AssemblyName", configuration.ProjectFile.CheckIdentical[0].PropertyName);
-            Assert.AreEqual("RootNamespace", configuration.ProjectFile.CheckIdentical[0].OtherPropertyName);
-            Assert.AreEqual("AssemblyName", configuration.ProjectFile.CheckIdentical[1].PropertyName);
-            Assert.AreEqual("ProjectName", configuration.ProjectFile.CheckIdentical[1].OtherPropertyName);
+			//// Project file / check identical:
+			Assert.IsTrue(configuration.ProjectFile.CheckIdentical.Check);
+			Assert.AreEqual(1, configuration.ProjectFile.CheckIdentical.Count);
+			//Assert.AreEqual("AssemblyName", configuration.ProjectFile.CheckIdentical[0].PropertyName);
+			//Assert.AreEqual("RootNamespace", configuration.ProjectFile.CheckIdentical[0].OtherPropertyName);
+			Assert.AreEqual("AssemblyName", configuration.ProjectFile.CheckIdentical[0].PropertyName);
+			Assert.AreEqual("ProjectName", configuration.ProjectFile.CheckIdentical[0].OtherPropertyName);
 
             // Project file / check for value:
             Assert.IsTrue(configuration.ProjectFile.CheckIdentical.Check);
@@ -87,11 +98,16 @@ namespace SolutionValidator.Tests.Configuration
             Assert.AreEqual("AnyCPU", configuration.ProjectFile.CheckForValue[1].Value);
         }
 
-        private void CheckCustomConfiguration(SolutionValidatorConfigurationSection configuration)
+
+	    private void CheckCustomConfiguration(SolutionValidatorConfigurationSection configuration)
         {
             // Folder structure:
             Assert.AreEqual("definitionFilePath", configuration.FolderStructure.DefinitionFilePath);
             Assert.IsFalse(configuration.FolderStructure.Check);
+
+			// C# formatting:
+			Assert.AreEqual("optionsFilePath", configuration.CSharpFormatting.OptionsFilePath);
+			Assert.IsFalse(configuration.CSharpFormatting.Check);
 
             // Project file / Output path:
             Assert.AreEqual("outputPath", configuration.ProjectFile.OutputPath.Value);

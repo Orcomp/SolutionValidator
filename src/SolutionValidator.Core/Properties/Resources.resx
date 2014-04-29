@@ -156,9 +156,6 @@
     <value>Project '{0}' contains expected configuration '{1}'. {2}</value>
   </data>
   <data name="FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath" xml:space="preserve">
-    <value>Error getting EvaluatedDefinitionFilePath.</value>
-  </data>
-  <data name="FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath2" xml:space="preserve">
     <value>Error getting EvaluatedDefinitionFilePath</value>
   </data>
   <data name="CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_identical" xml:space="preserve">
