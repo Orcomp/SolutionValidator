@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -75,11 +76,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".folderStructure" />
     <None Include="App.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include=".folderStructure">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -104,6 +103,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\lib\Fody.1.23.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\lib\Fody.1.23.2\build\Fody.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir).folderStructure" "$(ProjectDir)"..\..\</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
