@@ -6,13 +6,15 @@
 
 namespace SolutionValidator.Validator.Common
 {
-    public class RepositoryInfo
+	using System.IO;
+
+	public class RepositoryInfo
     {
-        public RepositoryInfo(string rootPath)
+        public RepositoryInfo(string repositoryRootPath)
         {
-            RootPath = rootPath.Trim().Replace("/", "\\");
+			RepositoryRootPath = repositoryRootPath.Trim().Replace("/", "\\");
         }
 
-        public string RootPath { get; private set; }
+        public string RepositoryRootPath { get; private set; }
     }
 }

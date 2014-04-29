@@ -36,6 +36,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Catel.Core.3.9.0.1404150943-beta\lib\net40\Catel.Core.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\binarydependencies\NRefactory.github.13b09287144b0c53e58399d735dd770d5dad653b\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\binarydependencies\NRefactory.github.13b09287144b0c53e58399d735dd770d5dad653b\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\lib\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -52,6 +60,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Infrastructure\Configuration\CSharpFormattingPropertiesTest.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigurationTest.cs" />
     <Compile Include="Infrastructure\Logging\LoggerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,6 +101,15 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="TestData\GetAllProjectFilePath\F0\nocount.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestFormattiongOptions\SimpleComplement.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestFormattiongOptions\Simple.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestFormattiongOptions\SharpDevelopProperties.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="TestData\GetAllProjectFilePath\F1Flat\p1.csprojfortest">

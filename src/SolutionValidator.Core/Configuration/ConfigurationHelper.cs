@@ -72,11 +72,11 @@ namespace SolutionValidator.Configuration
 				//	PropertyName = "AssemblyName",
 				//	OtherPropertyName = "RootNamespace"
 				//});
-				//configuration.ProjectFile.CheckIdentical.Add(new PropertiesToMatchElement
-				//{
-				//	PropertyName = "AssemblyName",
-				//	OtherPropertyName = "ProjectName"
-				//});
+				configuration.ProjectFile.CheckIdentical.Add(new PropertiesToMatchElement
+				{
+					PropertyName = "AssemblyName",
+					OtherPropertyName = "ProjectName"
+				});
             }
 
             if (configuration.ProjectFile.CheckForValue.Count == 0 && configuration.ProjectFile.CheckForValue.Check)

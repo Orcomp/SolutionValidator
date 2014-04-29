@@ -29,14 +29,14 @@ namespace SolutionValidator.Validator.ProjectFile.Rules
         public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
         {
             var result = new ValidationResult(this);
-            IEnumerable<string> projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RootPath);
+            IEnumerable<string> projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RepositoryRootPath);
 
             foreach (string projectFilePath in projectFilePaths)
             {
                 try
                 {
                     _projectFileHelper.LoadProject(projectFilePath);
-                    _projectFileHelper.CheckOutputPath(repositoryInfo.RootPath, _expectedOutputPath, result, notify);
+                    _projectFileHelper.CheckOutputPath(repositoryInfo.RepositoryRootPath, _expectedOutputPath, result, notify);
                 }
                 catch (Exception ex)
                 {
@@ -48,7 +48,7 @@ namespace SolutionValidator.Validator.ProjectFile.Rules
 
         protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
         {
-            _projectFileHelper.CheckOutputPath(repositoryInfo.RootPath, _expectedOutputPath, result, notify);
+            _projectFileHelper.CheckOutputPath(repositoryInfo.RepositoryRootPath, _expectedOutputPath, result, notify);
         }
     }
 }

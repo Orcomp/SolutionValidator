@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FolderStructureElement.cs" company="Orcomp development team">
+// <copyright file="CSharpFormattingElement.cs" company="Orcomp development team">
 //   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -14,22 +14,18 @@ namespace SolutionValidator.Configuration
     using Properties;
 
     [UsedImplicitly]
-    public class FolderStructureElement : ConfigurationElement
+    public class CSharpFormattingElement : ConfigurationElement
     {
         #region Constants
-        private const string DefinitionFilePathAttributeName = "definitionFilePath";
-
-        /// <summary>
-        /// The log.
-        /// </summary>
+        private const string OptionsFilePathAttributeName = "optionsFilePath";
         private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
         #endregion
 
         #region Properties
-        [ConfigurationProperty(DefinitionFilePathAttributeName, DefaultValue = ".folderStructure")]
-        public string DefinitionFilePath
+		[ConfigurationProperty(OptionsFilePathAttributeName, DefaultValue = "csharpformatting.xml")]
+        public string OptionsFilePath
         {
-            get { return (string) base[DefinitionFilePathAttributeName]; }
+            get { return (string) base[OptionsFilePathAttributeName]; }
         }
 
         [ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
@@ -40,18 +36,18 @@ namespace SolutionValidator.Configuration
         #endregion
 
         #region Methods
-        public string EvaluatedDefinitionFilePath()
+        public string EvaluatedOptionsFilePath()
         {
             try
             {
                 string folder = Path.GetDirectoryName(SolutionValidatorConfigurationSection.ConfigFilePath);
-                string combine = Path.Combine(folder, DefinitionFilePath);
+                string combine = Path.Combine(folder, OptionsFilePath);
                 return Path.GetFullPath(combine);
             }
             catch (Exception e)
             {
-				Logger.Error(e, Resources.FolderStructureElement_EvaluatedDefinitionFilePath_Error_getting_EvaluatedDefinitionFilePath);
-	            return Path.GetFullPath(DefinitionFilePath);
+				Logger.Error(e, "Error getting EvaluatedOptionsFilePath");
+	            return Path.GetFullPath(OptionsFilePath);
             }
         }
         #endregion

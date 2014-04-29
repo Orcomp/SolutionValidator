@@ -22,7 +22,7 @@ namespace SolutionValidator.Validator.FolderStructure.Rules
 		public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
 		{
 			var result = new ValidationResult(this);
-			var exist = FileSystemHelper.GetFolders(repositoryInfo.RootPath, RelativePath).Any();
+			var exist = FileSystemHelper.GetFolders(repositoryInfo.RepositoryRootPath, RelativePath).Any();
 			string message;
 
 			if (!exist && CheckType == CheckType.MustExist || exist && CheckType == CheckType.MustNotExist)

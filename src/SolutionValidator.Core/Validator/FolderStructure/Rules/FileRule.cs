@@ -31,12 +31,12 @@ namespace SolutionValidator.Validator.FolderStructure.Rules
 
             if (!IsRecursive)
             {
-                string folder = Path.Combine(repositoryInfo.RootPath, folderPattern);
+                string folder = Path.Combine(repositoryInfo.RepositoryRootPath, folderPattern);
                 foldersToCheck.Add(folder.TrimEnd('\\'));
             }
             else
             {
-                foldersToCheck.AddRange(FileSystemHelper.GetFolders(repositoryInfo.RootPath, folderPattern));
+                foldersToCheck.AddRange(FileSystemHelper.GetFolders(repositoryInfo.RepositoryRootPath, folderPattern));
             }
 
             bool exist = false;
