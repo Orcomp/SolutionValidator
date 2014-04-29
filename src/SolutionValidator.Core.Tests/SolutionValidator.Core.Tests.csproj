@@ -7,7 +7,7 @@
     <ProjectGuid>{C1BD2989-EA06-4D72-B7D0-CE2308D1D01B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolutionValidator.Core.Tests</RootNamespace>
+    <RootNamespace>SolutionValidator.Tests</RootNamespace>
     <AssemblyName>SolutionValidator.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

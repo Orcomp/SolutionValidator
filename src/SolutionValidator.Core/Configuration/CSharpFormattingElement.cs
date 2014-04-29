@@ -7,30 +7,51 @@
 
 namespace SolutionValidator.Configuration
 {
-    using System.Configuration;
-    using Catel.Logging;
-    using Properties;
+	using System;
+	using System.Configuration;
+	using Catel.Logging;
+	using Properties;
 
-    [UsedImplicitly]
-    public class CSharpFormattingElement : ConfigurationElement
-    {
-        #region Constants
-        private const string OptionsFilePathAttributeName = "optionsFilePath";
-        private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
-        #endregion
+	[UsedImplicitly]
+	public class CSharpFormattingElement : ConfigurationElement
+	{
+		#region Constants
+		private const string OptionsFilePathAttributeName = "optionsFilePath";
+		private const string DefaultFormattingOptionSetAttributeName = "DefaultFormattingOptionSetName";
+		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
+		#endregion
 
-        #region Properties
-        [ConfigurationProperty(OptionsFilePathAttributeName, DefaultValue = "csharpformatting.xml")]
-        public string OptionsFilePath
-        {
-            get { return (string)base[OptionsFilePathAttributeName]; }
-        }
+		#region Properties
+		[ConfigurationProperty(OptionsFilePathAttributeName, DefaultValue = "csharpformatting.xml")]
+		public string OptionsFilePath
+		{
+			get { return (string) base[OptionsFilePathAttributeName]; }
+		}
 
-        [ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
-        public bool Check
-        {
-            get { return (bool)base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
-        }
-        #endregion
-    }
+		[ConfigurationProperty(DefaultFormattingOptionSetAttributeName, DefaultValue = "Orcomp")]
+		public string DefaultFormattingOptionSetName
+		{
+			get { return (string) base[OptionsFilePathAttributeName]; }
+		}
+
+		public FormattingOptionSet DefaultFormattingOptionSet
+		{
+			get
+			{
+				FormattingOptionSet result;
+				if (Enum.TryParse(DefaultFormattingOptionSetName, true, out result))
+				{
+					return result;
+				}
+				return FormattingOptionSet.VisualStudio;
+			}
+		}
+
+		[ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
+		public bool Check
+		{
+			get { return (bool) base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
+		}
+		#endregion
+	}
 }

@@ -1,0 +1,164 @@
+1. IndentNamespaceBody: True
+2. IndentClassBody: True
+3. IndentInterfaceBody: True
+4. IndentStructBody: True
+5. IndentEnumBody: True
+6. IndentMethodBody: True
+7. IndentPropertyBody: True
+8. IndentEventBody: True
+9. IndentBlocks: True
+10. IndentSwitchBody: True
+11. IndentCaseBody: True
+12. IndentBreakStatements: True
+13. AlignEmbeddedStatements: True
+14. AlignElseInIfStatements: False
+15. AutoPropertyFormatting: AllowOneLine(AllowOneLine, ForceOneLine, ForceNewLine)
+16. SimplePropertyFormatting: AllowOneLine(AllowOneLine, ForceOneLine, ForceNewLine)
+17. EmptyLineFormatting: DoNotIndent(DoNotChange, Indent, DoNotIndent)
+18. IndentPreprocessorDirectives: True
+19. AlignToMemberReferenceDot: False
+20. IndentBlocksInsideExpressions: True
+21. NamespaceBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+22. ClassBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+23. InterfaceBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+24. StructBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+25. EnumBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+26. MethodBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+27. AnonymousMethodBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+28. ConstructorBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+29. DestructorBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+30. PropertyBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+31. PropertyGetBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+32. PropertySetBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+33. SimpleGetBlockFormatting: AllowOneLine(AllowOneLine, ForceOneLine, ForceNewLine)
+34. SimpleSetBlockFormatting: AllowOneLine(AllowOneLine, ForceOneLine, ForceNewLine)
+35. EventBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+36. EventAddBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+37. EventRemoveBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+38. AllowEventAddBlockInline: True
+39. AllowEventRemoveBlockInline: True
+40. StatementBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+41. AllowIfBlockInline: False
+42. AllowOneLinedArrayInitialziers: True
+43. ElseNewLinePlacement: NewLine(DoNotCare, NewLine, SameLine)
+44. ElseIfNewLinePlacement: SameLine(DoNotCare, NewLine, SameLine)
+45. CatchNewLinePlacement: NewLine(DoNotCare, NewLine, SameLine)
+46. FinallyNewLinePlacement: NewLine(DoNotCare, NewLine, SameLine)
+47. WhileNewLinePlacement: DoNotCare(DoNotCare, NewLine, SameLine)
+48. EmbeddedStatementPlacement: NewLine(DoNotCare, NewLine, SameLine)
+49. SpaceBeforeMethodDeclarationParentheses: False
+50. SpaceBetweenEmptyMethodDeclarationParentheses: False
+51. SpaceBeforeMethodDeclarationParameterComma: False
+52. SpaceAfterMethodDeclarationParameterComma: True
+53. SpaceWithinMethodDeclarationParentheses: False
+54. SpaceBeforeMethodCallParentheses: False
+55. SpaceBetweenEmptyMethodCallParentheses: False
+56. SpaceBeforeMethodCallParameterComma: False
+57. SpaceAfterMethodCallParameterComma: True
+58. SpaceWithinMethodCallParentheses: False
+59. SpaceBeforeFieldDeclarationComma: False
+60. SpaceAfterFieldDeclarationComma: True
+61. SpaceBeforeLocalVariableDeclarationComma: False
+62. SpaceAfterLocalVariableDeclarationComma: True
+63. SpaceBeforeConstructorDeclarationParentheses: False
+64. SpaceBetweenEmptyConstructorDeclarationParentheses: False
+65. SpaceBeforeConstructorDeclarationParameterComma: False
+66. SpaceAfterConstructorDeclarationParameterComma: True
+67. SpaceWithinConstructorDeclarationParentheses: False
+68. NewLineBeforeConstructorInitializerColon: NewLine(DoNotCare, NewLine, SameLine)
+69. NewLineAfterConstructorInitializerColon: SameLine(DoNotCare, NewLine, SameLine)
+70. SpaceBeforeIndexerDeclarationBracket: False
+71. SpaceWithinIndexerDeclarationBracket: False
+72. SpaceBeforeIndexerDeclarationParameterComma: False
+73. SpaceAfterIndexerDeclarationParameterComma: True
+74. SpaceBeforeDelegateDeclarationParentheses: False
+75. SpaceBetweenEmptyDelegateDeclarationParentheses: False
+76. SpaceBeforeDelegateDeclarationParameterComma: False
+77. SpaceAfterDelegateDeclarationParameterComma: True
+78. SpaceWithinDelegateDeclarationParentheses: False
+79. SpaceBeforeNewParentheses: False
+80. SpaceBeforeIfParentheses: True
+81. SpaceBeforeWhileParentheses: True
+82. SpaceBeforeForParentheses: True
+83. SpaceBeforeForeachParentheses: True
+84. SpaceBeforeCatchParentheses: True
+85. SpaceBeforeSwitchParentheses: True
+86. SpaceBeforeLockParentheses: True
+87. SpaceBeforeUsingParentheses: True
+88. SpaceAroundAssignment: True
+89. SpaceAroundLogicalOperator: True
+90. SpaceAroundEqualityOperator: True
+91. SpaceAroundRelationalOperator: True
+92. SpaceAroundBitwiseOperator: True
+93. SpaceAroundAdditiveOperator: True
+94. SpaceAroundMultiplicativeOperator: True
+95. SpaceAroundShiftOperator: True
+96. SpaceAroundNullCoalescingOperator: True
+97. SpaceAfterUnsafeAddressOfOperator: False
+98. SpaceAfterUnsafeAsteriskOfOperator: False
+99. SpaceAroundUnsafeArrowOperator: False
+100. SpacesWithinParentheses: False
+101. SpacesWithinIfParentheses: False
+102. SpacesWithinWhileParentheses: False
+103. SpacesWithinForParentheses: False
+104. SpacesWithinForeachParentheses: False
+105. SpacesWithinCatchParentheses: False
+106. SpacesWithinSwitchParentheses: False
+107. SpacesWithinLockParentheses: False
+108. SpacesWithinUsingParentheses: False
+109. SpacesWithinCastParentheses: False
+110. SpacesWithinSizeOfParentheses: False
+111. SpaceBeforeSizeOfParentheses: False
+112. SpacesWithinTypeOfParentheses: False
+113. SpacesWithinNewParentheses: False
+114. SpacesBetweenEmptyNewParentheses: False
+115. SpaceBeforeNewParameterComma: False
+116. SpaceAfterNewParameterComma: True
+117. SpaceBeforeTypeOfParentheses: False
+118. SpacesWithinCheckedExpressionParantheses: False
+119. SpaceBeforeConditionalOperatorCondition: True
+120. SpaceAfterConditionalOperatorCondition: True
+121. SpaceBeforeConditionalOperatorSeparator: True
+122. SpaceAfterConditionalOperatorSeparator: True
+123. SpacesWithinBrackets: False
+124. SpacesBeforeBrackets: False
+125. SpaceBeforeBracketComma: False
+126. SpaceAfterBracketComma: True
+127. SpaceBeforeForSemicolon: False
+128. SpaceAfterForSemicolon: True
+129. SpaceAfterTypecast: False
+130. SpaceBeforeArrayDeclarationBrackets: False
+131. SpaceInNamedArgumentAfterDoubleColon: True
+132. RemoveEndOfLineWhiteSpace: True
+133. SpaceBeforeSemicolon: False
+134. MinimumBlankLinesBeforeUsings: 0
+135. MinimumBlankLinesAfterUsings: 1
+136. MinimumBlankLinesBeforeFirstDeclaration: 0
+137. MinimumBlankLinesBetweenTypes: 1
+138. MinimumBlankLinesBetweenFields: 0
+139. MinimumBlankLinesBetweenEventFields: 0
+140. MinimumBlankLinesBetweenMembers: 1
+141. MinimumBlankLinesAroundRegion: 1
+142. MinimumBlankLinesInsideRegion: 1
+143. KeepCommentsAtFirstColumn: True
+144. ArrayInitializerWrapping: DoNotChange(DoNotChange, DoNotWrap, WrapAlways, WrapIfTooLong)
+145. ArrayInitializerBraceStyle: NextLine(DoNotChange, EndOfLine, EndOfLineWithoutSpace, NextLine, NextLineShifted, NextLineShifted2, BannerStyle)
+146. ChainedMethodCallWrapping: DoNotChange(DoNotChange, DoNotWrap, WrapAlways, WrapIfTooLong)
+147. MethodCallArgumentWrapping: DoNotChange(DoNotChange, DoNotWrap, WrapAlways, WrapIfTooLong)
+148. NewLineAferMethodCallOpenParentheses: DoNotCare(DoNotCare, NewLine, SameLine)
+149. MethodCallClosingParenthesesOnNewLine: DoNotCare(DoNotCare, NewLine, SameLine)
+150. IndexerArgumentWrapping: DoNotChange(DoNotChange, DoNotWrap, WrapAlways, WrapIfTooLong)
+151. NewLineAferIndexerOpenBracket: DoNotCare(DoNotCare, NewLine, SameLine)
+152. IndexerClosingBracketOnNewLine: DoNotCare(DoNotCare, NewLine, SameLine)
+153. MethodDeclarationParameterWrapping: DoNotChange(DoNotChange, DoNotWrap, WrapAlways, WrapIfTooLong)
+154. NewLineAferMethodDeclarationOpenParentheses: DoNotCare(DoNotCare, NewLine, SameLine)
+155. MethodDeclarationClosingParenthesesOnNewLine: DoNotCare(DoNotCare, NewLine, SameLine)
+156. IndexerDeclarationParameterWrapping: DoNotChange(DoNotChange, DoNotWrap, WrapAlways, WrapIfTooLong)
+157. NewLineAferIndexerDeclarationOpenBracket: DoNotCare(DoNotCare, NewLine, SameLine)
+158. IndexerDeclarationClosingBracketOnNewLine: DoNotCare(DoNotCare, NewLine, SameLine)
+159. AlignToFirstIndexerArgument: False
+160. AlignToFirstIndexerDeclarationParameter: False
+161. AlignToFirstMethodCallArgument: False
+162. AlignToFirstMethodDeclarationParameter: False
+163. NewLineBeforeNewQueryClause: NewLine(DoNotCare, NewLine, SameLine)
+164. UsingPlacement: TopOfFile(TopOfFile, InsideNamespace)

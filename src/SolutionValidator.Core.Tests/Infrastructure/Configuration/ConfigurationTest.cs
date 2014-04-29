@@ -6,8 +6,11 @@
 
 namespace SolutionValidator.Tests.Configuration
 {
-    using System.IO;
-    using NUnit.Framework;
+	using System;
+	using System.Diagnostics;
+    using System.Reflection;
+    using ICSharpCode.NRefactory.CSharp;
+	using NUnit.Framework;
     using SolutionValidator.Configuration;
 
     [TestFixture]
@@ -15,7 +18,29 @@ namespace SolutionValidator.Tests.Configuration
     {
         private const string TestFolder = @"TestData\TestConfigurations";
 
-	    [Test]
+		[Test]
+		[Explicit]
+		public void DumpOptions()
+		{
+			var option = FormattingOptionsFactory.CreateAllman();
+			var index = -1;
+			foreach (PropertyInfo propertyInfo in typeof(CSharpFormattingOptions).GetProperties())
+			{
+				string values = string.Empty;
+				if (propertyInfo.PropertyType.IsEnum)
+				{
+					values = string.Join(", ", Enum.GetNames(propertyInfo.PropertyType));
+				}
+				if (!string.IsNullOrEmpty(values))
+				{
+					values = string.Format("({0})", values);
+				}
+				
+				Debug.WriteLine("{0:###}. {1}: {2}{3}", index++, propertyInfo.Name, propertyInfo.GetValue(option, new object[0]), values);
+			}
+		}	    
+		
+		[Test]
 	    public void CSharpFormattingPropertiesEmpty()
 	    {
 		    var option = CSharpFormattingProperties.GetOptions();
