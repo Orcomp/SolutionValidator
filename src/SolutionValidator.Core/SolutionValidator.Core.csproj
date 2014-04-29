@@ -40,10 +40,10 @@
       <HintPath>..\..\lib\Catel.Fody.1.10.0\lib\portable-net4+sl4+wp7+win8+wpa81+MonoAndroid14+MonoTouch40\Catel.Fody.Attributes.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>..\..\binarydependencies\NRefactory.github.13b09287144b0c53e58399d735dd770d5dad653b\ICSharpCode.NRefactory.dll</HintPath>
+      <HintPath>..\..\lib\NRefactory\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory.CSharp">
-      <HintPath>..\..\binarydependencies\NRefactory.github.13b09287144b0c53e58399d735dd770d5dad653b\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+      <HintPath>..\..\lib\NRefactory\ICSharpCode.NRefactory.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
