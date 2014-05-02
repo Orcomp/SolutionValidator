@@ -1,37 +1,42 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Project.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="ProjectFile.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Models
 {
-    using System.Collections.ObjectModel;
-    using Catel.Data;
+	#region using...
+	using System.Collections.ObjectModel;
+	using Catel.Data;
 
-    public  class ProjectFile : ModelBase
-    {
-        public ProjectFile()
-        {            
-            RequiredConfigurations = new Collection<string>();
-            IdenticalChecks = new Collection<IdenticalCheck>();            
-            Properties = new Collection<Property>();
-        }
+	#endregion
 
-        public bool CheckOutPutPath { get; set; }
+	public class ProjectFile : ModelBase
+	{
+		public ProjectFile()
+		{
+			RequiredConfigurations = new Collection<string>();
+			IdenticalChecks = new Collection<IdenticalCheck>();
+			Properties = new Collection<Property>();
+		}
 
-        public string OutputPath { get; set;}
+		public bool CheckOutPutPath { get; set; }
 
-        public bool CheckRequiredConfigurations { get; set; }
+		public string OutputPath { get; set; }
 
-        public Collection<string> RequiredConfigurations { get; private set; }
+		public bool CheckRequiredConfigurations { get; set; }
 
-        public bool CheckIdentical { get; set; }
+		public Collection<string> RequiredConfigurations { get; private set; }
 
-        public Collection<IdenticalCheck> IdenticalChecks { get; private set; }       
+		public bool CheckIdentical { get; set; }
 
-        public bool CheckPropertyValues { get; set; }
+		public Collection<IdenticalCheck> IdenticalChecks { get; private set; }
 
-        public Collection<Property> Properties { get; private set; }
-    }
+		public bool CheckPropertyValues { get; set; }
+
+		public Collection<Property> Properties { get; private set; }
+	}
 }

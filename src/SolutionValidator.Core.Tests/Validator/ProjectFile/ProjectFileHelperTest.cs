@@ -1,32 +1,32 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="ProjectFileHelperTest.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Core.Tests.Validator.ProjectFile
+namespace SolutionValidator.Tests.Validator.ProjectFile
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using NUnit.Framework;
-    using SolutionValidator.Validator.Common;
-    using SolutionValidator.Validator.ProjectFile;
+	#region using...
+	using System;
+	using System.IO;
+	using System.Linq;
+	using Common;
+	using NUnit.Framework;
+	using SolutionValidator.ProjectFile;
 
-    [TestFixture]
+	#endregion
+
+	[TestFixture]
 	public class ProjectFileHelperTest
 	{
-		#region Setup/Teardown
-
 		[SetUp]
 		public void SetUp()
 		{
 			testee = new ProjectFileHelper("*.csprojfortest");
 			result = new ValidationResult(null);
 		}
-
-		#endregion
 
 		private const string TestDataPath = "TestData";
 		private ProjectFileHelper testee;
@@ -42,9 +42,9 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		[TestCase(@"GetAllProjectFilePath\F2Sub", 2)]
 		public void TestGetAllProjectFilePath(string subPath, int expectedCount)
 		{
-			string path = string.Format(@"{0}\{1}", TestDataPath, subPath);
+			var path = string.Format(@"{0}\{1}", TestDataPath, subPath);
 
-			List<string> result = testee.GetAllProjectFilePath(path).ToList();
+			var result = testee.GetAllProjectFilePath(path).ToList();
 
 			Assert.AreEqual(expectedCount, result.Count());
 			Assert.IsTrue(result.All(p => p.Contains(".csproj")));
@@ -54,7 +54,7 @@ namespace SolutionValidator.Core.Tests.Validator.ProjectFile
 		[Test]
 		public void TestLoad()
 		{
-			string p1Csproj = "TestData\\p2.csprojfortest";
+			var p1Csproj = "TestData\\p2.csprojfortest";
 			testee.LoadProject(p1Csproj);
 			testee.CheckOutputPath("", "", result);
 		}

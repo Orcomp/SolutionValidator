@@ -1,18 +1,22 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="FolderRule.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Validator.FolderStructure.Rules
+namespace SolutionValidator.FolderStructure
 {
-    using System;
-    using System.Linq;
-    using Properties;
-    using Common;
-    using FolderStructure;
+	#region using...
+	using System;
+	using System.Linq;
+	using Common;
+	using Properties;
 
-    public class FolderRule : FileSystemRule
+	#endregion
+
+	public class FolderRule : FileSystemRule
 	{
 		public FolderRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
 			: base(relativePath, checkType, fileSystemHelper)
@@ -28,14 +32,14 @@ namespace SolutionValidator.Validator.FolderStructure.Rules
 			if (!exist && CheckType == CheckType.MustExist || exist && CheckType == CheckType.MustNotExist)
 			{
 				message = string.Format("Folder '{0}' {1}.", RelativePath, exist ? Resources.FolderRule_Validate_exists_This_folder_should_not_exist
-						: Resources.FolderRule_Validate_does_not_exist_This_folder_must_exist);
-				result.AddResult(ResultLevel.Error, message);
+					: Resources.FolderRule_Validate_does_not_exist_This_folder_must_exist);
+				result.AddResult(ResultLevel.Invalid, message);
 				return result;
 			}
 			message = string.Format("Folder '{0}' {1}.", RelativePath, exist ? Resources.FolderRule_Validate_exists : Resources.FolderRule_Validate_does_not_exist);
 			result.AddResult(ResultLevel.Passed, message);
-			
-            return result;
+
+			return result;
 		}
 	}
 }

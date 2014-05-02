@@ -1,52 +1,55 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileSystemRule.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Validator.FolderStructure.Rules
+namespace SolutionValidator.FolderStructure
 {
-    using System;
-    using System.Dynamic;
-    using Common;
-    using FolderStructure;
+	#region using...
+	using System;
+	using System.Dynamic;
+	using Common;
 
-    public abstract class FileSystemRule : Rule
-    {
-        public const string RecursionToken = "**";
-        public const string FileWildCardToken = "*";
-        // Not used currently: public const string OneLevelWildCardToken = "*";
+	#endregion
 
-        protected readonly CheckType CheckType;
-        protected readonly IFileSystemHelper FileSystemHelper;
-        protected readonly bool IsRecursive;
-        protected readonly string RelativePath;
+	public abstract class FileSystemRule : Rule
+	{
+		public const string RecursionToken = "**";
+		public const string FileWildCardToken = "*";
+		// Not used currently: public const string OneLevelWildCardToken = "*";
 
-        protected FileSystemRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
-            : base()
-        {
-            RelativePath = relativePath.Replace("/", @"\");
-            CheckType = checkType;
-            FileSystemHelper = fileSystemHelper;
-            IsRecursive = relativePath.IndexOf(RecursionToken, StringComparison.InvariantCulture) != -1;
-        }
+		protected readonly CheckType CheckType;
+		protected readonly IFileSystemHelper FileSystemHelper;
+		protected readonly bool IsRecursive;
+		protected readonly string RelativePath;
 
-        // Custom Whitebox sorry...
-        public dynamic UnitTestPeek
-        {
-            get
-            {
-                dynamic result = new ExpandoObject();
-                result.CheckType = CheckType;
-                result.IsRecursive = IsRecursive;
-                return result;
-            }
-        }
+		protected FileSystemRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
+		{
+			RelativePath = relativePath.Replace("/", @"\");
+			CheckType = checkType;
+			FileSystemHelper = fileSystemHelper;
+			IsRecursive = relativePath.IndexOf(RecursionToken, StringComparison.InvariantCulture) != -1;
+		}
 
-        public override string ToString()
-        {
-            return string.Format("{0} Path: {1}, Recursive: {2}, CheckType: {3}", GetType().Name, RelativePath, IsRecursive,
-                CheckType);
-        }
-    }
+		// Custom Whitebox sorry...
+		public dynamic UnitTestPeek
+		{
+			get
+			{
+				dynamic result = new ExpandoObject();
+				result.CheckType = CheckType;
+				result.IsRecursive = IsRecursive;
+				return result;
+			}
+		}
+
+		public override string ToString()
+		{
+			return string.Format("{0} Path: {1}, Recursive: {2}, CheckType: {3}", GetType().Name, RelativePath, IsRecursive,
+				CheckType);
+		}
+	}
 }

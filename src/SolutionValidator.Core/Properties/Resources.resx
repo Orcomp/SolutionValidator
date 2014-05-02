@@ -150,7 +150,8 @@
     <value>does not exist</value>
   </data>
   <data name="RuleProcessor_Process_Checking_repository" xml:space="preserve">
-    <value>Checking repository: '{0}'</value>
+    <value>Checking repository: '{0}'...
+    </value>
   </data>
   <data name="ConfigurationExistsProjectFileRule_Validate_Project contains_expected_configuration" xml:space="preserve">
     <value>Project '{0}' contains expected configuration '{1}'. {2}</value>
@@ -163,5 +164,29 @@
   </data>
   <data name="CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identical" xml:space="preserve">
     <value>Properties in project {0} '{1}' and '{2}' are not identical ('{3}' &lt;&gt; '{4}'). {5}</value>
+  </data>
+  <data name="CSharpFormattingProperties_Deserialize_Cannot_read_a_properties_container_as_a_single_value" xml:space="preserve">
+    <value>Cannot read a properties container as a single value</value>
+  </data>
+  <data name="RuleProcessor_RuleProcessor_CSharp_formatting_check_was_set_to_true" xml:space="preserve">
+    <value>CSharp formatting check was set to 'true' but options file was not found: {0}</value>
+  </data>
+  <data name="ReformatRule_Validate_Formatter_can_not_create_backup_file" xml:space="preserve">
+    <value>Formatter can not create backup file. No .cs file will be formatted.</value>
+  </data>
+  <data name="ReformatRule_Validate_Can_not_read_file_for_formatting" xml:space="preserve">
+    <value>Can not read file for formatting. File {0}.</value>
+  </data>
+  <data name="ReformatRule_Validate_Not_formatting_file_because_can_not_verify_backup_exists" xml:space="preserve">
+    <value>Not formatting file because can not verify backup exists. File {0}.</value>
+  </data>
+  <data name="ReformatRule_Validate_Formatter_error" xml:space="preserve">
+    <value>Formatter error: {0} in file {1}.</value>
+  </data>
+  <data name="ReformatRule_Validate_File_successfully_formatted" xml:space="preserve">
+    <value>File successfully formatted: {0}.</value>
+  </data>
+  <data name="ReformatRule_BackupExists_Can_not_verify_zipped_backup" xml:space="preserve">
+    <value>Can not verify zipped backup</value>
   </data>
 </root>

@@ -1,18 +1,23 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="IdenticalCheck.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Models
 {
-    using Catel.Data;
+	#region using...
+	using Catel.Data;
 
-    public class IdenticalCheck : ModelBase   
+	#endregion
 
-{
-    public string PropertyName { get; set; }
+	public class IdenticalCheck : ModelBase
 
-    public string OtherPropertyName { get; set; }
-}
+	{
+		public string PropertyName { get; set; }
+
+		public string OtherPropertyName { get; set; }
+	}
 }

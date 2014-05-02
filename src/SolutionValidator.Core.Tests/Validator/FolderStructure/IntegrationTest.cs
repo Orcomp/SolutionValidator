@@ -1,15 +1,24 @@
-﻿namespace SolutionValidator.Tests.Validator.FolderStructure
-{
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using NUnit.Framework;
-    using SolutionValidator.Validator;
-    using SolutionValidator.Validator.Common;
-    using SolutionValidator.Validator.FolderStructure;
-    using SolutionValidator.Validator.FolderStructure.Rules;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="IntegrationTest.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-    [TestFixture]
+namespace SolutionValidator.Tests.Validator.FolderStructure
+{
+	#region using...
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using Common;
+	using NUnit.Framework;
+	using SolutionValidator.FolderStructure;
+
+	#endregion
+
+	[TestFixture]
 	public class IntegrationTest
 	{
 		private string rootPath;
@@ -33,96 +42,7 @@
 			TestUtils.DeleteFolder(rootPath);
 		}
 
-		[Test]
-		[TestCase("*.*", true)]
-		[TestCase("*.txt", true)]
-		[TestCase("file*.txt", true)]
-		[TestCase("file001.txt", true)]
-		[TestCase(".file.txt", true)]
-		[TestCase("**/*.*", true)]
-		[TestCase("**/*.txt", true)]
-		[TestCase("**/**/*.txt", true)]
-		[TestCase("**/file.txt", true)]
-		[TestCase("**/**/file.txt", true)]
-		[TestCase("folderWithFile100/*.*", true)]
-		[TestCase("folderWithFile100/*.txt", true)]
-		[TestCase("folderWithFile100/file.txt", true)]
-		[TestCase("**/folderWithFile100/*.*", false)]
-		[TestCase("**/folderWithFile100/*.txt", false)]
-		[TestCase("**/folderWithFile100/file.txt", false)]
-		[TestCase("*.qwe", false)]
-		[TestCase("fileqwe*.txt", false)]
-		[TestCase("file004.txt", false)]
-		[TestCase(".file4.txt", false)]
-		[TestCase("**/*.qwe", false)]
-		[TestCase("**/**/*.qwe", false)]
-		[TestCase("**/fileqwe.txt", false)]
-		[TestCase("**/**/fileqwe.txt", false)]
-		[TestCase("folderWithFile100/*.qwe", false)]
-		[TestCase("folderWithFile100/file4.txt", false)]
-		[TestCase("**/folderWithFile100/*.*", false)]
-		[TestCase("**/folderWithFile100/*.txt", false)]
-		[TestCase("**/folderWithFile100/file.txt", false)]
-		[TestCase("**/folderWithFile100/**/*.*", false)]
-		[TestCase("**/folderWithFile100/**/*.txt", false)]
-		[TestCase("**/folderWithFile100/**/file.txt", false)]
-		public void TestFileProcessing(string folderPattern, bool expectedIsValid)
-		{
-			FileSystemRule rule = fileSystemRuleParser.ParseLine(folderPattern);
-			Assert.IsTrue(rule is FileRule);
-			ValidationResult validationResult = rule.Validate(repositoryInfo);
-			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
-
-			rule = fileSystemRuleParser.ParseLine("!" + folderPattern);
-			Assert.IsTrue(rule is FileRule);
-			validationResult = rule.Validate(repositoryInfo);
-			Assert.AreEqual(expectedIsValid, !validationResult.IsValid);
-		}
-
-
-		[Test]
-		[TestCase("**/", true)]
-		[TestCase("**/**/", true)]
-		[TestCase("**/**/**/", true)]
-		[TestCase("folder100/", true)]
-		[TestCase("folder100/**/", true)]
-		[TestCase("folder100/**/**/", true)]
-		[TestCase("**/folder010/", true)]
-		[TestCase("**/folder010/**/", true)]
-		[TestCase("xxx/", false)]
-		[TestCase("**/xxx/", false)]
-		[TestCase("**/**/xxx/", false)]
-		[TestCase("**/xxx/**/", false)]
-		public void TestFolderProcessing(string folderPattern, bool expectedIsValid)
-		{
-			FileSystemRule rule = fileSystemRuleParser.ParseLine(folderPattern);
-			Assert.IsTrue(rule is FolderRule);
-			var validationResult = rule.Validate(repositoryInfo);
-			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
-
-			rule = fileSystemRuleParser.ParseLine("!" + folderPattern);
-			Assert.IsTrue(rule is FolderRule);
-			validationResult = rule.Validate(repositoryInfo);
-			Assert.AreEqual(expectedIsValid, !validationResult.IsValid);
-		}
-
-		[Test]
-		public void TestWithStream()
-		{
-			var reader = CreateTestStream(testPatterns);
-			var rules = fileSystemRuleParser.Parse(reader).ToArray();
-			Assert.AreEqual(testPatterns.Length, rules.Count());
-			
-			for (int index = 0; index < testPatterns.Length; index++)
-			{
-				var pr = testPatterns[index];
-				var rule = rules[index];
-				var validationResult = rule.Validate(repositoryInfo);
-				Assert.AreEqual(pr.Result, validationResult.IsValid);
-			}
-		}
-
-		struct PatternAndResult
+		private struct PatternAndResult
 		{
 			public readonly string Pattern;
 			public readonly bool Result;
@@ -138,15 +58,15 @@
 		{
 			var stream = new MemoryStream();
 			var writer = new StreamWriter(stream);
-			int index = 0;
+			var index = 0;
 			foreach (var pr in testPatterns)
 			{
 				writer.WriteLine(pr.Pattern);
-				if (index % 2 == 0)
+				if (index%2 == 0)
 				{
-					writer.WriteLine("    \t   ");	// Write some empty line
+					writer.WriteLine("    \t   "); // Write some empty line
 				}
-				if (index % 3 == 0)
+				if (index%3 == 0)
 				{
 					writer.WriteLine("# Some comment");
 				}
@@ -157,7 +77,7 @@
 			return stream;
 		}
 
-		private readonly PatternAndResult[] testPatterns = 
+		private readonly PatternAndResult[] testPatterns =
 		{
 			new PatternAndResult("*.*", true),
 			new PatternAndResult("*.txt", true),
@@ -204,5 +124,93 @@
 			new PatternAndResult("**/**/xxx/", false),
 			new PatternAndResult("**/xxx/**/", false)
 		};
+
+		[Test]
+		[TestCase("*.*", true)]
+		[TestCase("*.txt", true)]
+		[TestCase("file*.txt", true)]
+		[TestCase("file001.txt", true)]
+		[TestCase(".file.txt", true)]
+		[TestCase("**/*.*", true)]
+		[TestCase("**/*.txt", true)]
+		[TestCase("**/**/*.txt", true)]
+		[TestCase("**/file.txt", true)]
+		[TestCase("**/**/file.txt", true)]
+		[TestCase("folderWithFile100/*.*", true)]
+		[TestCase("folderWithFile100/*.txt", true)]
+		[TestCase("folderWithFile100/file.txt", true)]
+		[TestCase("**/folderWithFile100/*.*", false)]
+		[TestCase("**/folderWithFile100/*.txt", false)]
+		[TestCase("**/folderWithFile100/file.txt", false)]
+		[TestCase("*.qwe", false)]
+		[TestCase("fileqwe*.txt", false)]
+		[TestCase("file004.txt", false)]
+		[TestCase(".file4.txt", false)]
+		[TestCase("**/*.qwe", false)]
+		[TestCase("**/**/*.qwe", false)]
+		[TestCase("**/fileqwe.txt", false)]
+		[TestCase("**/**/fileqwe.txt", false)]
+		[TestCase("folderWithFile100/*.qwe", false)]
+		[TestCase("folderWithFile100/file4.txt", false)]
+		[TestCase("**/folderWithFile100/*.*", false)]
+		[TestCase("**/folderWithFile100/*.txt", false)]
+		[TestCase("**/folderWithFile100/file.txt", false)]
+		[TestCase("**/folderWithFile100/**/*.*", false)]
+		[TestCase("**/folderWithFile100/**/*.txt", false)]
+		[TestCase("**/folderWithFile100/**/file.txt", false)]
+		public void TestFileProcessing(string folderPattern, bool expectedIsValid)
+		{
+			var rule = fileSystemRuleParser.ParseLine(folderPattern);
+			Assert.IsTrue(rule is FileRule);
+			var validationResult = rule.Validate(repositoryInfo);
+			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
+
+			rule = fileSystemRuleParser.ParseLine("!" + folderPattern);
+			Assert.IsTrue(rule is FileRule);
+			validationResult = rule.Validate(repositoryInfo);
+			Assert.AreEqual(expectedIsValid, !validationResult.IsValid);
+		}
+
+		[Test]
+		[TestCase("**/", true)]
+		[TestCase("**/**/", true)]
+		[TestCase("**/**/**/", true)]
+		[TestCase("folder100/", true)]
+		[TestCase("folder100/**/", true)]
+		[TestCase("folder100/**/**/", true)]
+		[TestCase("**/folder010/", true)]
+		[TestCase("**/folder010/**/", true)]
+		[TestCase("xxx/", false)]
+		[TestCase("**/xxx/", false)]
+		[TestCase("**/**/xxx/", false)]
+		[TestCase("**/xxx/**/", false)]
+		public void TestFolderProcessing(string folderPattern, bool expectedIsValid)
+		{
+			var rule = fileSystemRuleParser.ParseLine(folderPattern);
+			Assert.IsTrue(rule is FolderRule);
+			var validationResult = rule.Validate(repositoryInfo);
+			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
+
+			rule = fileSystemRuleParser.ParseLine("!" + folderPattern);
+			Assert.IsTrue(rule is FolderRule);
+			validationResult = rule.Validate(repositoryInfo);
+			Assert.AreEqual(expectedIsValid, !validationResult.IsValid);
+		}
+
+		[Test]
+		public void TestWithStream()
+		{
+			var reader = CreateTestStream(testPatterns);
+			var rules = fileSystemRuleParser.Parse(reader).ToArray();
+			Assert.AreEqual(testPatterns.Length, rules.Count());
+
+			for (var index = 0; index < testPatterns.Length; index++)
+			{
+				var pr = testPatterns[index];
+				var rule = rules[index];
+				var validationResult = rule.Validate(repositoryInfo);
+				Assert.AreEqual(pr.Result, validationResult.IsValid);
+			}
+		}
 	}
 }

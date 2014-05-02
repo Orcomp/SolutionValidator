@@ -1,36 +1,40 @@
-// --------------------------------------------------------------------------------------------------------------------
+#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="PropertiesToMatchElement.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
+#endregion
 
 namespace SolutionValidator.Configuration
 {
-    using System.Configuration;
+	#region using...
+	using System.Configuration;
 
-    public class PropertiesToMatchElement : ConfigurationElement
-    {
-        #region Constants
-        private const string PropertyNameAttributeName = "propertyName";
+	#endregion
 
-        private const string OtherPropertyNameAttributeName = "otherPropertyName";
-        #endregion
+	public class PropertiesToMatchElement : ConfigurationElement
+	{
+		#region Constants
+		private const string PropertyNameAttributeName = "propertyName";
 
-        #region Properties
-        [ConfigurationProperty(PropertyNameAttributeName, DefaultValue = "", IsRequired = true)]
-        public string PropertyName
-        {
-            get { return ((string) (this[PropertyNameAttributeName])); }
-            set { this[PropertyNameAttributeName] = value; }
-        }
+		private const string OtherPropertyNameAttributeName = "otherPropertyName";
+		#endregion
 
-        [ConfigurationProperty(OtherPropertyNameAttributeName, DefaultValue = "", IsRequired = true)]
-        public string OtherPropertyName
-        {
-            get { return ((string) (this[OtherPropertyNameAttributeName])); }
-            set { this[OtherPropertyNameAttributeName] = value; }
-        }
-        #endregion
-    }
+		#region Properties
+		[ConfigurationProperty(PropertyNameAttributeName, DefaultValue = "", IsRequired = true)]
+		public string PropertyName
+		{
+			get { return ((string) (this[PropertyNameAttributeName])); }
+			set { this[PropertyNameAttributeName] = value; }
+		}
+
+		[ConfigurationProperty(OtherPropertyNameAttributeName, DefaultValue = "", IsRequired = true)]
+		public string OtherPropertyName
+		{
+			get { return ((string) (this[OtherPropertyNameAttributeName])); }
+			set { this[OtherPropertyNameAttributeName] = value; }
+		}
+		#endregion
+	}
 }

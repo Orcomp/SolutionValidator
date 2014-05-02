@@ -1,23 +1,28 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="ValidatorContext.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Models
 {
-    using Catel.Data;
+	#region using...
+	using Catel.Data;
 
-    public class ValidatorContext : ModelBase
-    {
-        public ValidatorContext()
-        {            
-            FolderStructure = new FolderStructure();
-            ProjectFile = new ProjectFile();
-        }
+	#endregion
 
-        public FolderStructure FolderStructure { get; private set; }
-        
-        public ProjectFile ProjectFile { get; private set; }        
-    }
+	public class ValidatorContext : ModelBase
+	{
+		public ValidatorContext()
+		{
+			FolderStructure = new FolderStructure();
+			ProjectFile = new ProjectFile();
+		}
+
+		public FolderStructure FolderStructure { get; private set; }
+
+		public ProjectFile ProjectFile { get; private set; }
+	}
 }

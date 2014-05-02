@@ -1,15 +1,20 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="Rule.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Validator.Common
+namespace SolutionValidator.Common
 {
-    using System;
+	#region using...
+	using System;
 
-    public abstract class Rule
-    {
-        public abstract ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null);
-    }
+	#endregion
+
+	public abstract class Rule
+	{
+		public abstract ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null);
+	}
 }

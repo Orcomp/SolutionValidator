@@ -1,39 +1,42 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="BootStrapper.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Infrastructure
 {
-    using Catel.IoC;
-    using Validator.FolderStructure;
-    using Validator.ProjectFile;
+	#region using...
+	using Catel.IoC;
+	using FolderStructure;
+	using ProjectFile;
 
-    /// <summary>
-    ///     Dependency Injection initializer class
-    /// </summary>
-    public static class BootStrapper
-    {
-        #region Constants and Fields
-        #endregion
+	#endregion
 
-        #region Public Methods and Operators
-        #endregion
+	/// <summary>
+	///     Dependency Injection initializer class
+	/// </summary>
+	public static class BootStrapper
+	{
+		#region Constants and Fields
+		#endregion
 
-        #region Methods
+		#region Public Methods and Operators
+		#endregion
 
-        /// <summary>
-        ///     Registers the services / interface bindings.
-        /// </summary>
-        public static void RegisterServices()
-        {
-            var serviceLocator = ServiceLocator.Default;
+		#region Methods
+		/// <summary>
+		///     Registers the services / interface bindings.
+		/// </summary>
+		public static void RegisterServices()
+		{
+			var serviceLocator = ServiceLocator.Default;
 
-            serviceLocator.RegisterInstance<IFileSystemHelper>(new FileSystemHelper());
-            serviceLocator.RegisterInstance<IProjectFileHelper>(new ProjectFileHelper());
-        }
-
-        #endregion
-    }
+			serviceLocator.RegisterInstance<IFileSystemHelper>(new FileSystemHelper());
+			serviceLocator.RegisterInstance<IProjectFileHelper>(new ProjectFileHelper());
+		}
+		#endregion
+	}
 }

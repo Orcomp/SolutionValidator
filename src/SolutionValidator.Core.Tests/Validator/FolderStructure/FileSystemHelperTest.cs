@@ -1,10 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using SolutionValidator.Validator.FolderStructure;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="FileSystemHelperTest.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Tests.Validator.FolderStructure
 {
+	#region using...
+	using System.Linq;
+	using NUnit.Framework;
+	using SolutionValidator.FolderStructure;
+
+	#endregion
+
 	[TestFixture]
 	public class FileSystemHelperTest
 	{
@@ -35,7 +45,7 @@ namespace SolutionValidator.Tests.Validator.FolderStructure
 		[TestCase("**/folder010/**/", 3)]
 		public void TestGetFolders(string folderPattern, int expectedCount)
 		{
-			IEnumerable<string> folders = fileSystemHelper.GetFolders(root, folderPattern);
+			var folders = fileSystemHelper.GetFolders(root, folderPattern);
 			Assert.AreEqual(expectedCount, folders.Count());
 		}
 	}

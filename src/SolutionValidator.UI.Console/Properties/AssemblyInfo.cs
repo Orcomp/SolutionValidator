@@ -1,6 +1,17 @@
-﻿using System.Reflection;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
+
+#region using...
+using System.Reflection;
 using System.Runtime.InteropServices;
 using CommandLine;
+
+#endregion
 
 [assembly: AssemblyUsage(
 	" ",

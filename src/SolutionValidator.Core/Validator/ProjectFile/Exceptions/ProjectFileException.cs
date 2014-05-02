@@ -1,23 +1,28 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="ProjectFileException.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Validator.ProjectFile
+namespace SolutionValidator.ProjectFile
 {
-    using System;
+	#region using...
+	using System;
 
-    public class ProjectFileException : ApplicationException
-    {
-        public ProjectFileException(string message)
-            : base(message)
-        {
-        }
+	#endregion
 
-        public ProjectFileException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
-    }
+	public class ProjectFileException : ApplicationException
+	{
+		public ProjectFileException(string message)
+			: base(message)
+		{
+		}
+
+		public ProjectFileException(string message, Exception innerException)
+			: base(message, innerException)
+		{
+		}
+	}
 }

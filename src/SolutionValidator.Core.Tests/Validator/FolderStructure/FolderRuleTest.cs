@@ -1,25 +1,29 @@
-﻿using Moq;
-using NUnit.Framework;
-using SolutionValidator.Validator;
-using SolutionValidator.Validator.FolderStructure;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="FolderRuleTest.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Tests.Validator.FolderStructure
 {
-    using SolutionValidator.Validator.Common;
-    using SolutionValidator.Validator.FolderStructure.Rules;
+	#region using...
+	using Common;
+	using Moq;
+	using NUnit.Framework;
+	using SolutionValidator.FolderStructure;
 
-    [TestFixture]
+	#endregion
+
+	[TestFixture]
 	public class FolderRuleTest
 	{
-		#region Setup/Teardown
-
 		[SetUp]
 		public void SetUp()
 		{
 			fshMock = new Mock<IFileSystemHelper>();
 		}
-
-		#endregion
 
 		private const string RootPath = "should not matter what is this content";
 		private const string FolderPattern = "also should not matter what is this content";
@@ -37,7 +41,6 @@ namespace SolutionValidator.Tests.Validator.FolderStructure
 			repositoryInfo = new RepositoryInfo(RootPath);
 		}
 
-
 		[Test]
 		[TestCase(0, false)]
 		[TestCase(1, true)]
@@ -49,7 +52,7 @@ namespace SolutionValidator.Tests.Validator.FolderStructure
 
 			// Act:
 			var rule = new FolderRule(FolderPattern, CheckType.MustExist, fshMock.Object);
-			ValidationResult validationResult = rule.Validate(repositoryInfo);
+			var validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
 			fshMock.Verify(f => f.GetFolders(RootPath, FolderPattern), Times.Once);
@@ -67,7 +70,7 @@ namespace SolutionValidator.Tests.Validator.FolderStructure
 
 			// Act:
 			var rule = new FolderRule(FolderPattern, CheckType.MustNotExist, fshMock.Object);
-			ValidationResult validationResult = rule.Validate(repositoryInfo);
+			var validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
 			fshMock.Verify(f => f.GetFolders(RootPath, FolderPattern), Times.Once);

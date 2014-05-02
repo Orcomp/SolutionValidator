@@ -1,12 +1,12 @@
 #region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectFileHelper.cs" company="Orcomp development team">
+// <copyright file="CodeInspectionHelper.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 #endregion
 
-namespace SolutionValidator.ProjectFile
+namespace SolutionValidator.CodeInspection
 {
 	#region using...
 	using System;
@@ -15,14 +15,14 @@ namespace SolutionValidator.ProjectFile
 	using System.Linq;
 	using Common;
 	using Microsoft.Build.Evaluation;
+	using ProjectFile;
 	using Properties;
 
 	#endregion
 
-	public class ProjectFileHelper : IProjectFileHelper
+	public class CodeInspectionHelper : ICodeInspectionHelper
 	{
-		private const string SearchPattern = "*.csproj";
-		private const string SpecialPropertyProjectName = "ProjectName";
+		private const string SearchPattern = "*.cs";
 		private readonly string _searchPattern = SearchPattern;
 
 		private string _assemblyName;
@@ -30,7 +30,7 @@ namespace SolutionValidator.ProjectFile
 		private Project _project;
 		private string _projectFileFullName;
 
-		public ProjectFileHelper(string searchPattern = SearchPattern)
+		public CodeInspectionHelper(string searchPattern = SearchPattern)
 		{
 			_searchPattern = searchPattern;
 		}
@@ -82,30 +82,14 @@ namespace SolutionValidator.ProjectFile
 			return _project.ConditionedProperties["Configuration"];
 		}
 
-		public string GetProjectInfo()
-		{
-			return GetProjectInfo("N/A");
-		}
-
-
-		public string GetProjectInfo(string configuration)
+		public string GetProjectInfo(string configuration = "N/A")
 		{
 			return string.Format("Project File: '{0}', Configuration '{1}'", _projectFileFullName, configuration);
 		}
 
-
 		public string GetProjectShortName()
 		{
 			return Path.GetFileNameWithoutExtension(_projectFileFullName);
-		}
-
-		public string GetPropertyValue(string propertyName)
-		{
-			if (propertyName == SpecialPropertyProjectName)
-			{
-				return GetProjectShortName();
-			}
-			return _project.GetPropertyValue(propertyName);
 		}
 
 		// TODO: Performance tuning: Implement caching loaded projects

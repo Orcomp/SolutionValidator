@@ -1,54 +1,58 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="OutPutPathProjectFileRule.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="OutpuPathProjectFileRule.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Validator.ProjectFile.Rules
+namespace SolutionValidator.ProjectFile
 {
-    using System;
-    using System.Collections.Generic;
-    using Catel.Logging;
-    using Common;
+	#region using...
+	using System;
+	using Catel.Logging;
+	using Common;
 
-    public class OutPutPathProjectFileRule : ProjectFileRule
-    {
-        /// <summary>
-        /// The log.
-        /// </summary>
-        private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
+	#endregion
 
-        private readonly string _expectedOutputPath;
+	public class OutPutPathProjectFileRule : ProjectFileRule
+	{
+		/// <summary>
+		/// The log.
+		/// </summary>
+		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
-        public OutPutPathProjectFileRule(string expectedOutputPath, IProjectFileHelper projectFileHelper)
-            : base(projectFileHelper)
-        {
-            _expectedOutputPath = expectedOutputPath;
-        }
+		private readonly string _expectedOutputPath;
 
-        public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
-        {
-            var result = new ValidationResult(this);
-            IEnumerable<string> projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RepositoryRootPath);
+		public OutPutPathProjectFileRule(string expectedOutputPath, IProjectFileHelper projectFileHelper)
+			: base(projectFileHelper)
+		{
+			_expectedOutputPath = expectedOutputPath;
+		}
 
-            foreach (string projectFilePath in projectFilePaths)
-            {
-                try
-                {
-                    _projectFileHelper.LoadProject(projectFilePath);
-                    _projectFileHelper.CheckOutputPath(repositoryInfo.RepositoryRootPath, _expectedOutputPath, result, notify);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                }
-            }
-            return result;
-        }
+		public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+		{
+			var result = new ValidationResult(this);
+			var projectFilePaths = _projectFileHelper.GetAllProjectFilePath(repositoryInfo.RepositoryRootPath);
 
-        protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
-        {
-            _projectFileHelper.CheckOutputPath(repositoryInfo.RepositoryRootPath, _expectedOutputPath, result, notify);
-        }
-    }
+			foreach (var projectFilePath in projectFilePaths)
+			{
+				try
+				{
+					_projectFileHelper.LoadProject(projectFilePath);
+					_projectFileHelper.CheckOutputPath(repositoryInfo.RepositoryRootPath, _expectedOutputPath, result, notify);
+				}
+				catch (Exception ex)
+				{
+					Logger.Error(ex);
+				}
+			}
+			return result;
+		}
+
+		protected override void DoValidation(ValidationResult result, RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+		{
+			_projectFileHelper.CheckOutputPath(repositoryInfo.RepositoryRootPath, _expectedOutputPath, result, notify);
+		}
+	}
 }

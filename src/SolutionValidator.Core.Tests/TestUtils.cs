@@ -1,9 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestUtils.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Tests
 {
+	#region using...
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+
+	#endregion
+
 	internal static class TestUtils
 	{
 		public static readonly string[] MockFileSystemDefinition =
@@ -38,7 +49,7 @@ namespace SolutionValidator.Tests
 
 		public static string CreateTempRootFolder()
 		{
-			string result = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+			var result = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 			DeleteFolder(result);
 			Directory.CreateDirectory(result);
 			return result;
@@ -46,11 +57,11 @@ namespace SolutionValidator.Tests
 
 		public static string CreateFoldersAndFiles(IEnumerable<string> names)
 		{
-			string root = CreateTempRootFolder();
+			var root = CreateTempRootFolder();
 
-			foreach (string name in names)
+			foreach (var name in names)
 			{
-				string fullName = Path.Combine(root, name.Replace("/", @"\"));
+				var fullName = Path.Combine(root, name.Replace("/", @"\"));
 
 				if (fullName.EndsWith(@"\"))
 				{
@@ -58,14 +69,14 @@ namespace SolutionValidator.Tests
 				}
 				else
 				{
-					string fileName = Path.GetFileName(fullName);
-					string folder = fullName.Replace(fileName, "");
+					var fileName = Path.GetFileName(fullName);
+					var folder = fullName.Replace(fileName, "");
 					if (!string.IsNullOrEmpty(folder))
 					{
 						Directory.CreateDirectory(folder);
 					}
 
-					using (StreamWriter writer = File.CreateText(fullName))
+					using (var writer = File.CreateText(fullName))
 					{
 						writer.WriteLine("Created: {0}", DateTime.Now);
 					}

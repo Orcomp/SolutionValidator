@@ -1,25 +1,29 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="OutputLogListener.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2014 CatenaLogic. All rights reserved.
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="OutputLogListener.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
+#endregion
 
 namespace SolutionValidator.Logging
 {
-    using Catel.Logging;
+	#region using...
+	using Catel.Logging;
 
-    public class OutputLogListener : ConsoleLogListener
-    {
-        public OutputLogListener()
-        {
-            IgnoreCatelLogging = true;
-            IsDebugEnabled = true;
-        }
+	#endregion
 
-        protected override string FormatLogEvent(ILog log, string message, LogEvent logEvent, object extraData)
-        {
-            return message;
-        }
-    }
+	public class OutputLogListener : FileLogListener
+	{
+		public OutputLogListener()
+		{
+			IgnoreCatelLogging = true;
+			IsDebugEnabled = true;
+		}
+
+		protected override string FormatLogEvent(ILog log, string message, LogEvent logEvent, object extraData)
+		{
+			return message;
+		}
+	}
 }

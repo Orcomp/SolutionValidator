@@ -30,7 +30,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{DAF9732E-D1DE-4E91-B6EE-13B1CCC30BDA}"
 	ProjectSection(SolutionItems) = preProject
 		nuget.config = nuget.config
-		resharper.settings = resharper.settings
 		Settings.StyleCop = Settings.StyleCop
 		SolutionValidator.sln.DotSettings = SolutionValidator.sln.DotSettings
 	EndProjectSection

@@ -1,45 +1,49 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="PropertiesToMatchCollection.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
+#endregion
 
 namespace SolutionValidator.Configuration
 {
-    using System.Configuration;
+	#region using...
+	using System.Configuration;
 
-    [ConfigurationCollection(typeof (ConfigurationNameElement))]
-    public class PropertiesToMatchCollection : ConfigurationElementCollection
-    {
-        #region Properties
-        [ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
-        public bool Check
-        {
-            get { return (bool) base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
-        }
+	#endregion
 
-        public PropertiesToMatchElement this[int idx]
-        {
-            get { return (PropertiesToMatchElement) BaseGet(idx); }
-        }
-        #endregion
+	[ConfigurationCollection(typeof (ConfigurationNameElement))]
+	public class PropertiesToMatchCollection : ConfigurationElementCollection
+	{
+		#region Properties
+		[ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
+		public bool Check
+		{
+			get { return (bool) base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
+		}
 
-        #region Methods
-        protected override ConfigurationElement CreateNewElement()
-        {
-            return new PropertiesToMatchElement();
-        }
+		public PropertiesToMatchElement this[int idx]
+		{
+			get { return (PropertiesToMatchElement) BaseGet(idx); }
+		}
+		#endregion
 
-        protected override object GetElementKey(ConfigurationElement element)
-        {
-            return ((PropertiesToMatchElement) (element)).PropertyName + ((PropertiesToMatchElement) (element)).OtherPropertyName;
-        }
+		#region Methods
+		protected override ConfigurationElement CreateNewElement()
+		{
+			return new PropertiesToMatchElement();
+		}
 
-        public void Add(PropertiesToMatchElement item)
-        {
-            base.BaseAdd(item);
-        }
-        #endregion
-    }
+		protected override object GetElementKey(ConfigurationElement element)
+		{
+			return ((PropertiesToMatchElement) (element)).PropertyName + ((PropertiesToMatchElement) (element)).OtherPropertyName;
+		}
+
+		public void Add(PropertiesToMatchElement item)
+		{
+			base.BaseAdd(item);
+		}
+		#endregion
+	}
 }

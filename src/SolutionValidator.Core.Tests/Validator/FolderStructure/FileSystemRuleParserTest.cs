@@ -1,11 +1,20 @@
-﻿using NUnit.Framework;
-using SolutionValidator.Validator.FolderStructure;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="FileSystemRuleParserTest.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Tests.Validator.FolderStructure
 {
-    using SolutionValidator.Validator.FolderStructure.Rules;
+	#region using...
+	using NUnit.Framework;
+	using SolutionValidator.FolderStructure;
 
-    [TestFixture]
+	#endregion
+
+	[TestFixture]
 	public class FileSystemRuleParserTest
 	{
 		private FileSystemRuleParser parser;
@@ -25,7 +34,7 @@ namespace SolutionValidator.Tests.Validator.FolderStructure
 		[TestCase("qwe/*.*", false, false)]
 		public void TestParseLineValidPath(string line, bool expectedIsRecursive, bool canBeFolder)
 		{
-			FileSystemRule result = parser.ParseLine(line);
+			var result = parser.ParseLine(line);
 			Assert.IsTrue(result is FileRule);
 			Assert.AreEqual(CheckType.MustExist, result.UnitTestPeek.CheckType);
 			Assert.AreEqual(expectedIsRecursive, result.UnitTestPeek.IsRecursive);
@@ -48,7 +57,6 @@ namespace SolutionValidator.Tests.Validator.FolderStructure
 				Assert.AreEqual(expectedIsRecursive, result.UnitTestPeek.IsRecursive);
 			}
 		}
-
 
 		[Test]
 		[TestCase("#")]
@@ -79,7 +87,6 @@ namespace SolutionValidator.Tests.Validator.FolderStructure
 		{
 			parser.ParseLine(line);
 		}
-
 
 		[Test]
 		[TestCase("!**/q**we/")]

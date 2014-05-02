@@ -47,6 +47,9 @@
     <Reference Include="ICSharpCode.NRefactory.CSharp">
       <HintPath>..\..\lib\NRefactory\ICSharpCode.NRefactory.CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\lib\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="ReachFramework" />
@@ -99,10 +102,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SolutionValidatorEnvironment.cs" />
+    <Compile Include="Validator\CodeInspection\ReformatRule.cs" />
+    <Compile Include="Validator\CodeInspection\CodeInspectionHelper.cs" />
+    <Compile Include="Validator\CodeInspection\Interfaces\ICodeInspectionHelper.cs" />
     <Compile Include="Validator\Common\ResultLevel.cs" />
     <Compile Include="Validator\Common\RepositoryInfo.cs" />
     <Compile Include="Validator\Common\RuleProcessor.cs" />
     <Compile Include="Validator\Common\ValidationMessage.cs" />
+    <Compile Include="Validator\CodeInspection\Extensions\CSharpFormattingOptionsExtension.cs" />
     <Compile Include="Validator\FolderStructure\CheckType.cs" />
     <Compile Include="Validator\FolderStructure\Rules\FileRule.cs" />
     <Compile Include="Validator\FolderStructure\FileSystemHelper.cs" />
@@ -123,7 +130,6 @@
     <Compile Include="Validator\ProjectFile\Exceptions\ProjectFileException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Validator\CodeInspection\" />
     <Folder Include="Validator\File\" />
   </ItemGroup>
   <ItemGroup>

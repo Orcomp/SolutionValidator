@@ -1,64 +1,68 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileRule.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Validator.FolderStructure.Rules
+namespace SolutionValidator.FolderStructure
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using Properties;
-    using Common;
-    using FolderStructure;
+	#region using...
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using Common;
+	using Properties;
 
-    public class FileRule : FileSystemRule
-    {
-        public FileRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
-            : base(relativePath, checkType, fileSystemHelper)
-        {
-        }
+	#endregion
 
-        public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
-        {
-            var result = new ValidationResult(this);
-            string searchPattern = RelativePath.Split('\\').Last();
-            string folderPattern = RelativePath.Replace(searchPattern, string.Empty);
+	public class FileRule : FileSystemRule
+	{
+		public FileRule(string relativePath, CheckType checkType, IFileSystemHelper fileSystemHelper)
+			: base(relativePath, checkType, fileSystemHelper)
+		{
+		}
 
-            var foldersToCheck = new List<string>();
+		public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
+		{
+			var result = new ValidationResult(this);
+			var searchPattern = RelativePath.Split('\\').Last();
+			var folderPattern = RelativePath.Replace(searchPattern, string.Empty);
 
-            if (!IsRecursive)
-            {
-                string folder = Path.Combine(repositoryInfo.RepositoryRootPath, folderPattern);
-                foldersToCheck.Add(folder.TrimEnd('\\'));
-            }
-            else
-            {
-                foldersToCheck.AddRange(FileSystemHelper.GetFolders(repositoryInfo.RepositoryRootPath, folderPattern));
-            }
+			var foldersToCheck = new List<string>();
 
-            bool exist = false;
+			if (!IsRecursive)
+			{
+				var folder = Path.Combine(repositoryInfo.RepositoryRootPath, folderPattern);
+				foldersToCheck.Add(folder.TrimEnd('\\'));
+			}
+			else
+			{
+				foldersToCheck.AddRange(FileSystemHelper.GetFolders(repositoryInfo.RepositoryRootPath, folderPattern));
+			}
 
-            foreach (string folder in foldersToCheck)
-            {
-                exist = exist || FileSystemHelper.Exists(folder, searchPattern);
-            }
+			var exist = false;
 
-            string message;
+			foreach (var folder in foldersToCheck)
+			{
+				exist = exist || FileSystemHelper.Exists(folder, searchPattern);
+			}
 
-            if (!exist && CheckType == CheckType.MustExist || exist && CheckType == CheckType.MustNotExist)
-            {
-                message = string.Format("File '{0}' {1}.", RelativePath, exist ? Resources.FileRule_Validate_exists__This_file_should_not_exist_
-                        : Resources.FileRule_Validate_does_not_exist__This_file_must_exist_);
-                result.AddResult(ResultLevel.Error, message);
-                return result;
-            }
+			string message;
 
-            message = string.Format("File '{0}' {1}.", RelativePath, exist ? Resources.FileRule_Validate_exists_ : Resources.FileRule_Validate_does_not_exist_);
-            result.AddResult(ResultLevel.Passed, message);
-            return result;
-        }
-    }
+			if (!exist && CheckType == CheckType.MustExist || exist && CheckType == CheckType.MustNotExist)
+			{
+				message = string.Format("File '{0}' {1}.", RelativePath, exist ? Resources.FileRule_Validate_exists__This_file_should_not_exist_
+					: Resources.FileRule_Validate_does_not_exist__This_file_must_exist_);
+				result.AddResult(ResultLevel.Invalid, message);
+				return result;
+			}
+
+			message = string.Format("File '{0}' {1}.", RelativePath, exist ? Resources.FileRule_Validate_exists_ : Resources.FileRule_Validate_does_not_exist_);
+			result.AddResult(ResultLevel.Passed, message);
+			return result;
+		}
+	}
 }

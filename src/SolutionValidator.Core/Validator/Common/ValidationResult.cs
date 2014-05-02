@@ -1,71 +1,76 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ValidationMessage.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="ValidationResult.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Validator.Common
+namespace SolutionValidator.Common
 {
-    using System;
-    using System.Collections.Generic;
-    using Properties;
+	#region using...
+	using System;
+	using System.Collections.Generic;
+	using Properties;
 
-    public class ValidationResult
-    {
-        private readonly List<ValidationMessage> _messages;
-        private readonly string _ruleDescription;
+	#endregion
 
-        public ValidationResult(Rule rule)
-        {
-            // Currently we do not need to reference the rule itself, and hopefully we will not
-            // However it sounds practical to spare the calling client to know how the complete 
-            // Validation Result metainfo is prepared:
-            if (rule != null)
-            {
-                _ruleDescription = rule.ToString();
-            }
-            else
-            {
-                _ruleDescription = Resources.ValidationResult_ValidationResult_Unknown_rule;
-            }
+	public class ValidationResult
+	{
+		private readonly List<ValidationMessage> _messages;
+		private readonly string _ruleDescription;
 
-            _messages = new List<ValidationMessage>();
-            ErrorCount = 0;
-            CheckCount = 0;
-        }
+		public ValidationResult(Rule rule)
+		{
+			// Currently we do not need to reference the rule itself, and hopefully we will not
+			// However it sounds practical to spare the calling client to know how the complete 
+			// Validation Result metainfo is prepared:
+			if (rule != null)
+			{
+				_ruleDescription = rule.ToString();
+			}
+			else
+			{
+				_ruleDescription = Resources.ValidationResult_ValidationResult_Unknown_rule;
+			}
 
-        public bool IsValid
-        {
-            get { return ErrorCount == 0; }
-        }
+			_messages = new List<ValidationMessage>();
+			ErrorCount = 0;
+			CheckCount = 0;
+		}
 
-        public string RuleDescription
-        {
-            get { return _ruleDescription; }
-        }
+		public bool IsValid
+		{
+			get { return ErrorCount == 0; }
+		}
 
-        public int ErrorCount { get; private set; }
-        public int CheckCount { get; private set; }
+		public string RuleDescription
+		{
+			get { return _ruleDescription; }
+		}
 
-        public IEnumerable<ValidationMessage> Messages
-        {
-            get { return _messages.AsReadOnly(); }
-        }
+		public int ErrorCount { get; private set; }
+		public int CheckCount { get; private set; }
 
-        public void AddResult(ResultLevel resultLevel, string message, Action<ValidationResult> notify = null)
-        {
-            if (resultLevel == ResultLevel.Error)
-            {
-                ErrorCount++;
-            }
+		public IEnumerable<ValidationMessage> Messages
+		{
+			get { return _messages.AsReadOnly(); }
+		}
 
-            CheckCount++;
-            _messages.Add(new ValidationMessage { ResultLevel = resultLevel, Message = message });
+		public void AddResult(ResultLevel resultLevel, string message, Action<ValidationResult> notify = null)
+		{
+			if (resultLevel == ResultLevel.Invalid)
+			{
+				ErrorCount++;
+			}
 
-            if (notify != null)
-            {
-                notify(this);
-            }
-        }
-    }
+			CheckCount++;
+			_messages.Add(new ValidationMessage {ResultLevel = resultLevel, Message = message});
+
+			if (notify != null)
+			{
+				notify(this);
+			}
+		}
+	}
 }

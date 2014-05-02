@@ -119,13 +119,24 @@
   <data name="Program_Run_Total_checks_Total_errors_found" xml:space="preserve">
     <value>Total checks: {0}. Total errors found: {1}</value>
   </data>
+  <data name="Program_Run_Invalid" xml:space="preserve">
+    <value>Invalid: </value>
+  </data>
   <data name="Program_Run_Error" xml:space="preserve">
-    <value>Error: {0}</value>
+    <value>Error: </value>
+  </data>
+  <data name="Program_Run_Warning" xml:space="preserve">
+    <value>Warning: </value>
   </data>
   <data name="Program_Run_Passed" xml:space="preserve">
-    <value>Passed: {0}</value>
+    <value>Passed: </value>
   </data>
   <data name="Program_Run_Error_when_processing_Repository_root_path" xml:space="preserve">
-    <value>Error when processing Repository root path: &gt;{0}&lt;.</value>
+    <value>Error when processing Repository root path: '{0}'.</value>
+  </data>
+  <data name="Program_Run_Bold" xml:space="preserve">
+    <value>
+{0}
+</value>
   </data>
 </root>

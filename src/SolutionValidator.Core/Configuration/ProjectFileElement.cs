@@ -1,47 +1,52 @@
-// --------------------------------------------------------------------------------------------------------------------
+#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="ProjectFileElement.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.Configuration
 {
-    using System.Configuration;
-    using Properties;
+	#region using...
+	using System.Configuration;
+	using Properties;
 
-    [UsedImplicitly]
-    public class ProjectFileElement : ConfigurationElement
-    {
-        private const string OutputPathElementName = "outputPath";
+	#endregion
 
-        private const string RequiredConfigurationsElementName = "requiredConfigurations";
+	[UsedImplicitly]
+	public class ProjectFileElement : ConfigurationElement
+	{
+		private const string OutputPathElementName = "outputPath";
 
-        private const string CheckIdenticalElementName = "checkIdentical";
+		private const string RequiredConfigurationsElementName = "requiredConfigurations";
 
-        private const string CheckForValueElementName = "checkForValue";
+		private const string CheckIdenticalElementName = "checkIdentical";
 
-        [ConfigurationProperty(OutputPathElementName)]
-        public OutputPathElement OutputPath
-        {
-            get { return (OutputPathElement)base[OutputPathElementName]; }
-        }
+		private const string CheckForValueElementName = "checkForValue";
 
-        [ConfigurationProperty(RequiredConfigurationsElementName)]
-        public ConfigurationNameCollection RequiredConfigurations
-        {
-            get { return ((ConfigurationNameCollection)(base[RequiredConfigurationsElementName])); }
-        }
+		[ConfigurationProperty(OutputPathElementName)]
+		public OutputPathElement OutputPath
+		{
+			get { return (OutputPathElement) base[OutputPathElementName]; }
+		}
 
-        [ConfigurationProperty(CheckIdenticalElementName)]
-        public PropertiesToMatchCollection CheckIdentical
-        {
-            get { return ((PropertiesToMatchCollection)(base[CheckIdenticalElementName])); }
-        }
+		[ConfigurationProperty(RequiredConfigurationsElementName)]
+		public ConfigurationNameCollection RequiredConfigurations
+		{
+			get { return ((ConfigurationNameCollection) (base[RequiredConfigurationsElementName])); }
+		}
 
-        [ConfigurationProperty(CheckForValueElementName)]
-        public PropertiesToCheckCollection CheckForValue
-        {
-            get { return ((PropertiesToCheckCollection)(base[CheckForValueElementName])); }
-        }
-    }
+		[ConfigurationProperty(CheckIdenticalElementName)]
+		public PropertiesToMatchCollection CheckIdentical
+		{
+			get { return ((PropertiesToMatchCollection) (base[CheckIdenticalElementName])); }
+		}
+
+		[ConfigurationProperty(CheckForValueElementName)]
+		public PropertiesToCheckCollection CheckForValue
+		{
+			get { return ((PropertiesToCheckCollection) (base[CheckForValueElementName])); }
+		}
+	}
 }

@@ -1,34 +1,38 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="OutputPathElement.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
+#endregion
 
 namespace SolutionValidator.Configuration
 {
-    using System.Configuration;
-    using Properties;
+	#region using...
+	using System.Configuration;
+	using Properties;
 
-    [UsedImplicitly]
-    public class OutputPathElement : ConfigurationElement
-    {
-        #region Constants
-        private const string ValueAttributeName = "value";
-        #endregion
+	#endregion
 
-        #region Properties
-        [ConfigurationProperty(ValueAttributeName, DefaultValue = "output")]
-        public string Value
-        {
-            get { return (string) base[ValueAttributeName]; }
-        }
+	[UsedImplicitly]
+	public class OutputPathElement : ConfigurationElement
+	{
+		#region Constants
+		private const string ValueAttributeName = "value";
+		#endregion
 
-        [ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
-        public bool Check
-        {
-            get { return (bool) base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
-        }
-        #endregion
-    }
+		#region Properties
+		[ConfigurationProperty(ValueAttributeName, DefaultValue = "output")]
+		public string Value
+		{
+			get { return (string) base[ValueAttributeName]; }
+		}
+
+		[ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
+		public bool Check
+		{
+			get { return (bool) base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
+		}
+		#endregion
+	}
 }

@@ -1,39 +1,50 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="Options.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
 namespace SolutionValidator.CommandLineParsing
 {
-    using CommandLine;
-    using CommandLine.Text;
+	#region using...
+	using CommandLine;
+	using CommandLine.Text;
 
-    internal class Options
-    {
-        #region Properties
-        [Option('r', "repoRoot", DefaultValue = ".", HelpText = "Path to repository root.")]
-        public string RepoRootPath { get; set; }
+	#endregion
 
-        [Option('f', "folderCheckRules", DefaultValue = ".folderCheckRules", HelpText = "Path to folder and file check rule file")]
-        public string FolderCheckFile { get; set; }
+	internal class Options
+	{
+		public const string ConfigFilePathDefaultValue = "%app.config%";
 
-        [Option('v', "verbose", DefaultValue = true, HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
-        public bool Verbose { get; set; }
+		#region Properties
+		[Option('r', "repoRoot", DefaultValue = ".", HelpText = "Path to repository root.")]
+		public string RepoRootPath { get; set; }
 
-        [Option('c', "config", DefaultValue = SolutionValidatorEnvironment.ConfigFilePathDefaultValue, HelpText = "Path to configuration file.")]
-        public string ConfigFilePath { get; set; }
+		[Option('f', "folderCheckRules", DefaultValue = ".folderCheckRules", HelpText = "Path to folder and file check rule file")]
+		public string FolderCheckFile { get; set; }
 
-        [ParserState]
-        public IParserState LastParserState { get; set; }
-        #endregion
+		[Option('v', "verbose", DefaultValue = true, HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
+		public bool Verbose { get; set; }
 
-        #region Methods
-        [HelpOption]
-        public string GetUsage()
-        {
-            return HelpText.AutoBuild(this, current => HelpText.DefaultParsingErrorsHandler(this, current));
-        }
-        #endregion
-    }
+		[Option('F', "reFormat code", DefaultValue = false, HelpText = "Reformats code. Backups all overwritten files in a .zip file in the repository root.")]
+		public bool Reformat { get; set; }
+
+
+		[Option('c', "config", DefaultValue = SolutionValidatorEnvironment.ConfigFilePathDefaultValue, HelpText = "Path to configuration file.")]
+		public string ConfigFilePath { get; set; }
+
+		[ParserState]
+		public IParserState LastParserState { get; set; }
+		#endregion
+
+		#region Methods
+		[HelpOption]
+		public string GetUsage()
+		{
+			return HelpText.AutoBuild(this, current => HelpText.DefaultParsingErrorsHandler(this, current));
+		}
+		#endregion
+	}
 }

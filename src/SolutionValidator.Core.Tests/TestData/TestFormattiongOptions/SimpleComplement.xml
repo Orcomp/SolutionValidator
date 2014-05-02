@@ -126,6 +126,9 @@
     <SerializedObject key="AllowIfBlockInline">
       <x:Boolean xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">True</x:Boolean>
     </SerializedObject>
+    <SerializedObject key="AllowOneLinedArrayInitialziers">
+      <x:Boolean xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">False</x:Boolean>
+    </SerializedObject>
     <SerializedObject key="ForceOneLinedArrayInitialziers">
       <x:Boolean xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">False</x:Boolean>
     </SerializedObject>
@@ -396,7 +399,7 @@
     <SerializedObject key="SpaceInNamedArgumentAfterDoubleColon">
       <x:Boolean xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">False</x:Boolean>
     </SerializedObject>
-    <SerializedObject key="RemoveNextLineShifted2WhiteSpace">
+    <SerializedObject key="RemoveEndOfLineWhiteSpace">
       <x:Boolean xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">False</x:Boolean>
     </SerializedObject>
     <SerializedObject key="SpaceBeforeSemicolon">

@@ -1,5 +1,16 @@
-﻿using System.Reflection;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
+
+#region using...
+using System.Reflection;
 using System.Runtime.InteropServices;
+
+#endregion
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -7,7 +18,6 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("SolutionValidator.Core.Tests")]
 [assembly: AssemblyDescription("")]
-
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

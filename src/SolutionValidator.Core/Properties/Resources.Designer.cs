@@ -90,6 +90,16 @@ namespace SolutionValidator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot read a properties container as a single value.
+        /// </summary>
+        internal static string CSharpFormattingProperties_Deserialize_Cannot_read_a_properties_container_as_a_single_value {
+            get {
+                return ResourceManager.GetString("CSharpFormattingProperties_Deserialize_Cannot_read_a_properties_container_as_a_si" +
+                        "ngle_value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to does not exist.
         /// </summary>
         internal static string FileRule_Validate_does_not_exist_ {
@@ -219,7 +229,62 @@ namespace SolutionValidator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking repository: &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Can not verify zipped backup.
+        /// </summary>
+        internal static string ReformatRule_BackupExists_Can_not_verify_zipped_backup {
+            get {
+                return ResourceManager.GetString("ReformatRule_BackupExists_Can_not_verify_zipped_backup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not read file for formatting. File {0}..
+        /// </summary>
+        internal static string ReformatRule_Validate_Can_not_read_file_for_formatting {
+            get {
+                return ResourceManager.GetString("ReformatRule_Validate_Can_not_read_file_for_formatting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File successfully formatted: {0}..
+        /// </summary>
+        internal static string ReformatRule_Validate_File_successfully_formatted {
+            get {
+                return ResourceManager.GetString("ReformatRule_Validate_File_successfully_formatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formatter can not create backup file. No .cs file will be formatted..
+        /// </summary>
+        internal static string ReformatRule_Validate_Formatter_can_not_create_backup_file {
+            get {
+                return ResourceManager.GetString("ReformatRule_Validate_Formatter_can_not_create_backup_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formatter error: {0} in file {1}..
+        /// </summary>
+        internal static string ReformatRule_Validate_Formatter_error {
+            get {
+                return ResourceManager.GetString("ReformatRule_Validate_Formatter_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not formatting file because can not verify backup exists. File {0}..
+        /// </summary>
+        internal static string ReformatRule_Validate_Not_formatting_file_because_can_not_verify_backup_exists {
+            get {
+                return ResourceManager.GetString("ReformatRule_Validate_Not_formatting_file_because_can_not_verify_backup_exists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking repository: &apos;{0}&apos;...
+        ///    .
         /// </summary>
         internal static string RuleProcessor_Process_Checking_repository {
             get {
@@ -233,6 +298,15 @@ namespace SolutionValidator.Properties {
         internal static string RuleProcessor_Process_Unexpected_error_while_processing_rule {
             get {
                 return ResourceManager.GetString("RuleProcessor_Process_Unexpected_error_while_processing_rule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSharp formatting check was set to &apos;true&apos; but options file was not found: {0}.
+        /// </summary>
+        internal static string RuleProcessor_RuleProcessor_CSharp_formatting_check_was_set_to_true {
+            get {
+                return ResourceManager.GetString("RuleProcessor_RuleProcessor_CSharp_formatting_check_was_set_to_true", resourceCulture);
             }
         }
         

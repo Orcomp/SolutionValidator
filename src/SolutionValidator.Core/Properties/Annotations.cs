@@ -1,4 +1,15 @@
-﻿using System;
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
+// <copyright file="Annotations.cs" company="Orcomp development team">
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+#endregion
+
+#region using...
+using System;
+
+#endregion
 
 #pragma warning disable 1591
 // ReSharper disable UnusedMember.Global
@@ -100,12 +111,12 @@ namespace SolutionValidator.Properties
 
 	/// <summary>
 	///     Indicates that the method is contained in a type that implements
-	///     <see cref="System.ComponentModel.INotifyPropertyChanged" /> interface
+	/// <see cref="System.ComponentModel.INotifyPropertyChanged" /> interface
 	///     and this method is used to notify that some property value changed
 	/// </summary>
 	/// <remarks>
 	///     The method should be non-static and conform to one of the supported signatures:
-	///     <list>
+	/// <list>
 	///         <item>
 	///             <c>NotifyChanged(string)</c>
 	///         </item>
@@ -137,8 +148,8 @@ namespace SolutionValidator.Properties
 	///    }
 	///  }
 	///  </code>
-	///     Examples of generated notifications:
-	///     <list>
+	/// Examples of generated notifications:
+	/// <list>
 	///         <item>
 	///             <c>NotifyChanged("Property")</c>
 	///         </item>
@@ -180,11 +191,11 @@ namespace SolutionValidator.Properties
 	///         <item>Output   ::= [ParameterName: Value]* {halt|stop|void|nothing|Value}</item>
 	///         <item>Value    ::= true | false | null | notnull | canbenull</item>
 	///     </list>
-	///     If method has single input parameter, it's name could be omitted.<br />
-	///     Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same)
+	/// If method has single input parameter, it's name could be omitted.<br />
+	/// Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same)
 	///     for method output means that the methos doesn't return normally.<br />
 	///     <c>canbenull</c> annotation is only applicable for output parameters.<br />
-	///     You can use multiple <c>[ContractAnnotation]</c> for each FDT row,
+	/// You can use multiple <c>[ContractAnnotation]</c> for each FDT row,
 	///     or use single attribute with rows separated by semicolon.<br />
 	/// </syntax>
 	/// <examples>
@@ -269,7 +280,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     Indicates that the value of the marked type (or its derivatives)
 	///     cannot be compared using '==' or '!=' operators and <c>Equals()</c>
-	///     should be used instead. However, using '==' or '!=' for comparison
+	/// should be used instead. However, using '==' or '!=' for comparison
 	///     with <c>null</c> is always permitted.
 	/// </summary>
 	/// <example>
@@ -416,7 +427,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     Specify what is considered used implicitly
 	///     when marked with <see cref="MeansImplicitUseAttribute" />
-	///     or <see cref="UsedImplicitlyAttribute" />
+	/// or <see cref="UsedImplicitlyAttribute" />
 	/// </summary>
 	[Flags]
 	public enum ImplicitUseTargetFlags
@@ -556,7 +567,7 @@ namespace SolutionValidator.Properties
 	///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
 	///     is an MVC action. If applied to a method, the MVC action name is calculated
 	///     implicitly from the context. Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>
+	/// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
 	public sealed class AspMvcActionAttribute : Attribute
@@ -577,7 +588,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>
+	/// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter)]
 	public sealed class AspMvcAreaAttribute : PathReferenceAttribute
@@ -600,7 +611,7 @@ namespace SolutionValidator.Properties
 	///     the parameter is an MVC controller. If applied to a method,
 	///     the MVC controller name is calculated implicitly from the context.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>
+	/// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
 	public sealed class AspMvcControllerAttribute : Attribute
@@ -621,7 +632,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     ASP.NET MVC attribute. Indicates that a parameter is an MVC Master.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Controller.View(String, String)</c>
+	/// <c>System.Web.Mvc.Controller.View(String, String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter)]
 	public sealed class AspMvcMasterAttribute : Attribute
@@ -631,7 +642,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     ASP.NET MVC attribute. Indicates that a parameter is an MVC model type.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Controller.View(String, Object)</c>
+	/// <c>System.Web.Mvc.Controller.View(String, Object)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter)]
 	public sealed class AspMvcModelTypeAttribute : Attribute
@@ -643,7 +654,7 @@ namespace SolutionValidator.Properties
 	///     the parameter is an MVC partial view. If applied to a method,
 	///     the MVC partial view name is calculated implicitly from the context.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>
+	/// <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
 	public sealed class AspMvcPartialViewAttribute : PathReferenceAttribute
@@ -662,7 +673,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>
+	/// <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter)]
 	public sealed class AspMvcDisplayTemplateAttribute : Attribute
@@ -672,7 +683,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>
+	/// <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter)]
 	public sealed class AspMvcEditorTemplateAttribute : Attribute
@@ -682,7 +693,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>
+	/// <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter)]
 	public sealed class AspMvcTemplateAttribute : Attribute
@@ -693,7 +704,7 @@ namespace SolutionValidator.Properties
 	///     ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
 	///     is an MVC view. If applied to a method, the MVC view name is calculated implicitly
 	///     from the context. Use this attribute for custom wrappers similar to
-	///     <c>System.Web.Mvc.Controller.View(Object)</c>
+	/// <c>System.Web.Mvc.Controller.View(Object)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
 	public sealed class AspMvcViewAttribute : PathReferenceAttribute
@@ -755,7 +766,7 @@ namespace SolutionValidator.Properties
 	/// <summary>
 	///     Razor attribute. Indicates that a parameter or a method is a Razor section.
 	///     Use this attribute for custom wrappers similar to
-	///     <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>
+	/// <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method, Inherited = true)]
 	public sealed class RazorSectionAttribute : Attribute

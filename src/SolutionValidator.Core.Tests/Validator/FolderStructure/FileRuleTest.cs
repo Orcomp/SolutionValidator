@@ -1,29 +1,29 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿#region Copyright (c) 2014 Orcomp development team.
+// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileRuleTest.cs" company="Orcomp development team">
-//   Copyright (c) 2008 - 2014 Orcomp development team. All rights reserved.
+//   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+#endregion
 
-namespace SolutionValidator.Core.Tests.Validator.FolderStructure
+namespace SolutionValidator.Tests.Validator.FolderStructure
 {
-    using Moq;
-    using NUnit.Framework;
-    using SolutionValidator.Validator.Common;
-    using SolutionValidator.Validator.FolderStructure;
-    using SolutionValidator.Validator.FolderStructure.Rules;
+	#region using...
+	using Common;
+	using Moq;
+	using NUnit.Framework;
+	using SolutionValidator.FolderStructure;
 
-    [TestFixture]
+	#endregion
+
+	[TestFixture]
 	public class FileRuleTest
 	{
-		#region Setup/Teardown
-
 		[SetUp]
 		public void SetUp()
 		{
 			fshMock = new Mock<IFileSystemHelper>();
 		}
-
-		#endregion
 
 		private const string RootPath = "should not matter what is this content";
 		private static readonly string[] Count0 = new string[0];
@@ -39,7 +39,6 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 		{
 			repositoryInfo = new RepositoryInfo(RootPath);
 		}
-
 
 		[Test]
 		[TestCase(0, true, "qwe.txt", false, true)]
@@ -62,7 +61,7 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 
 			// Act:
 			var rule = new FileRule(pattern, CheckType.MustExist, fshMock.Object);
-			ValidationResult validationResult = rule.Validate(repositoryInfo);
+			var validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
 			fshMock.Verify(f => f.GetFolders(RootPath, It.IsAny<string>()), isRecursive ? Times.Once() : Times.Never());
@@ -70,7 +69,6 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 				isRecursive ? (countIndex == 0 ? Times.Never() : Times.AtLeastOnce()) : Times.Once());
 			Assert.AreEqual(expectedIsValid, validationResult.IsValid);
 		}
-
 
 		[Test]
 		[TestCase(0, true, "qwe.txt", false, false)]
@@ -97,7 +95,7 @@ namespace SolutionValidator.Core.Tests.Validator.FolderStructure
 
 			// Act:
 			var rule = new FileRule(pattern, CheckType.MustNotExist, fshMock.Object);
-			ValidationResult validationResult = rule.Validate(repositoryInfo);
+			var validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
 			fshMock.Verify(f => f.GetFolders(RootPath, It.IsAny<string>()), isRecursive ? Times.Once() : Times.Never());
