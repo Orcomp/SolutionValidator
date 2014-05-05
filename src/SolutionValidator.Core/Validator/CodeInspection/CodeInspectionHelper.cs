@@ -122,7 +122,7 @@ namespace SolutionValidator.CodeInspection
 				if (item == null)
 				{
 					message = string.Format(Resources.ProjectFileHelper_CheckOne_Can_not_get_output_path, GetProjectInfo(configuration));
-					result.AddResult(ResultLevel.Invalid, message, notify);
+					result.AddResult(ResultLevel.NotPassed, message, notify);
 					return;
 				}
 				var outputPath = item.EvaluatedInclude;
@@ -130,7 +130,7 @@ namespace SolutionValidator.CodeInspection
 				{
 					message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_must_be_a_relative_path, outputPath,
 						GetProjectInfo(configuration));
-					result.AddResult(ResultLevel.Invalid, message, notify);
+					result.AddResult(ResultLevel.NotPassed, message, notify);
 					return;
 				}
 				//($repoRoot)\($expectedOutputPath)\($configuration)\($targetFrameworkVersion)\($projectName)
@@ -154,7 +154,7 @@ namespace SolutionValidator.CodeInspection
 				{
 					message = string.Format(Resources.ProjectFileHelper_CheckOne_Output_path_was_evaluated_to, actualValue,
 						expectedValue, GetProjectInfo(configuration));
-					result.AddResult(ResultLevel.Invalid, message, notify);
+					result.AddResult(ResultLevel.NotPassed, message, notify);
 					return;
 				}
 				message = string.Format(
@@ -164,11 +164,11 @@ namespace SolutionValidator.CodeInspection
 			}
 			catch (ProjectFileException e)
 			{
-				result.AddResult(ResultLevel.Invalid, e.Message, notify);
+				result.AddResult(ResultLevel.NotPassed, e.Message, notify);
 			}
 			catch (Exception e)
 			{
-				result.AddResult(ResultLevel.Invalid, string.Format("Unexpected exception: {0}", e.Message), notify);
+				result.AddResult(ResultLevel.NotPassed, string.Format("Unexpected exception: {0}", e.Message), notify);
 			}
 		}
 

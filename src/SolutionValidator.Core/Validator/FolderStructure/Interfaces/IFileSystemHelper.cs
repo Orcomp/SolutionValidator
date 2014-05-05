@@ -10,6 +10,7 @@ namespace SolutionValidator.FolderStructure
 {
 	#region using...
 	using System.Collections.Generic;
+	using Configuration;
 
 	#endregion
 
@@ -17,6 +18,6 @@ namespace SolutionValidator.FolderStructure
 	{
 		bool Exists(string folder, string searchPattern = null);
 		IEnumerable<string> GetFolders(string root, string pattern);
-		IEnumerable<string> GetFiles(string root, string pattern);
+		IEnumerable<string> GetFiles(string root, string pattern, IncludeExcludeCollection sourceFileFilters);
 	}
 }

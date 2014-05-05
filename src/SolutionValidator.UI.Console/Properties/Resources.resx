@@ -119,8 +119,8 @@
   <data name="Program_Run_Total_checks_Total_errors_found" xml:space="preserve">
     <value>Total checks: {0}. Total errors found: {1}</value>
   </data>
-  <data name="Program_Run_Invalid" xml:space="preserve">
-    <value>Invalid: </value>
+  <data name="Program_Run_NotPassed" xml:space="preserve">
+    <value>Not passed: </value>
   </data>
   <data name="Program_Run_Error" xml:space="preserve">
     <value>Error: </value>
@@ -138,5 +138,8 @@
     <value>
 {0}
 </value>
+  </data>
+  <data name="Program_Run_Code_was_not_reformatted__To_reformat_code_use_the__F_command_line_option" xml:space="preserve">
+    <value>Code was not reformatted. To reformat code use the -F command line option.</value>
   </data>
 </root>

@@ -16,25 +16,31 @@ namespace SolutionValidator.CodeInspection
 
 	#endregion
 
-	public static class StringExtension
+	public static class CSharpFormattingOptionsExtension
 	{
-		public static string Replace(this string @this, string oldValue, string newValue, StringComparison comparison)
+		public static string Dump(this CSharpFormattingOptions @this)
 		{
 			var result = new StringBuilder();
-
-			var previousIndex = 0;
-			var index = @this.IndexOf(oldValue, comparison);
-			while (index != -1)
+			var index = 1;
+			foreach (var propertyInfo in typeof (CSharpFormattingOptions).GetProperties())
 			{
-				result.Append(@this.Substring(previousIndex, index - previousIndex));
-				result.Append(newValue);
-				index += oldValue.Length;
+				if (propertyInfo.Name.Equals("Name") || propertyInfo.Name.Equals("IsBuiltIn"))
+				{
+					continue;
+				}
 
-				previousIndex = index;
-				index = @this.IndexOf(oldValue, index, comparison);
+				var values = string.Empty;
+				if (propertyInfo.PropertyType.IsEnum)
+				{
+					values = string.Join(", ", Enum.GetNames(propertyInfo.PropertyType));
+				}
+				if (!string.IsNullOrEmpty(values))
+				{
+					values = string.Format("({0})", values);
+				}
+
+				result.AppendLine("{0:###}. {1}: {2} {3}", index++, propertyInfo.Name, propertyInfo.GetValue(@this, new object[0]), values);
 			}
-			result.Append(@this.Substring(previousIndex));
-
 			return result.ToString();
 		}
 	}

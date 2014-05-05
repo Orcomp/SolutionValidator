@@ -50,7 +50,7 @@ namespace SolutionValidator.ProjectFile
 			}
 			else
 			{
-				result.AddResult(ResultLevel.Invalid,
+				result.AddResult(ResultLevel.NotPassed,
 					string.Format("Property '{0}' in project {1} has unexpected value. Was '{2}' but expected {3}. {4}",
 						_propertyName,
 						_projectFileHelper.GetProjectShortName(),

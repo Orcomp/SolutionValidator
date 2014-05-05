@@ -111,6 +111,11 @@ namespace SolutionValidator.Configuration
 				});
 			}
 
+			if (configuration.CSharpFormatting.SourceFileFilters.Count == 0)
+			{
+				configuration.CSharpFormatting.SourceFileFilters.Add(new IncludeExcludeElement { Include = @"^src\\.*", Exclude = @".*\\obj\\(Debug|Release)\\.*" });
+			}
+
 			return configuration;
 		}
 	}

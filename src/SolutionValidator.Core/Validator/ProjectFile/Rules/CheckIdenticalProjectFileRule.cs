@@ -58,7 +58,7 @@ namespace SolutionValidator.ProjectFile
 			}
 			else
 			{
-				result.AddResult(ResultLevel.Invalid,
+				result.AddResult(ResultLevel.NotPassed,
 					string.Format(Resources.CheckIdenticalProjectFileRule_DoValidation_Properties_in_project_are_not_identical,
 						_projectFileHelper.GetProjectShortName(),
 						_propertyName,

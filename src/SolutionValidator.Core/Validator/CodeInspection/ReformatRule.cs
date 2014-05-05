@@ -11,6 +11,7 @@ namespace SolutionValidator.CodeInspection
 	#region using...
 	using System;
 	using System.Collections.Generic;
+	using System.Diagnostics;
 	using System.IO;
 	using System.Linq;
 	using System.Text;
@@ -30,19 +31,22 @@ namespace SolutionValidator.CodeInspection
 		private readonly IFileSystemHelper _fileSystemHelper;
 		private readonly CSharpFormattingOptions _options;
 		private readonly string _pattern;
+		private IncludeExcludeCollection _sourceFileFilters;
 
-		public ReformatRule(string optionsFilePath, IFileSystemHelper fileSystemHelper, string pattern = "*.cs")
+		public ReformatRule(string optionsFilePath, IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string pattern = "*.cs")
 		{
 			_pattern = pattern;
 			_fileSystemHelper = fileSystemHelper;
 			_options = CSharpFormattingProperties.GetOptions(optionsFilePath);
+			_sourceFileFilters = sourceFileFilters;
 		}
 
 		public override ValidationResult Validate(RepositoryInfo repositoryInfo, Action<ValidationResult> notify = null)
 		{
 			var result = new ValidationResult(this);
 			var formatter = new CSharpFormatter(_options);
-			var fileNames = _fileSystemHelper.GetFiles(repositoryInfo.RepositoryRootPath, _pattern).ToList();
+			var fileNames = _fileSystemHelper.GetFiles(repositoryInfo.RepositoryRootPath, _pattern, _sourceFileFilters).ToList();
+
 			string message;
 
 			string backupFileName;
@@ -94,6 +98,12 @@ namespace SolutionValidator.CodeInspection
 				}
 				try
 				{
+					var fileName2 = fileName.Replace(@"d:\", @"t:\", StringComparison.OrdinalIgnoreCase);
+					if (!fileName.Equals(fileName2))
+					{
+						Debug.WriteLine(fileName2);
+						// File.WriteAllText(fileName2, formattedCode, Encoding.UTF8);		
+					}
 					// File.WriteAllText(fileName, formattedCode, Encoding.UTF8);	
 				}
 				catch (Exception e)
@@ -150,7 +160,7 @@ namespace SolutionValidator.CodeInspection
 
 				foreach (var fileName in fileNames)
 				{
-					var name = ReplaceString(fileName, root, "", StringComparison.Ordinal);
+					var name = fileName.Replace(root, "", StringComparison.InvariantCultureIgnoreCase);
 					var entry = new ZipEntry(name) {DateTime = DateTime.Now};
 					zipOutputStream.PutNextEntry(entry);
 
@@ -176,26 +186,6 @@ namespace SolutionValidator.CodeInspection
 		{
 			var fileName = string.Format(".reformat_backup_{0:yyyyMMdd_HH_mm_ss}.zip", DateTime.Now);
 			return Path.Combine(root, fileName);
-		}
-
-		private string ReplaceString(string str, string oldValue, string newValue, StringComparison comparison)
-		{
-			var result = new StringBuilder();
-
-			var previousIndex = 0;
-			var index = str.IndexOf(oldValue, comparison);
-			while (index != -1)
-			{
-				result.Append(str.Substring(previousIndex, index - previousIndex));
-				result.Append(newValue);
-				index += oldValue.Length;
-
-				previousIndex = index;
-				index = str.IndexOf(oldValue, index, comparison);
-			}
-			result.Append(str.Substring(previousIndex));
-
-			return result.ToString();
 		}
 	}
 }

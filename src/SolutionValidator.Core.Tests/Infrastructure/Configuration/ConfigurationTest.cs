@@ -29,6 +29,9 @@ namespace SolutionValidator.Tests.Configuration
 			// C# formatting:
 			Assert.AreEqual("csharpformatting.xml", configuration.CSharpFormatting.OptionsFilePath);
 			Assert.IsTrue(configuration.CSharpFormatting.Check);
+			Assert.AreEqual(1, configuration.CSharpFormatting.SourceFileFilters.Count);
+			Assert.AreEqual(@"^src\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Include);
+			Assert.AreEqual(@".*\\obj\\(Debug|Release)\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
 
 			// Project file / Output path:
 			Assert.AreEqual("output", configuration.ProjectFile.OutputPath.Value);
@@ -66,6 +69,10 @@ namespace SolutionValidator.Tests.Configuration
 			// C# formatting:
 			Assert.AreEqual("optionsFilePath", configuration.CSharpFormatting.OptionsFilePath);
 			Assert.IsFalse(configuration.CSharpFormatting.Check);
+			Assert.AreEqual(1, configuration.CSharpFormatting.SourceFileFilters.Count);
+			Assert.AreEqual("include", configuration.CSharpFormatting.SourceFileFilters[0].Include);
+			Assert.AreEqual("exclude", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
+
 
 			// Project file / Output path:
 			Assert.AreEqual("outputPath", configuration.ProjectFile.OutputPath.Value);

@@ -106,13 +106,13 @@ namespace SolutionValidator.Common
 				var optionsFilePath = configuration.CSharpFormatting.EvaluatedOptionsFilePath();
 				if (File.Exists(optionsFilePath))
 				{
-					rule = new ReformatRule(optionsFilePath, fileSystemHelper);
+					rule = new ReformatRule(optionsFilePath, configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper);
 				}
 				else
 				{
 					if (configuration.CSharpFormatting.IsDefaultOptionsFilePath)
 					{
-						rule = new ReformatRule(null, fileSystemHelper);
+						rule = new ReformatRule(null, configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper);
 					}
 					else
 					{

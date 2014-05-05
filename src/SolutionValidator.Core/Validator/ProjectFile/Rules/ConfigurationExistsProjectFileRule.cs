@@ -39,7 +39,7 @@ namespace SolutionValidator.ProjectFile
 			}
 			else
 			{
-				result.AddResult(ResultLevel.Invalid,
+				result.AddResult(ResultLevel.NotPassed,
 					string.Format("Project '{0}' does not contain expected configuration '{1}'. {2}",
 						_projectFileHelper.GetProjectShortName(),
 						_expectedConfiguration,

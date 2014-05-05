@@ -119,7 +119,7 @@ namespace SolutionValidator.Tests.Validator.ProjectFile
 				{
 					foreach (var expected in expectedContains.Split(';'))
 					{
-						var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.Invalid).Select(m => m.Message)).Contains(expected);
+						var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.NotPassed).Select(m => m.Message)).Contains(expected);
 						Assert.IsTrue(errorMessages, string.Format("Expected contains: {0}, but was: {1}", expected, result.RuleDescription));
 					}
 				}
@@ -164,7 +164,7 @@ namespace SolutionValidator.Tests.Validator.ProjectFile
 				{
 					foreach (var expected in expectedContains.Split(';'))
 					{
-						var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.Invalid).Select(m => m.Message)).Contains(expected);
+						var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.NotPassed).Select(m => m.Message)).Contains(expected);
 						Assert.IsTrue(errorMessages, string.Format("Expected contains: {0}, but was: {1}", expected, result.RuleDescription));
 					}
 				}
@@ -203,7 +203,7 @@ namespace SolutionValidator.Tests.Validator.ProjectFile
 				{
 					foreach (var expected in expectedContains.Split(';'))
 					{
-						var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.Invalid).Select(m => m.Message)).Contains(expected);
+						var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.NotPassed).Select(m => m.Message)).Contains(expected);
 						Assert.IsTrue(errorMessages, string.Format("Expected contains: {0}, but was: {1}", expected, result.RuleDescription));
 					}
 				}
@@ -235,7 +235,7 @@ namespace SolutionValidator.Tests.Validator.ProjectFile
 			{
 				foreach (var expected in expectedContains.Split(';'))
 				{
-					var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.Invalid).Select(m => m.Message)).Contains(expected);
+					var errorMessages = string.Concat(result.Messages.Where(m => m.ResultLevel == ResultLevel.NotPassed).Select(m => m.Message)).Contains(expected);
 					Assert.IsTrue(errorMessages, string.Format("Expected contains: {0}, but was: {1}", expected, result.RuleDescription));
 				}
 			}

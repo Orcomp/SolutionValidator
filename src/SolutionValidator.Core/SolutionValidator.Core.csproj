@@ -69,6 +69,8 @@
     </Compile>
     <Compile Include="Configuration\ConfigurationNameCollection.cs" />
     <Compile Include="Configuration\ConfigurationNameElement.cs" />
+    <Compile Include="Configuration\IncludeExcludeCollection.cs" />
+    <Compile Include="Configuration\IncludeExcludeElement.cs" />
     <Compile Include="Configuration\Extensions\ConfigurationExtensions.cs" />
     <Compile Include="Configuration\CSharpFormattingElement.cs" />
     <Compile Include="Configuration\CSharpFormattingProperties.cs">
@@ -102,6 +104,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SolutionValidatorEnvironment.cs" />
+    <Compile Include="Validator\CodeInspection\Extensions\CSharpFormattingOptionsExtension - Copy.cs" />
     <Compile Include="Validator\CodeInspection\ReformatRule.cs" />
     <Compile Include="Validator\CodeInspection\CodeInspectionHelper.cs" />
     <Compile Include="Validator\CodeInspection\Interfaces\ICodeInspectionHelper.cs" />

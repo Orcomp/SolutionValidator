@@ -10,7 +10,7 @@ namespace SolutionValidator.Common
 {
 	public enum ResultLevel
 	{
-		Invalid,
+		NotPassed,
 		Error,
 		Warning, // Not used currently
 		Passed,

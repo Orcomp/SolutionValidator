@@ -33,7 +33,7 @@ namespace SolutionValidator.FolderStructure
 			{
 				message = string.Format("Folder '{0}' {1}.", RelativePath, exist ? Resources.FolderRule_Validate_exists_This_folder_should_not_exist
 					: Resources.FolderRule_Validate_does_not_exist_This_folder_must_exist);
-				result.AddResult(ResultLevel.Invalid, message);
+				result.AddResult(ResultLevel.NotPassed, message);
 				return result;
 			}
 			message = string.Format("Folder '{0}' {1}.", RelativePath, exist ? Resources.FolderRule_Validate_exists : Resources.FolderRule_Validate_does_not_exist);

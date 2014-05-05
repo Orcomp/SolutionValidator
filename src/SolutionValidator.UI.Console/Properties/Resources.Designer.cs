@@ -81,6 +81,16 @@ namespace SolutionValidator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Code was not reformatted. To reformat code use the -F command line option..
+        /// </summary>
+        internal static string Program_Run_Code_was_not_reformatted__To_reformat_code_use_the__F_command_line_option {
+            get {
+                return ResourceManager.GetString("Program_Run_Code_was_not_reformatted__To_reformat_code_use_the__F_command_line_op" +
+                        "tion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuration file: &gt;{0}&lt; does not exist..
         /// </summary>
         internal static string Program_Run_Configuration_file_does_not_exist {
@@ -108,11 +118,11 @@ namespace SolutionValidator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid: .
+        ///   Looks up a localized string similar to Not passed: .
         /// </summary>
-        internal static string Program_Run_Invalid {
+        internal static string Program_Run_NotPassed {
             get {
-                return ResourceManager.GetString("Program_Run_Invalid", resourceCulture);
+                return ResourceManager.GetString("Program_Run_NotPassed", resourceCulture);
             }
         }
         

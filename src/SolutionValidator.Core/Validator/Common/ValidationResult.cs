@@ -59,7 +59,7 @@ namespace SolutionValidator.Common
 
 		public void AddResult(ResultLevel resultLevel, string message, Action<ValidationResult> notify = null)
 		{
-			if (resultLevel == ResultLevel.Invalid)
+			if (resultLevel == ResultLevel.NotPassed)
 			{
 				ErrorCount++;
 			}

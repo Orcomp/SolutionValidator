@@ -26,11 +26,8 @@ namespace SolutionValidator
 
 	internal static class Program
 	{
-		#region Constants
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
-		#endregion
 
-		#region Methods
 		private static void Main(string[] args)
 		{
 			WriteLineBold(Resources.Program_Main_SolutionValidator_started);
@@ -38,9 +35,7 @@ namespace SolutionValidator
 			BootStrapper.RegisterServices();
 
 			var options = new Options();
-
 			var parser = new Parser(with => with.HelpWriter = Console.Error);
-
 			if (parser.ParseArgumentsStrict(args, options, () => Environment.Exit(-1)))
 			{
 				Run(options);
@@ -93,11 +88,11 @@ namespace SolutionValidator
 						validationMessage.Processed = true;
 						switch (validationMessage.ResultLevel)
 						{
-							case ResultLevel.Invalid:
+							case ResultLevel.NotPassed:
 							{
 								using (new ColorChanger(ConsoleColor.Red))
 								{
-									Console.Write(Resources.Program_Run_Invalid);
+									Console.Write(Resources.Program_Run_NotPassed);
 								}
 								Console.WriteLine(validationMessage.Message);
 							}
@@ -147,7 +142,7 @@ namespace SolutionValidator
 
 				if (!options.Reformat)
 				{
-					WriteLineBold("Code was not reformatted. To reformat code use the -F command line option.");	
+					WriteLineBold(Resources.Program_Run_Code_was_not_reformatted__To_reformat_code_use_the__F_command_line_option);	
 				}
 				
 				var totalMessage = string.Format(Resources.Program_Run_Total_checks_Total_errors_found, ruleProcessor.TotalCheckCount, ruleProcessor.TotalErrorCount);
@@ -193,6 +188,5 @@ namespace SolutionValidator
 			Logger.Info(Resources.Program_Run_SolutionValidator_exited_with_code, exitCode);
 			Environment.Exit(exitCode);
 		}
-		#endregion
 	}
 }

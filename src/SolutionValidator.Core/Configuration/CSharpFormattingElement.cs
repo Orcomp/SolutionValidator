@@ -20,24 +20,28 @@ namespace SolutionValidator.Configuration
 	[UsedImplicitly]
 	public class CSharpFormattingElement : ConfigurationElement
 	{
-		#region Constants
-		private const string OptionsFilePathAttributeName = "optionsFilePath";
-		private const string DefaultFormattingOptionSetAttributeName = "DefaultFormattingOptionSetName";
 		private const string OptionsFilePathDefaultValue = "csharpformatting.xml";
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
-		#endregion
 
-		#region Properties
+		private const string OptionsFilePathAttributeName = "optionsFilePath";
 		[ConfigurationProperty(OptionsFilePathAttributeName, DefaultValue = OptionsFilePathDefaultValue)]
 		public string OptionsFilePath
 		{
 			get { return (string) base[OptionsFilePathAttributeName]; }
 		}
 
+		private const string DefaultFormattingOptionSetAttributeName = "DefaultFormattingOptionSetName";		
 		[ConfigurationProperty(DefaultFormattingOptionSetAttributeName, DefaultValue = "Orcomp")]
 		public string DefaultFormattingOptionSetName
 		{
 			get { return (string) base[OptionsFilePathAttributeName]; }
+		}
+
+		private const string SourceFileFiltersElementName = "sourceFileFilters";
+		[ConfigurationProperty(SourceFileFiltersElementName)]
+		public IncludeExcludeCollection SourceFileFilters
+		{
+			get { return ((IncludeExcludeCollection)(base[SourceFileFiltersElementName])); }
 		}
 
 		public FormattingOptionSet DefaultFormattingOptionSet
@@ -78,6 +82,5 @@ namespace SolutionValidator.Configuration
 				return Path.GetFullPath(OptionsFilePath);
 			}
 		}
-		#endregion
 	}
 }

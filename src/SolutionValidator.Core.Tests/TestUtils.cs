@@ -55,7 +55,7 @@ namespace SolutionValidator.Tests
 			return result;
 		}
 
-		public static string CreateFoldersAndFiles(IEnumerable<string> names)
+		public static string CreateFoldersAndFiles(IEnumerable<string> names, string extension = null)
 		{
 			var root = CreateTempRootFolder();
 
@@ -76,6 +76,10 @@ namespace SolutionValidator.Tests
 						Directory.CreateDirectory(folder);
 					}
 
+					if (extension != null)
+					{
+						fullName = Path.ChangeExtension(fullName, "cs");
+					}
 					using (var writer = File.CreateText(fullName))
 					{
 						writer.WriteLine("Created: {0}", DateTime.Now);

@@ -16,7 +16,6 @@ namespace SolutionValidator.Configuration
 
 	public class SolutionValidatorConfigurationSection : ConfigurationSection
 	{
-		#region Constants
 		public const string SectionName = "solutionValidatorConfigSection";
 		public const string CheckAttributeName = "check";
 
@@ -24,11 +23,9 @@ namespace SolutionValidator.Configuration
 		private const string CSharpFormattingElementName = "csharpFormatting";
 
 		private const string ProjectFileElementName = "projectFile";
-		#endregion
 
 		public static string ConfigFilePath { get; set; }
 
-		#region Properties
 		[ConfigurationProperty(FolderStructureElementName)]
 		public FolderStructureElement FolderStructure
 		{
@@ -46,6 +43,5 @@ namespace SolutionValidator.Configuration
 		{
 			get { return (ProjectFileElement) base[ProjectFileElementName]; }
 		}
-		#endregion
 	}
 }

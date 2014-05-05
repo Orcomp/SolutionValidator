@@ -100,7 +100,9 @@
       <Name>SolutionValidator.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Validator\CodeInspection\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="TestData\GetAllProjectFilePath\F0\nocount.txt">
