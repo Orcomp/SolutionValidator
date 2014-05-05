@@ -13,7 +13,7 @@ namespace SolutionValidator.Logging
 
 	#endregion
 
-	public class OutputLogListener : FileLogListener
+	public class OutputLogListener : ConsoleLogListener
 	{
 		public OutputLogListener()
 		{

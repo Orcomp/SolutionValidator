@@ -107,6 +107,9 @@
   <data name="Program_Run_SolutionValidator_exited_with_code" xml:space="preserve">
     <value>SolutionValidator exited with code {0}.</value>
   </data>
+  <data name="Program_Run_SolutionValidator_exited_with_error_code" xml:space="preserve">
+    <value>SolutionValidator exited with code {0}. {1}</value>
+  </data>
   <data name="Program_Run_Configuration_file_does_not_exist" xml:space="preserve">
     <value>Configuration file: &gt;{0}&lt; does not exist.</value>
   </data>
@@ -114,7 +117,8 @@
     <value>Unexpected error: {0}</value>
   </data>
   <data name="Program_Run_Press_any_key_to_continue" xml:space="preserve">
-    <value>Press any key to continue . . .</value>
+    <value>
+Press any key to continue . . .</value>
   </data>
   <data name="Program_Run_Total_checks_Total_errors_found" xml:space="preserve">
     <value>Total checks: {0}. Total errors found: {1}</value>

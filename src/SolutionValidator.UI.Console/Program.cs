@@ -26,26 +26,32 @@ namespace SolutionValidator
 
 	internal static class Program
 	{
+		// -v -r..\..\..\..
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
 		private static void Main(string[] args)
 		{
-			WriteLineBold(Resources.Program_Main_SolutionValidator_started);
-
-			BootStrapper.RegisterServices();
-
-			var options = new Options();
-			var parser = new Parser(with => with.HelpWriter = Console.Error);
-			if (parser.ParseArgumentsStrict(args, options, () => Environment.Exit(-1)))
+			try
 			{
-				Run(options);
+				WriteLineBold(Resources.Program_Main_SolutionValidator_started);
+				BootStrapper.RegisterServices();
+
+				var options = new Options();
+				var parser = new Parser(with => with.HelpWriter = Console.Error);
+				if (parser.ParseArgumentsStrict(args, options, () => Environment.Exit(-1)))
+				{
+					Run(options);
+				}
+			}
+			catch (Exception e)
+			{
+				Exit("", -5);
 			}
 		}
 
 		private static void Run(Options options)
 		{
 			var repoRootPath = string.Empty;
-
 			try
 			{
 				repoRootPath = Path.GetFullPath(options.RepoRootPath);
@@ -99,13 +105,13 @@ namespace SolutionValidator
 								break;
 
 							case ResultLevel.Error:
+							{
+								using (new ColorChanger(ConsoleColor.Red))
 								{
-									using (new ColorChanger(ConsoleColor.Red))
-									{
-										Console.Write(Resources.Program_Run_Error);
-									}
-									Console.WriteLine(validationMessage.Message);
+									Console.Write(Resources.Program_Run_Error);
 								}
+								Console.WriteLine(validationMessage.Message);
+							}
 								break;
 
 							case ResultLevel.Warning:
@@ -140,20 +146,23 @@ namespace SolutionValidator
 					}
 				});
 
+				Console.WriteLine("");
+
 				if (!options.Reformat)
 				{
-					WriteLineBold(Resources.Program_Run_Code_was_not_reformatted__To_reformat_code_use_the__F_command_line_option);	
+					WriteLineBold(Resources.Program_Run_Code_was_not_reformatted__To_reformat_code_use_the__F_command_line_option);
 				}
-				
+
 				var totalMessage = string.Format(Resources.Program_Run_Total_checks_Total_errors_found, ruleProcessor.TotalCheckCount, ruleProcessor.TotalErrorCount);
 				WriteLineBold(totalMessage);
-				
+
 				if (Debugger.IsAttached)
 				{
 					Console.WriteLine(Resources.Program_Run_Press_any_key_to_continue);
 					Console.ReadKey(true);
 				}
 
+				LogManager.FlushAll();
 				Environment.Exit(ruleProcessor.TotalErrorCount);
 			}
 			catch (Exception ex)
@@ -164,18 +173,16 @@ namespace SolutionValidator
 			}
 		}
 
-		private static void WriteLineBold(string totalMessage)
+		private static void WriteLineBold(string message, params object[] args)
 		{
 			using (new ColorChanger(ConsoleColor.White))
 			{
-				Console.WriteLine(Resources.Program_Run_Bold, totalMessage);
+				Console.WriteLine(message, args);
 			}
 		}
 
 		private static void Exit(string message, int exitCode, Exception e = null)
 		{
-			Logger.Info(message);
-
 			if (e == null)
 			{
 				Logger.Error(message);
@@ -183,9 +190,17 @@ namespace SolutionValidator
 			else
 			{
 				Logger.Error(e, message);
+				message += e.Message;
+			}
+			if (exitCode < 0)
+			{
+				WriteLineBold(Resources.Program_Run_SolutionValidator_exited_with_error_code, exitCode, message);
+				WriteLineBold("For detailed error information please refer to log.txt in the current folder.");
 			}
 
 			Logger.Info(Resources.Program_Run_SolutionValidator_exited_with_code, exitCode);
+
+			LogManager.FlushAll();
 			Environment.Exit(exitCode);
 		}
 	}

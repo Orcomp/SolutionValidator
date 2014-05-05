@@ -22,18 +22,14 @@ namespace SolutionValidator.CommandLineParsing
 		[Option('r', "repoRoot", DefaultValue = ".", HelpText = "Path to repository root.")]
 		public string RepoRootPath { get; set; }
 
-		[Option('f', "folderCheckRules", DefaultValue = ".folderCheckRules", HelpText = "Path to folder and file check rule file")]
-		public string FolderCheckFile { get; set; }
+		[Option('c', "config", DefaultValue = SolutionValidatorEnvironment.ConfigFilePathDefaultValue, HelpText = "Path to configuration file.")]
+		public string ConfigFilePath { get; set; }
 
-		[Option('v', "verbose", DefaultValue = true, HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
+		[Option('v', "verbose", DefaultValue = false, HelpText = "Prints verbose messages to standard output. (does nothing currently)")]
 		public bool Verbose { get; set; }
 
 		[Option('F', "reFormat code", DefaultValue = false, HelpText = "Reformats code. Backups all overwritten files in a .zip file in the repository root.")]
 		public bool Reformat { get; set; }
-
-
-		[Option('c', "config", DefaultValue = SolutionValidatorEnvironment.ConfigFilePathDefaultValue, HelpText = "Path to configuration file.")]
-		public string ConfigFilePath { get; set; }
 
 		[ParserState]
 		public IParserState LastParserState { get; set; }

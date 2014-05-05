@@ -98,13 +98,7 @@ namespace SolutionValidator.CodeInspection
 				}
 				try
 				{
-					var fileName2 = fileName.Replace(@"d:\", @"t:\", StringComparison.OrdinalIgnoreCase);
-					if (!fileName.Equals(fileName2))
-					{
-						Debug.WriteLine(fileName2);
-						// File.WriteAllText(fileName2, formattedCode, Encoding.UTF8);		
-					}
-					// File.WriteAllText(fileName, formattedCode, Encoding.UTF8);	
+					File.WriteAllText(fileName, formattedCode, Encoding.UTF8);	
 				}
 				catch (Exception e)
 				{

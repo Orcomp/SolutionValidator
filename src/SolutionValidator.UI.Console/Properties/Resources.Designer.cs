@@ -136,7 +136,8 @@ namespace SolutionValidator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Press any key to continue . . ..
+        ///   Looks up a localized string similar to 
+        ///Press any key to continue . . ..
         /// </summary>
         internal static string Program_Run_Press_any_key_to_continue {
             get {
@@ -159,6 +160,15 @@ namespace SolutionValidator.Properties {
         internal static string Program_Run_SolutionValidator_exited_with_code {
             get {
                 return ResourceManager.GetString("Program_Run_SolutionValidator_exited_with_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SolutionValidator exited with code {0}. {1}.
+        /// </summary>
+        internal static string Program_Run_SolutionValidator_exited_with_error_code {
+            get {
+                return ResourceManager.GetString("Program_Run_SolutionValidator_exited_with_error_code", resourceCulture);
             }
         }
         
