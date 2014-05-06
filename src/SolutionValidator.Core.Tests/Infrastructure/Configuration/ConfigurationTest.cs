@@ -10,6 +10,7 @@ namespace SolutionValidator.Tests.Configuration
 {
 	#region using...
 	using System.IO;
+	using ICSharpCode.NRefactory.CSharp;
 	using NUnit.Framework;
 	using SolutionValidator.Configuration;
 
@@ -32,6 +33,10 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual(1, configuration.CSharpFormatting.SourceFileFilters.Count);
 			Assert.AreEqual(@"^src\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Include);
 			Assert.AreEqual(@".*\\obj\\(Debug|Release)\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
+
+			Assert.AreEqual(0, configuration.CSharpFormatting.CodeMemberOrder.Count);
+			//Assert.AreEqual(GeneratedCodeMember.StaticFields, configuration.CSharpFormatting.CodeMemberOrder[0]);
+
 
 			// Project file / Output path:
 			Assert.AreEqual("output", configuration.ProjectFile.OutputPath.Value);
@@ -73,6 +78,8 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual("include", configuration.CSharpFormatting.SourceFileFilters[0].Include);
 			Assert.AreEqual("exclude", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
 
+			Assert.AreEqual(1, configuration.CSharpFormatting.CodeMemberOrder.Count);
+			Assert.AreEqual(GeneratedCodeMember.StaticFields, configuration.CSharpFormatting.CodeMemberOrder[0].Member);
 
 			// Project file / Output path:
 			Assert.AreEqual("outputPath", configuration.ProjectFile.OutputPath.Value);
