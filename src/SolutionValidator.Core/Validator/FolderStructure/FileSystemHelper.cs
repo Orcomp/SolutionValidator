@@ -15,6 +15,7 @@ namespace SolutionValidator.FolderStructure
 	using System.Globalization;
 	using System.IO;
 	using System.Linq;
+	using System.Text;
 	using System.Text.RegularExpressions;
 	using CodeInspection;
 	using Configuration;
@@ -25,7 +26,7 @@ namespace SolutionValidator.FolderStructure
 	{
 		public bool Exists(string folder, string searchPattern = null)
 		{
-			if (string.IsNullOrEmpty(searchPattern))
+			if (String.IsNullOrEmpty(searchPattern))
 			{
 				return Directory.Exists(folder);
 			}
@@ -44,7 +45,7 @@ namespace SolutionValidator.FolderStructure
 			regexPattern = regexPattern.Replace(FileSystemRule.RecursionToken, @".+");
 			// Not used currently: .Replace(FileSystemRule.OneLevelWildCardToken, @"[^\\]+")
 
-			regexPattern = string.Format(@"^{0}$", regexPattern);
+			regexPattern = String.Format(@"^{0}$", regexPattern);
 
 			foreach (var folder in folders)
 			{
@@ -62,6 +63,16 @@ namespace SolutionValidator.FolderStructure
 			root = root.Trim().ToLower().Replace('/', '\\').Trim('\\') + '\\';
 			var excludeIncludeElements = sourceFileFilters.Cast<IncludeExcludeElement>();
 			return Directory.GetFiles(root, pattern, SearchOption.AllDirectories).Where(fn => Filter(root, fn, excludeIncludeElements));
+		}
+
+		public string ReadAllText(string fileName)
+		{
+			return File.ReadAllText(fileName);
+		}
+
+		public void WriteAllText(string fileName, string content, Encoding encoding)
+		{
+			File.WriteAllText(fileName, content, encoding);
 		}
 
 		private static bool Filter(string root, string text, IEnumerable<IncludeExcludeElement> filters)
