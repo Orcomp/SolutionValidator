@@ -17,6 +17,7 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 	using Moq;
 	using NUnit.Framework;
 	using SolutionValidator.CodeInspection.Refactoring;
+	using SolutionValidator.Configuration;
 	using SolutionValidator.FolderStructure;
 
 	#endregion
@@ -46,14 +47,33 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 		}
 
 		[Test]
+		[TestCase("qweAsd", "_qweAsd")]
+		public void TestRegex(string input, string expected)
+		{
+			const string pattern = "^([a-zA-Z][a-zA-Z0-9_]*$)";
+			const string replacement = @"_$1";
+
+			var result = Regex.Replace(input, pattern, replacement, RegexOptions.None);
+			Assert.AreEqual(expected, result);
+		}
+
+		[Test]
 		public void TestProto()
 		{
+			var configuration = ConfigurationHelper.Load("Not Existing File Name");
 			// Arrange:
 			fshMock.Setup(f => f.GetFiles(It.IsAny<string>(), It.IsAny<string>(), null)).Returns(new String[] { "dummy" });
 			fshMock.Setup(f => f.ReadAllText(It.IsAny<string>())).Returns(sourceString);
+			fshMock.Setup(f => f.WriteAllText(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Encoding>())).Callback((string s1,string s2, Encoding e) =>
+			{
+				var x = s2;
+			});
 
 			// Act:
-			var rule = new RenamePrivateFieldsRefactorRule(null, fshMock.Object, "*.cs", false);
+			var rule = new RenamePrivateFieldsRefactorRule(
+				configuration.CSharpFormatting.PrivateFieldRename.Find,
+				configuration.CSharpFormatting.PrivateFieldRename.Replace, null, fshMock.Object, "*.cs", false);
+			
 			var validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:
@@ -63,7 +83,7 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 
 		const string sourceString = @"class C
 {
-private int xxx;
+private int xxx,aaa;
 private int yyy;
 public int Xxx
 {

@@ -20,8 +20,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\Debug\NET40\SolutionValidator.Core</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET40</DefineConstants>
+    <OutputPath>..\..\output\Debug\NET45\SolutionValidator.Core\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -29,8 +29,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\output\Release\NET40\SolutionValidator.Core</OutputPath>
-    <DefineConstants>TRACE;NET40</DefineConstants>
+    <OutputPath>..\..\output\Release\NET45\SolutionValidator.Core\</OutputPath>
+    <DefineConstants>TRACE;NET45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -101,6 +101,7 @@
     <Compile Include="Configuration\FormattingOptionSet.cs" />
     <Compile Include="Configuration\Helpers\ConfigurationHelper.cs" />
     <Compile Include="Configuration\OutputPathElement.cs" />
+    <Compile Include="Configuration\PrivateFieldRenameElement.cs" />
     <Compile Include="Configuration\ProjectFileElement.cs" />
     <Compile Include="Configuration\PropertiesToCheckCollection.cs" />
     <Compile Include="Configuration\PropertyToCheckElement.cs" />

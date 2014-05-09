@@ -15,6 +15,7 @@ namespace SolutionValidator.Common
 	using System.Linq;
 	using Catel.Logging;
 	using CodeInspection;
+	using CodeInspection.Refactoring;
 	using Configuration;
 	using DependencyInjection;
 	using FolderStructure;
@@ -30,8 +31,8 @@ namespace SolutionValidator.Common
 		private readonly RepositoryInfo _repositoryInfo;
 		private readonly List<Rule> _rules;
 		private List<ValidationResult> _allValidationResults;
-		private int totalCheckCount;
-		private int totalErrorCount;
+		private int _totalCheckCount;
+		private int _totalErrorCount;
 
 		public RuleProcessor(string repoRootPath, SolutionValidatorConfigurationSection configuration, bool isReformatEnabled)
 		{
@@ -122,22 +123,32 @@ namespace SolutionValidator.Common
 				}
 				_rules.Add(rule);
 			}
+
+
+			if (configuration.CSharpFormatting.PrivateFieldRename.Check && isReformatEnabled)
+			{
+				var fileSystemHelper = Dependency.Resolve<IFileSystemHelper>();
+				_rules.Add(new RenamePrivateFieldsRefactorRule(
+					configuration.CSharpFormatting.PrivateFieldRename.Find,
+					configuration.CSharpFormatting.PrivateFieldRename.Replace,
+					configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper));
+			}
 		}
 
 		public int TotalCheckCount
 		{
-			get { return totalCheckCount; }
+			get { return _totalCheckCount; }
 		}
 
 		public int TotalErrorCount
 		{
-			get { return totalErrorCount; }
+			get { return _totalErrorCount; }
 		}
 
 		public void Process(Action<ValidationResult> notify = null)
 		{
-			totalCheckCount = 0;
-			totalErrorCount = 0;
+			_totalCheckCount = 0;
+			_totalErrorCount = 0;
 			_allValidationResults = new List<ValidationResult>();
 
 			OnNotifyInfo(notify, Resources.RuleProcessor_Process_Checking_repository, _repositoryInfo.RepositoryRootPath);
@@ -162,8 +173,8 @@ namespace SolutionValidator.Common
 			{
 				notify(validationResult);
 			}
-			totalCheckCount += validationResult.CheckCount;
-			totalErrorCount += validationResult.ErrorCount;
+			_totalCheckCount += validationResult.CheckCount;
+			_totalErrorCount += validationResult.ErrorCount;
 			_allValidationResults.Add(validationResult);
 		}
 

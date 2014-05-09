@@ -52,6 +52,13 @@ namespace SolutionValidator.Configuration
 			get { return ((CodeMemberOrderCollection)(base[CodeMemberOrderElementName])); }
 		}
 
+		private const string PrivateFieldRenameElementName = "privateFieldRename";
+		[ConfigurationProperty(PrivateFieldRenameElementName)]
+		public PrivateFieldRenameElement PrivateFieldRename
+		{
+			get { return ((PrivateFieldRenameElement)(base[PrivateFieldRenameElementName])); }
+		}
+
 
 
 		public FormattingOptionSet DefaultFormattingOptionSet

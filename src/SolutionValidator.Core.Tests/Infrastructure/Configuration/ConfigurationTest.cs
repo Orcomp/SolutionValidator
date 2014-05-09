@@ -34,8 +34,14 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual(@"^src\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Include);
 			Assert.AreEqual(@".*\\obj\\(Debug|Release)\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
 
-			Assert.AreEqual(0, configuration.CSharpFormatting.CodeMemberOrder.Count);
+			// C# memeber reordering
+			//Assert.AreEqual(0, configuration.CSharpFormatting.CodeMemberOrder.Count);
 			//Assert.AreEqual(GeneratedCodeMember.StaticFields, configuration.CSharpFormatting.CodeMemberOrder[0]);
+
+			// C# private field rename
+			Assert.AreEqual("^([a-zA-Z][a-zA-Z0-9_]*$)", configuration.CSharpFormatting.PrivateFieldRename.Find);
+			Assert.AreEqual("_$1", configuration.CSharpFormatting.PrivateFieldRename.Replace);
+			Assert.IsTrue(configuration.ProjectFile.OutputPath.Check);
 
 
 			// Project file / Output path:
@@ -78,8 +84,14 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual("include", configuration.CSharpFormatting.SourceFileFilters[0].Include);
 			Assert.AreEqual("exclude", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
 
-			Assert.AreEqual(1, configuration.CSharpFormatting.CodeMemberOrder.Count);
-			Assert.AreEqual(GeneratedCodeMember.StaticFields, configuration.CSharpFormatting.CodeMemberOrder[0].Member);
+			// C# member reorder
+			//Assert.AreEqual(1, configuration.CSharpFormatting.CodeMemberOrder.Count);
+			//Assert.AreEqual(GeneratedCodeMember.StaticFields, configuration.CSharpFormatting.CodeMemberOrder[0].Member);
+
+			// C# private field rename
+			Assert.AreEqual("find", configuration.CSharpFormatting.PrivateFieldRename.Find);
+			Assert.AreEqual("replace", configuration.CSharpFormatting.PrivateFieldRename.Replace);
+			Assert.IsFalse(configuration.ProjectFile.OutputPath.Check);
 
 			// Project file / Output path:
 			Assert.AreEqual("outputPath", configuration.ProjectFile.OutputPath.Value);
