@@ -84,7 +84,7 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 		const string sourceString = @"
 		class C
 		{
-			private int xxx, aaa,  bbb;
+			private int xxx, aaa,  bbb = 1;
 			private int yyy;
 			public int Xxx{
 				get {return xxx;}

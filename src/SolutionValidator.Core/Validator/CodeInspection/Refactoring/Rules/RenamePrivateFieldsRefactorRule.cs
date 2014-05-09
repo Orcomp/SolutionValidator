@@ -63,7 +63,7 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
 			var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
 
-			var rewriter = new RenamePrivateFieldsRewriter(_find, _replace, semanticModel, Workspace);
+			var rewriter = new RenamePrivateFieldsRewriter(_find, _replace, semanticModel);
 			var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(true);
 			var newRoot = rewriter.Visit(root);
 			

@@ -23,14 +23,12 @@ namespace SolutionValidator.CodeInspection.Refactoring
 		private readonly SemanticModel _semanticModel;
 		private string _find;
 		private string _replace;
-		private Workspace _workspace;
 
-		public RenamePrivateFieldsRewriter(string find, string replace, SemanticModel semanticModel, Workspace workspace)
+		public RenamePrivateFieldsRewriter(string find, string replace, SemanticModel semanticModel)
 		{
 			_find = find;
 			_replace = replace;
 			_semanticModel = semanticModel;
-			_workspace = workspace;
 		}
 
 		public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax name)
@@ -42,12 +40,10 @@ namespace SolutionValidator.CodeInspection.Refactoring
 				&& fieldSymbol.DeclaredAccessibility == Accessibility.Private 
 				&& !fieldSymbol.IsConst)
 			{
-				
-				//name = name.WithLeadingTrivia().WithTrailingTrivia().Update(SyntaxFactory.Identifier(GetChangedName(name.Identifier.ValueText)));
-				name = name.WithIdentifier(SyntaxFactory.Identifier(GetChangedName(name.Identifier.ValueText)));
-				//name.NormalizeWhitespace();
-				//name = (IdentifierNameSyntax) Formatter.Format(name, _workspace);
-				//name = name.WithAdditionalAnnotations(Formatter.Annotation);
+				name = name
+					.WithIdentifier(SyntaxFactory.Identifier(GetChangedName(name.Identifier.ValueText)))
+					.WithLeadingTrivia(name.GetLeadingTrivia())
+					.WithTrailingTrivia(name.GetTrailingTrivia());
 			}
 
 			return name;
@@ -69,11 +65,27 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			var variables = new List<VariableDeclaratorSyntax>();
 			foreach (var variable in field.Declaration.Variables)
 			{
-				variables.Add(SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(GetChangedName(variable.Identifier.ValueText))));
+				
+				//var newVariable = variable.ReplaceToken(variable.Identifier, SyntaxFactory.Identifier(GetChangedName(variable.Identifier.ValueText))
+				//	.WithLeadingTrivia(variable.Identifier.LeadingTrivia)
+				//	.WithTrailingTrivia(variable.Identifier.TrailingTrivia))
+				//	.WithLeadingTrivia(variable.GetLeadingTrivia())
+				//	.WithTrailingTrivia(variable.GetTrailingTrivia());
+				
+				var newVariable = variable.WithIdentifier(SyntaxFactory.Identifier(GetChangedName(variable.Identifier.ValueText))
+					.WithLeadingTrivia(variable.Identifier.LeadingTrivia)
+					.WithTrailingTrivia(variable.Identifier.TrailingTrivia))
+					.WithLeadingTrivia(variable.GetLeadingTrivia())
+					.WithTrailingTrivia(variable.GetTrailingTrivia());
+
+				variables.Add(newVariable);
 			}
 
-			field = field.WithDeclaration(SyntaxFactory.VariableDeclaration(field.Declaration.Type, SyntaxFactory.SeparatedList(variables)));
-			field = field.WithAdditionalAnnotations(Formatter.Annotation);
+			field = field
+				.WithDeclaration(SyntaxFactory.VariableDeclaration(field.Declaration.Type, SyntaxFactory.SeparatedList(variables)))
+				.WithLeadingTrivia(field.GetLeadingTrivia())
+				.WithTrailingTrivia(field.GetTrailingTrivia());
+			
 			return field;
 		}
 
