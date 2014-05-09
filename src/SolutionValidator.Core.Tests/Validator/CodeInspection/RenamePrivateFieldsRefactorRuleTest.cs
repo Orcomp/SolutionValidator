@@ -81,25 +81,24 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 		}
 
 
-		const string sourceString = @"class C
-{
-private int xxx,aaa;
-private int yyy;
-public int Xxx
-{
-	get {return xxx;}
-	set {xxx = value;}
-}
+		const string sourceString = @"
+		class C
+		{
+			private int xxx, aaa,  bbb;
+			private int yyy;
+			public int Xxx{
+				get {return xxx;}
+				set {xxx = value;}
+			}
 
-static void Main(){
-	var local = 10;
-WriteLine(""Hello, World! {0}"", yyy, local);
-	this.xxx = 3;
-xxx = 4;
-xxx = 5;
-}
-}";
-
-
+			static void Main()
+			{
+				var local = 10;
+				WriteLine(""Hello, World! {0}"", yyy, local);
+				this.xxx = 3;
+				xxx = 4;
+				xxx = 5;
+			}
+		}";
 	}
 }

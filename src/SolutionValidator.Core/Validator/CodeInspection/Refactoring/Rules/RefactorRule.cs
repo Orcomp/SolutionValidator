@@ -26,12 +26,13 @@ namespace SolutionValidator.CodeInspection.Refactoring
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 		private readonly Project _project;
 		protected SourceText RefactorResult;
+		protected readonly CustomWorkspace Workspace;
 
 		protected RefactorRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true)
 			: base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
 		{
-			var workspace = new CustomWorkspace();
-			var solution = workspace.CurrentSolution;
+			Workspace = new CustomWorkspace();
+			var solution = Workspace.CurrentSolution;
 			_project = solution.AddProject("dummyProjectName", "dummyAssemblyName", LanguageNames.CSharp);
 		}
 
