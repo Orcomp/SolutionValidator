@@ -11,7 +11,6 @@ namespace SolutionValidator.CodeInspection.Refactoring
 	#region using...
 	using System;
 	using System.Diagnostics;
-	using System.Dynamic;
 	using System.Threading;
 	using System.Threading.Tasks;
 	using Catel.Logging;
@@ -24,37 +23,33 @@ namespace SolutionValidator.CodeInspection.Refactoring
 
 	#endregion
 
-	public class RenamePrivateFieldsRefactorRule : RefactorRule<RenamePrivateFieldsRewriter>
+	public class RemoveRedundantThisQualifierRule : RefactorRule<RemoveRedundantThisQualifierRewriter>
 	{
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
-
-		public RenamePrivateFieldsRefactorRule(string find, string replace, IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true)
-			: base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
+		public RemoveRedundantThisQualifierRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true) : base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
 		{
-			Parameter.Find = find;
-			Parameter.Replace = replace;
 		}
 
 		#region Message overrides
 		protected override string TransformedMessage
 		{
-			get { return "Renamed private fields"; }
+			get { return "Removed redundant 'this' qualifiers"; }
 		}
 
 		protected override string TransformingMessage
 		{
-			get { return "Renaming private fields"; }
+			get { return "Removing redundant 'this' qualifiers"; }
 		}
 
 		protected override string TransformerMessage
 		{
-			get { return "Private fields renamer"; }
+			get { return "Redundant 'this' qualifier remover"; }
 		}
 
 		protected override string TransformMessage
 		{
-			get { return "Rename private fields"; }
+			get { return "Remove redundant 'this' qualifiers"; }
 		}
 		#endregion
 
@@ -62,10 +57,8 @@ namespace SolutionValidator.CodeInspection.Refactoring
 		//{
 		//	var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
 		//	var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-			
-		//	var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-		//	var rewriter = new RenamePrivateFieldsRewriter(Parameter, semanticModel);
-			
+		//	var rewriter = new RemoveRedundantThisQualifierRewriter(semanticModel);
+		//	var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(true);
 		//	var newRoot = rewriter.Visit(root);
 		//	var newDocument = document.WithSyntaxRoot(newRoot);
 		//	RefactorResult = await newDocument.GetTextAsync(cancellationToken);

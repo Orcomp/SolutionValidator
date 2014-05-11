@@ -133,6 +133,13 @@ namespace SolutionValidator.Common
 					configuration.CSharpFormatting.PrivateFieldRename.Replace,
 					configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper));
 			}
+
+			if (configuration.CSharpFormatting.RemoveRedundantThisQualifier.Check && isReformatEnabled)
+			{
+				var fileSystemHelper = Dependency.Resolve<IFileSystemHelper>();
+				_rules.Add(new RemoveRedundantThisQualifierRule(
+					configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper));
+			}
 		}
 
 		public int TotalCheckCount

@@ -10,6 +10,7 @@ namespace SolutionValidator.CodeInspection.Refactoring
 {
 	#region using...
 	using System;
+	using System.Dynamic;
 	using System.Threading;
 	using System.Threading.Tasks;
 	using Catel.Logging;
@@ -17,15 +18,18 @@ namespace SolutionValidator.CodeInspection.Refactoring
 	using Configuration;
 	using FolderStructure;
 	using Microsoft.CodeAnalysis;
+	using Microsoft.CodeAnalysis.CSharp;
 	using Microsoft.CodeAnalysis.Text;
 
 	#endregion
 
-	public abstract class RefactorRule : TransformRule
+	public abstract class RefactorRule<T> : TransformRule where T : CSharpSyntaxRewriter
 	{
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 		private readonly Project _project;
+		
 		protected SourceText RefactorResult;
+		protected readonly dynamic Parameter;
 
 		protected RefactorRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true)
 			: base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
@@ -33,6 +37,7 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			var workspace = new CustomWorkspace();
 			var solution = workspace.CurrentSolution;
 			_project = solution.AddProject("dummyProjectName", "dummyAssemblyName", LanguageNames.CSharp);
+			Parameter = new ExpandoObject();
 		}
 
 		protected override string Transform(string code, string fileName, Action<ValidationResult> notify)
@@ -42,6 +47,18 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			return RefactorResult.ToString();
 		}
 
-		protected abstract Task Refactor(Document document, Action<ValidationResult> notify, CancellationToken cancellationToken);
+		protected virtual async Task Refactor(Document document, Action<ValidationResult> notify, CancellationToken cancellationToken)
+		{
+			var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+			var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+
+			var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+			//var rewriter = new RenamePrivateFieldsRewriter(Parameter, semanticModel);
+			var rewriter = (T) Activator.CreateInstance(typeof (T), new[] {Parameter, semanticModel});
+
+			var newRoot = rewriter.Visit(root);
+			var newDocument = document.WithSyntaxRoot(newRoot);
+			RefactorResult = await newDocument.GetTextAsync(cancellationToken);
+		}
 	}
 }

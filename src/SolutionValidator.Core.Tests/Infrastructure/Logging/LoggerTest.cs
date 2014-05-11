@@ -20,9 +20,6 @@ namespace SolutionValidator.Tests.Logging
 	[TestFixture]
 	public class LoggerTest
 	{
-		/// <summary>
-		/// The log.
-		/// </summary>
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
 		// [assembly: log4net.Config.XmlConfigurator(ConfigFile = "SolutionValidator.log4net.config", Watch = true)]

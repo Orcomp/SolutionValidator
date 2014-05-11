@@ -107,6 +107,7 @@
     <Compile Include="Configuration\PropertyToCheckElement.cs" />
     <Compile Include="Configuration\PropertiesToMatchCollection.cs" />
     <Compile Include="Configuration\PropertiesToMatchElement.cs" />
+    <Compile Include="Configuration\RemoveRedundantThisQualifierElement.cs" />
     <Compile Include="Configuration\SolutionValidatorConfigurationSection.cs" />
     <Compile Include="DependencyInjection\Dependency.cs" />
     <Compile Include="Exceptions\SolutionValidatorException.cs" />
@@ -128,6 +129,8 @@
     <Compile Include="SolutionValidatorEnvironment.cs" />
     <Compile Include="Validator\CodeInspection\Extensions\CSharpFormattingOptionsExtension - Copy.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Rules\RefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RemoveRedundantThisQualifierRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RemoveRedundantThisQualifierRewriter.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RenamePrivateFieldsRewriter.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Rules\RenamePrivateFieldsRefactorRule.cs" />
     <Compile Include="Validator\CodeInspection\TransformRule.cs" />

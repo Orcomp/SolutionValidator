@@ -43,6 +43,8 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual("_$1", configuration.CSharpFormatting.PrivateFieldRename.Replace);
 			Assert.IsTrue(configuration.ProjectFile.OutputPath.Check);
 
+			// C# Remove redundant this qualifier
+			Assert.IsTrue(configuration.ProjectFile.OutputPath.Check);
 
 			// Project file / Output path:
 			Assert.AreEqual("output", configuration.ProjectFile.OutputPath.Value);
@@ -83,6 +85,9 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual(1, configuration.CSharpFormatting.SourceFileFilters.Count);
 			Assert.AreEqual("include", configuration.CSharpFormatting.SourceFileFilters[0].Include);
 			Assert.AreEqual("exclude", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
+
+			// C# Remove redundant this qualifier
+			Assert.IsFalse(configuration.ProjectFile.OutputPath.Check);
 
 			// C# member reorder
 			//Assert.AreEqual(1, configuration.CSharpFormatting.CodeMemberOrder.Count);

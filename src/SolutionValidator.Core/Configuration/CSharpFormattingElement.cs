@@ -59,6 +59,13 @@ namespace SolutionValidator.Configuration
 			get { return ((PrivateFieldRenameElement)(base[PrivateFieldRenameElementName])); }
 		}
 
+		private const string RemoveRedundantThisQualifierElementName = "removeRedundantThisQualifier";
+		[ConfigurationProperty(RemoveRedundantThisQualifierElementName)]
+		public RemoveRedundantThisQualifierElement RemoveRedundantThisQualifier
+		{
+			get { return ((RemoveRedundantThisQualifierElement)(base[RemoveRedundantThisQualifierElementName])); }
+		}
+
 
 
 		public FormattingOptionSet DefaultFormattingOptionSet

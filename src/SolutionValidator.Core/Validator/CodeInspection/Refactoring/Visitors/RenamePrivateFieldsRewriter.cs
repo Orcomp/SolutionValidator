@@ -1,4 +1,5 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
+
 // -------------------------------------------------------------------------------------------------------------------
 // <copyright file="PrivateFieldRenameRewriter.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
@@ -14,31 +15,31 @@ namespace SolutionValidator.CodeInspection.Refactoring
 	using Microsoft.CodeAnalysis;
 	using Microsoft.CodeAnalysis.CSharp;
 	using Microsoft.CodeAnalysis.CSharp.Syntax;
-	using Microsoft.CodeAnalysis.Formatting;
-
+	
 	#endregion
 
-	internal class RenamePrivateFieldsRewriter : CSharpSyntaxRewriter
+	public class RenamePrivateFieldsRewriter : CSharpSyntaxRewriter
 	{
 		private readonly SemanticModel _semanticModel;
-		private string _find;
-		private string _replace;
+		private dynamic _parameters;
 
-		public RenamePrivateFieldsRewriter(string find, string replace, SemanticModel semanticModel)
+		public RenamePrivateFieldsRewriter(dynamic parameters, SemanticModel semanticModel)
 		{
-			_find = find;
-			_replace = replace;
+			_parameters = parameters;
 			_semanticModel = semanticModel;
 		}
 
 		public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax name)
 		{
+			// TODO: Hanlde initializer list correctly
+
 			var symbolInfo = _semanticModel.GetSymbolInfo(name);
 			var fieldSymbol = symbolInfo.Symbol as IFieldSymbol;
 			
 			if (fieldSymbol != null 
 				&& fieldSymbol.DeclaredAccessibility == Accessibility.Private 
-				&& !fieldSymbol.IsConst)
+				&& !fieldSymbol.IsConst
+				&& !fieldSymbol.IsStatic)
 			{
 				name = name
 					.WithIdentifier(SyntaxFactory.Identifier(GetChangedName(name.Identifier.ValueText)))
@@ -61,16 +62,17 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			{
 				return field;
 			}
+
+			if (field.Modifiers.Any(SyntaxKind.StaticKeyword))
+			{
+				return field;
+			}
+
 			
+			//var variables = new List<VariableDeclaratorSyntax>();
 			var variables = new List<VariableDeclaratorSyntax>();
 			foreach (var variable in field.Declaration.Variables)
 			{
-				
-				//var newVariable = variable.ReplaceToken(variable.Identifier, SyntaxFactory.Identifier(GetChangedName(variable.Identifier.ValueText))
-				//	.WithLeadingTrivia(variable.Identifier.LeadingTrivia)
-				//	.WithTrailingTrivia(variable.Identifier.TrailingTrivia))
-				//	.WithLeadingTrivia(variable.GetLeadingTrivia())
-				//	.WithTrailingTrivia(variable.GetTrailingTrivia());
 				
 				var newVariable = variable.WithIdentifier(SyntaxFactory.Identifier(GetChangedName(variable.Identifier.ValueText))
 					.WithLeadingTrivia(variable.Identifier.LeadingTrivia)
@@ -91,7 +93,7 @@ namespace SolutionValidator.CodeInspection.Refactoring
 
 		private string GetChangedName(string oldName)
 		{
-			return Regex.Replace(oldName, _find, _replace, RegexOptions.None);
+			return Regex.Replace(oldName, _parameters.Find, _parameters.Replace, RegexOptions.None);
 		}
 	}
 }
