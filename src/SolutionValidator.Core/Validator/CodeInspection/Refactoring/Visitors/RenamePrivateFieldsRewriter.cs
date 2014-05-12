@@ -1,7 +1,6 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
-
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="PrivateFieldRenameRewriter.cs" company="Orcomp development team">
+// <copyright file="RenamePrivateFieldsRewriter.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -15,13 +14,13 @@ namespace SolutionValidator.CodeInspection.Refactoring
 	using Microsoft.CodeAnalysis;
 	using Microsoft.CodeAnalysis.CSharp;
 	using Microsoft.CodeAnalysis.CSharp.Syntax;
-	
+
 	#endregion
 
 	public class RenamePrivateFieldsRewriter : CSharpSyntaxRewriter
 	{
+		private readonly dynamic _parameters;
 		private readonly SemanticModel _semanticModel;
-		private dynamic _parameters;
 
 		public RenamePrivateFieldsRewriter(dynamic parameters, SemanticModel semanticModel)
 		{
@@ -35,11 +34,11 @@ namespace SolutionValidator.CodeInspection.Refactoring
 
 			var symbolInfo = _semanticModel.GetSymbolInfo(name);
 			var fieldSymbol = symbolInfo.Symbol as IFieldSymbol;
-			
-			if (fieldSymbol != null 
-				&& fieldSymbol.DeclaredAccessibility == Accessibility.Private 
-				&& !fieldSymbol.IsConst
-				&& !fieldSymbol.IsStatic)
+
+			if (fieldSymbol != null
+			    && fieldSymbol.DeclaredAccessibility == Accessibility.Private
+			    && !fieldSymbol.IsConst
+			    && !fieldSymbol.IsStatic)
 			{
 				name = name
 					.WithIdentifier(SyntaxFactory.Identifier(GetChangedName(name.Identifier.ValueText)))
@@ -49,7 +48,6 @@ namespace SolutionValidator.CodeInspection.Refactoring
 
 			return name;
 		}
-
 
 		public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax field)
 		{
@@ -68,12 +66,10 @@ namespace SolutionValidator.CodeInspection.Refactoring
 				return field;
 			}
 
-			
 			//var variables = new List<VariableDeclaratorSyntax>();
 			var variables = new List<VariableDeclaratorSyntax>();
 			foreach (var variable in field.Declaration.Variables)
 			{
-				
 				var newVariable = variable.WithIdentifier(SyntaxFactory.Identifier(GetChangedName(variable.Identifier.ValueText))
 					.WithLeadingTrivia(variable.Identifier.LeadingTrivia)
 					.WithTrailingTrivia(variable.Identifier.TrailingTrivia))
@@ -87,7 +83,7 @@ namespace SolutionValidator.CodeInspection.Refactoring
 				.WithDeclaration(SyntaxFactory.VariableDeclaration(field.Declaration.Type, SyntaxFactory.SeparatedList(variables)))
 				.WithLeadingTrivia(field.GetLeadingTrivia())
 				.WithTrailingTrivia(field.GetTrailingTrivia());
-			
+
 			return field;
 		}
 

@@ -1,6 +1,6 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="RefactorRule.cs" company="Orcomp development team">
+// <copyright file="TreeRefactorRule.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -23,17 +23,18 @@ namespace SolutionValidator.CodeInspection.Refactoring
 
 	#endregion
 
-	public abstract class RefactorRule<T> : TransformRule where T : CSharpSyntaxRewriter
+	public abstract class TreeRefactorRule<T> : TransformRule where T : CSharpSyntaxRewriter
 	{
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
-		private readonly Project _project;
-		
-		protected SourceText RefactorResult;
 		protected readonly dynamic Parameter;
+		private readonly Project _project;
 
-		protected RefactorRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true)
+		protected SourceText RefactorResult;
+
+		protected TreeRefactorRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true)
 			: base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
 		{
+			//var workspace = new CustomWorkspace();
 			var workspace = new CustomWorkspace();
 			var solution = workspace.CurrentSolution;
 			_project = solution.AddProject("dummyProjectName", "dummyAssemblyName", LanguageNames.CSharp);
@@ -53,10 +54,11 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
 
 			var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-			//var rewriter = new RenamePrivateFieldsRewriter(Parameter, semanticModel);
-			var rewriter = (T) Activator.CreateInstance(typeof (T), new[] {Parameter, semanticModel});
 
+			// TODO: Discover available constructors dynamically:
+			var rewriter = (T) Activator.CreateInstance(typeof (T), new[] {Parameter, semanticModel});
 			var newRoot = rewriter.Visit(root);
+
 			var newDocument = document.WithSyntaxRoot(newRoot);
 			RefactorResult = await newDocument.GetTextAsync(cancellationToken);
 		}

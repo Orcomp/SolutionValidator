@@ -47,7 +47,10 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 		private const string InputSourceString = @"
 		class C
 		{
+			private static int saaa, sbbb = 1; // Must not touched
+			protected int paaa, pbbb = 1; // Must not touched
 			private int aaa, bbb = 1;
+			private int[] array = {aaa, bbb}; // Yes this is compile error, just checking
 			private int xxx;
 			private int yyy;
 
@@ -69,10 +72,41 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 			}
 		}";
 
-		private const string OutputSourceString = @"
+		private const string OutputSourceStringForSource = @"
 		class C
 		{
+			private static int saaa, sbbb = 1; // Must not touched
+			protected int paaa, pbbb = 1; // Must not touched
+			private int _aaa, _bbb = 1;
+			private int[] _array = {_aaa, _bbb}; // Yes this is compile error, just checking
+			private int _xxx;
+			private int _yyy;
+
+			public int Xxx
+			{
+				get { return _xxx; }
+				set { _xxx = value; }
+			}
+
+			private void M()
+			{
+				var local = 10;
+				Console.WriteLine(""Hello, World! {0} {1}"", _yyy, local);
+				_xxx = 3;
+				_xxx = 4;
+				_xxx = _xxx;
+				var any = _xxx.ToString();
+				AnyMethod(_xxx.ToString(), _xxx.ToString(), _xxx, _xxx + 1);
+			}
+		}";
+
+		private const string OutputSourceStringForTree = @"
+		class C
+		{
+			private static int saaa, sbbb = 1; // Must not touched
+			protected int paaa, pbbb = 1; // Must not touched
 			private int _aaa,_bbb = 1;
+			private int[] _array = {aaa, bbb}; // Yes this is compile error, just checking
 			private int _xxx;
 			private int _yyy;
 
@@ -95,8 +129,8 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 		}";
 
 		[Test]
-		[TestCase("Current scenarios", InputSourceString, OutputSourceString)]
-		public void TestRenamePrivateFieldsRefactorRuleTest(string dummy, string inputSource, string outputSource)
+		[TestCase("Current scenarios", InputSourceString, OutputSourceStringForTree)]
+		public void TestRenamePrivateFieldsTreeRefactorRuleTest(string dummy, string inputSource, string outputSource)
 		{
 			var configuration = ConfigurationHelper.Load("Not Existing File Name");
 			// Arrange:
@@ -109,7 +143,33 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 
 
 			// Act:
-			var rule = new RenamePrivateFieldsRefactorRule(
+			var rule = new RenamePrivateFieldsTreeRefactorRule(
+				configuration.CSharpFormatting.PrivateFieldRename.Find,
+				configuration.CSharpFormatting.PrivateFieldRename.Replace, null, fshMock.Object, "*.cs", false);
+
+			var validationResult = rule.Validate(repositoryInfo);
+
+			// Assert:
+			fshMock.Verify(f => f.WriteAllText(It.IsAny<string>(), outputSource, It.IsAny<Encoding>()), Times.Once());
+		}
+
+
+		[Test]
+		[TestCase("Current scenarios", InputSourceString, OutputSourceStringForSource)]
+		public void TestRenamePrivateFieldsSourceRefactorRuleTest(string dummy, string inputSource, string outputSource)
+		{
+			var configuration = ConfigurationHelper.Load("Not Existing File Name");
+			// Arrange:
+			fshMock.Setup(f => f.GetFiles(It.IsAny<string>(), It.IsAny<string>(), null)).Returns(new[] { "dummy" });
+			fshMock.Setup(f => f.ReadAllText(It.IsAny<string>())).Returns(inputSource);
+			fshMock.Setup(f => f.WriteAllText(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Encoding>())).Callback((string s1, string s2, Encoding e) =>
+			{
+				//Assert.AreEqual(outputSource, s2);
+			});
+
+
+			// Act:
+			var rule = new RenamePrivateFieldsSourceRefactorRule(
 				configuration.CSharpFormatting.PrivateFieldRename.Find,
 				configuration.CSharpFormatting.PrivateFieldRename.Replace, null, fshMock.Object, "*.cs", false);
 

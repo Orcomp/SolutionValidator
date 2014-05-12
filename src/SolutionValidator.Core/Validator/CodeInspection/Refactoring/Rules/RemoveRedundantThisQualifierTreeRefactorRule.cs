@@ -1,6 +1,6 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="RenamePrivateFieldsRefactorRule.cs" company="Orcomp development team">
+// <copyright file="RemoveRedundantThisQualifierRule.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -9,25 +9,17 @@
 namespace SolutionValidator.CodeInspection.Refactoring
 {
 	#region using...
-	using System;
-	using System.Diagnostics;
-	using System.Threading;
-	using System.Threading.Tasks;
 	using Catel.Logging;
-	using Common;
 	using Configuration;
 	using FolderStructure;
-	using Microsoft.CodeAnalysis;
-	using Microsoft.CodeAnalysis.Formatting;
-	using Microsoft.CodeAnalysis.Options;
 
 	#endregion
 
-	public class RemoveRedundantThisQualifierRule : RefactorRule<RemoveRedundantThisQualifierRewriter>
+	public class RemoveRedundantThisQualifierTreeRefactorRule : TreeRefactorRule<RemoveRedundantThisQualifierRewriter>
 	{
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
-		public RemoveRedundantThisQualifierRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true) : base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
+		public RemoveRedundantThisQualifierTreeRefactorRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true) : base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
 		{
 		}
 

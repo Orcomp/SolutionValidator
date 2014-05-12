@@ -128,11 +128,17 @@
     </Compile>
     <Compile Include="SolutionValidatorEnvironment.cs" />
     <Compile Include="Validator\CodeInspection\Extensions\CSharpFormattingOptionsExtension - Copy.cs" />
-    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RefactorRule.cs" />
-    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RemoveRedundantThisQualifierRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RemoveRedundantThisQualifierSourceRefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RenamePrivateFieldsSourceRefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\SourceRefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\TreeRefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RemoveRedundantThisQualifierTreeRefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RemoveRedundantThisQualifierChangeCollector.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RemoveRedundantThisQualifierRewriter.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Visitors\CSharpSyntaxChangeCollector.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RenamePrivateFieldsChangeCollector.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RenamePrivateFieldsRewriter.cs" />
-    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RenamePrivateFieldsRefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RenamePrivateFieldsTreeRefactorRule.cs" />
     <Compile Include="Validator\CodeInspection\TransformRule.cs" />
     <Compile Include="Validator\CodeInspection\ReformatRule.cs" />
     <Compile Include="Validator\CodeInspection\CodeInspectionHelper.cs" />
@@ -162,6 +168,7 @@
     <Compile Include="Validator\ProjectFile\Exceptions\ProjectFileException.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Validator\CodeInspection\Roslyn\" />
     <Folder Include="Validator\File\" />
   </ItemGroup>
   <ItemGroup>

@@ -169,7 +169,7 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 		[TestCase("Must Remove On Method", InputSourceMustRemoveOnMethod, OutputSourceMustRemoveOnMethod)]
 		[TestCase("Must Not Remove Because Of Parameter", InputSourceMustNotRemoveBecauseOfParameter, OutputSourceMustNotRemoveBecauseOfParameter)]
 		[TestCase("Must Not Remove Because Of Local", InputSourceMustNotRemoveBecauseOfLocal, OutputSourceMustNotRemoveBecauseOfLocal)]
-		public void TestRemoveRedundantThisQualifierRule(string dummy, string inputSource, string outputSource)
+		public void TestRemoveRedundantThisQualifierTreeRefactorRule(string dummy, string inputSource, string outputSource)
 		{
 			if (outputSource == null)
 			{
@@ -185,7 +185,35 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 			});
 
 			// Act:
-			var rule = new RemoveRedundantThisQualifierRule(null, fshMock.Object, "*.cs", false);
+			var rule = new RemoveRedundantThisQualifierTreeRefactorRule(null, fshMock.Object, "*.cs", false);
+			var validationResult = rule.Validate(repositoryInfo);
+
+			// Assert:
+			fshMock.Verify(f => f.WriteAllText(It.IsAny<string>(), outputSource, It.IsAny<Encoding>()), Times.Once());
+		}
+
+		[Test]
+		[TestCase("Must Remove On Field", InputSourceMustRemoveOnField, OutputSourceMustRemoveOnField)]
+		[TestCase("Must Remove On Method", InputSourceMustRemoveOnMethod, OutputSourceMustRemoveOnMethod)]
+		[TestCase("Must Not Remove Because Of Parameter", InputSourceMustNotRemoveBecauseOfParameter, OutputSourceMustNotRemoveBecauseOfParameter)]
+		[TestCase("Must Not Remove Because Of Local", InputSourceMustNotRemoveBecauseOfLocal, OutputSourceMustNotRemoveBecauseOfLocal)]
+		public void TestRemoveRedundantThisQualifierSourceRefactorRule(string dummy, string inputSource, string outputSource)
+		{
+			if (outputSource == null)
+			{
+				outputSource = inputSource;
+			}
+
+			// Arrange:
+			fshMock.Setup(f => f.GetFiles(It.IsAny<string>(), It.IsAny<string>(), null)).Returns(new[] { "dummy" });
+			fshMock.Setup(f => f.ReadAllText(It.IsAny<string>())).Returns(inputSource);
+			fshMock.Setup(f => f.WriteAllText(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Encoding>())).Callback((string s1, string s2, Encoding e) =>
+			{
+				//	Assert.AreEqual(outputSource, s2);
+			});
+
+			// Act:
+			var rule = new RemoveRedundantThisQualifierSourceRefactorRule(null, fshMock.Object, "*.cs", false);
 			var validationResult = rule.Validate(repositoryInfo);
 
 			// Assert:

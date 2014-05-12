@@ -128,7 +128,7 @@ namespace SolutionValidator.Common
 			if (configuration.CSharpFormatting.PrivateFieldRename.Check && isReformatEnabled)
 			{
 				var fileSystemHelper = Dependency.Resolve<IFileSystemHelper>();
-				_rules.Add(new RenamePrivateFieldsRefactorRule(
+				_rules.Add(new RenamePrivateFieldsSourceRefactorRule(
 					configuration.CSharpFormatting.PrivateFieldRename.Find,
 					configuration.CSharpFormatting.PrivateFieldRename.Replace,
 					configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper));
@@ -137,7 +137,7 @@ namespace SolutionValidator.Common
 			if (configuration.CSharpFormatting.RemoveRedundantThisQualifier.Check && isReformatEnabled)
 			{
 				var fileSystemHelper = Dependency.Resolve<IFileSystemHelper>();
-				_rules.Add(new RemoveRedundantThisQualifierRule(
+				_rules.Add(new RemoveRedundantThisQualifierSourceRefactorRule(
 					configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper));
 			}
 		}

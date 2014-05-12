@@ -17,13 +17,10 @@ namespace SolutionValidator.CodeInspection.Refactoring
 	#endregion
 
 	// ReSharper disable once ClassNeverInstantiated.Global
-	public class RemoveRedundantThisQualifierRewriter : CSharpSyntaxRewriter
+	public class RemoveRedundantThisQualifierChangeCollector : CSharpSyntaxChangeCollector
 	{
-		private readonly SemanticModel _semanticModel;
-
-		public RemoveRedundantThisQualifierRewriter(dynamic dummy, SemanticModel semanticModel)
+		public RemoveRedundantThisQualifierChangeCollector(SemanticModel semanticModel) : base(semanticModel)
 		{
-			_semanticModel = semanticModel;
 		}
 
 		public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
@@ -37,12 +34,12 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			}
 
 			// Check for field: 
-			var symbolInfo = _semanticModel.GetSymbolInfo(nameNode);
+			var symbolInfo = SemanticModel.GetSymbolInfo(nameNode);
 			var fieldSymbol = symbolInfo.Symbol as IFieldSymbol;
 			if (fieldSymbol != null)
 			{
 				// Checking for naming ambiguities:
-				var symbols = _semanticModel.LookupSymbols(node.SpanStart)
+				var symbols = SemanticModel.LookupSymbols(node.SpanStart)
 					.Where(s => new[]
 					{
 						SymbolKind.Local,
@@ -60,10 +57,10 @@ namespace SolutionValidator.CodeInspection.Refactoring
 			}
 
 			// Not field or field be no ambiguities so we are free to remove the "this" qualifier:
-
-			// Change memberaccess node to be a simple identified node, but keep the trivia:
-
-			return nameNode.WithLeadingTrivia(thisNode.GetLeadingTrivia());
+			AddSpan(thisNode.Span);
+			AddSpan(node.OperatorToken.FullSpan);
+			return base.VisitMemberAccessExpression(node);
+			
 		}
 	}
 }
