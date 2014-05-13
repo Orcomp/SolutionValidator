@@ -1,0 +1,95 @@
+﻿<catel:UserControl x:Class="SolutionValidator.Views.SolutionValidatorView"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:catel="http://catel.codeplex.com"
+                   xmlns:common="clr-namespace:SolutionValidator.Common;assembly=SolutionValidator.Core"
+                   xmlns:converters="clr-namespace:SolutionValidator.Converters"
+                   mc:Ignorable="d" 
+                   d:DesignHeight="300" 
+                   d:DesignWidth="300">
+    <!-- Resources -->        
+    <UserControl.Resources>
+        <!-- ValidationResultTemplateSelector -->
+        <converters:ValidationResultTemplateSelector x:Key="ValidationResultTemplateSelector" />
+        
+        <DataTemplate x:Key="ErrorTemplate"  DataType="common:ValidationMessage">
+            <TextBlock Foreground="Red" Text="{Binding Message}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="WarningTemplate" DataType="common:ValidationMessage">
+            <TextBlock Foreground="Yellow" Text="{Binding Message}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="PassedTemplate" DataType="common:ValidationMessage">
+            <TextBlock Foreground="Green" Text="{Binding Message}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="InfoTemplate" DataType="common:ValidationMessage">
+            <TextBlock Foreground="Black" Text="{Binding Message}" />
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    
+    <!-- MainContent -->
+    <Grid>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>-->         
+        
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Command="{Binding SelectSettingsFileCommand}"
+                    Grid.Row="0">Settings</Button>
+
+            <TextBlock Text="{Binding ConfigFilePath}" />
+            
+            <Button Grid.Row="1"
+                    Command="{Binding SelectProjectFolderCommand}">Project</Button>
+            
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding ProjectFileLocation}" />
+
+            <CheckBox IsChecked="{Binding IsReformatEnabled}"
+                      Grid.Column="2"
+                      Content="Reformat"
+                      VerticalAlignment="Center"/>
+
+            <Button Grid.Column="3" Command="{Binding RunCommand}">Run</Button>
+
+            <TextBlock Text="{Binding TotalCheckCount}"
+                       Grid.Row="2"/>
+
+            <TextBlock Text="{Binding TotalErrorCount}"
+                       Grid.Row="2" 
+                       Grid.Column="2"/>
+
+            <ListBox ItemsSource="{Binding ValidationResults}"
+                     Grid.Row="3"
+                     Grid.ColumnSpan="4"
+                     VerticalAlignment="Stretch"
+                     ItemTemplateSelector="{StaticResource ValidationResultTemplateSelector}">
+                
+            </ListBox>
+                                    
+        </Grid>
+                
+    </Grid>
+</catel:UserControl>

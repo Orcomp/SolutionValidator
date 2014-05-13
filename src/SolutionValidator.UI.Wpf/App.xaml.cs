@@ -12,6 +12,9 @@ namespace SolutionValidator
     using System.Windows;
     using Catel.IoC;
     using Catel.Logging;
+    using Catel.Windows;
+    using FolderStructure;
+    using ProjectFile;
 
     /// <summary>
     ///     Interaction logic for App.xaml
@@ -58,12 +61,12 @@ namespace SolutionValidator
         ///     A <see cref="T:System.Windows.StartupEventArgs" /> that contains the event data.
         /// </param>
         protected override void OnStartup(StartupEventArgs e)
-        {
+        {           
             base.OnStartup(e);
 
             try
             {
-                RegisterServices();
+                RegisterServices();                
 
                 // This is only for verbose logging info and debug info
                 Thread.CurrentThread.Name = "UI";
@@ -80,7 +83,8 @@ namespace SolutionValidator
         {
             var serviceLocator = ServiceLocator.Default;
 
-            // TODO: Register servics
+            serviceLocator.RegisterInstance<IFileSystemHelper>(new FileSystemHelper());
+            serviceLocator.RegisterInstance<IProjectFileHelper>(new ProjectFileHelper());
         }
         #endregion
     }

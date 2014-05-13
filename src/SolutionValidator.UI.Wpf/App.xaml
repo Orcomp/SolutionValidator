@@ -2,6 +2,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="Views\MainWindow.xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1P1:Ignorable="d"
              xmlns:d1P1="http://schemas.openxmlformats.org/markup-compatibility/2006">
-    <Application.Resources>       
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Set custom theme -->
+                <ResourceDictionary Source="/Catel.Extensions.Controls;component/themes/generic.xaml" />
+                
+                <ResourceDictionary>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="100"></Setter>
+                        <Setter Property="Height" Value="20"></Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

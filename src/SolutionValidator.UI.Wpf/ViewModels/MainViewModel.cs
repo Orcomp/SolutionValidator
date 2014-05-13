@@ -10,6 +10,7 @@ namespace SolutionValidator.ViewModels
     using System.Reflection;
     using Catel;
     using Catel.MVVM;
+    using Catel.MVVM.Services;
     using Catel.Reflection;
     using Catel.Services;
 
