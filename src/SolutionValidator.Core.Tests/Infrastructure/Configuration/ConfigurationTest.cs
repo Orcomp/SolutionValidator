@@ -34,17 +34,16 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual(@"^src\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Include);
 			Assert.AreEqual(@".*\\obj\\(Debug|Release)\\.*", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
 
-			// C# memeber reordering
-			//Assert.AreEqual(0, configuration.CSharpFormatting.CodeMemberOrder.Count);
-			//Assert.AreEqual(GeneratedCodeMember.StaticFields, configuration.CSharpFormatting.CodeMemberOrder[0]);
-
 			// C# private field rename
 			Assert.AreEqual("^([a-zA-Z][a-zA-Z0-9_]*$)", configuration.CSharpFormatting.PrivateFieldRename.Find);
 			Assert.AreEqual("_$1", configuration.CSharpFormatting.PrivateFieldRename.Replace);
-			Assert.IsTrue(configuration.ProjectFile.OutputPath.Check);
+			Assert.IsTrue(configuration.CSharpFormatting.PrivateFieldRename.Check);
 
 			// C# Remove redundant this qualifier
-			Assert.IsTrue(configuration.ProjectFile.OutputPath.Check);
+			Assert.IsTrue(configuration.CSharpFormatting.RemoveRedundantThisQualifier.Check);
+
+			// C# Rearrange members
+			Assert.IsTrue(configuration.CSharpFormatting.RearrangeMembers.Check);
 
 			// Project file / Output path:
 			Assert.AreEqual("output", configuration.ProjectFile.OutputPath.Value);
@@ -86,17 +85,16 @@ namespace SolutionValidator.Tests.Configuration
 			Assert.AreEqual("include", configuration.CSharpFormatting.SourceFileFilters[0].Include);
 			Assert.AreEqual("exclude", configuration.CSharpFormatting.SourceFileFilters[0].Exclude);
 
-			// C# Remove redundant this qualifier
-			Assert.IsFalse(configuration.ProjectFile.OutputPath.Check);
-
-			// C# member reorder
-			//Assert.AreEqual(1, configuration.CSharpFormatting.CodeMemberOrder.Count);
-			//Assert.AreEqual(GeneratedCodeMember.StaticFields, configuration.CSharpFormatting.CodeMemberOrder[0].Member);
-
 			// C# private field rename
 			Assert.AreEqual("find", configuration.CSharpFormatting.PrivateFieldRename.Find);
 			Assert.AreEqual("replace", configuration.CSharpFormatting.PrivateFieldRename.Replace);
-			Assert.IsFalse(configuration.ProjectFile.OutputPath.Check);
+			Assert.IsFalse(configuration.CSharpFormatting.PrivateFieldRename.Check);
+
+			// C# Remove redundant this qualifier
+			Assert.IsFalse(configuration.CSharpFormatting.RemoveRedundantThisQualifier.Check);
+
+			// C# Rearrange members
+			Assert.IsFalse(configuration.CSharpFormatting.RearrangeMembers.Check);
 
 			// Project file / Output path:
 			Assert.AreEqual("outputPath", configuration.ProjectFile.OutputPath.Value);

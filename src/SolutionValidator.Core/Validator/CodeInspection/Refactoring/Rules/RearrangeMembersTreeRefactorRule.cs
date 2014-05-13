@@ -15,35 +15,35 @@ namespace SolutionValidator.CodeInspection.Refactoring
 
 	#endregion
 
-	public class RemoveRedundantThisQualifierTreeRefactorRule : TreeRefactorRule<RemoveRedundantThisQualifierRewriter>
+	public class RearrangeMembersTreeRefactorRule : TreeRefactorRule<RearrangeMembersRewriter>
 	{
 		private static readonly ILog Logger = LogManager.GetCurrentClassLogger();
 
-		public RemoveRedundantThisQualifierTreeRefactorRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true) : base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
+		public RearrangeMembersTreeRefactorRule(IncludeExcludeCollection sourceFileFilters, IFileSystemHelper fileSystemHelper, string fileNamePattern = "*.cs", bool isBackupEnabled = true)
+			: base(sourceFileFilters, fileSystemHelper, fileNamePattern, isBackupEnabled)
 		{
 		}
 
 		#region Message overrides
 		protected override string TransformedMessage
 		{
-			get { return "Removed redundant 'this' qualifiers"; }
+			get { return "Rearranged members"; }
 		}
 
 		protected override string TransformingMessage
 		{
-			get { return "Removing redundant 'this' qualifiers"; }
+			get { return "Rearranging members"; }
 		}
 
 		protected override string TransformerMessage
 		{
-			get { return "Redundant 'this' qualifier remover"; }
+			get { return "Member rearranger"; }
 		}
 
 		protected override string TransformMessage
 		{
-			get { return "Remove redundant 'this' qualifiers"; }
+			get { return "Rearrange members"; }
 		}
 		#endregion
-
 	}
 }

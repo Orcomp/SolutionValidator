@@ -94,7 +94,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="Validator\CodeInspection\RemoveRedundantThisQualifierRule.cs" />
+    <Compile Include="Validator\CodeInspection\RearrangeMembersRefactorRuleTest.cs" />
     <Compile Include="Validator\CodeInspection\RenamePrivateFieldsRefactorRuleTest.cs" />
+    <Compile Include="Validator\CodeInspection\TransformRuleBaseTest.cs" />
     <Compile Include="Validator\FolderStructure\FileRuleTest.cs" />
     <Compile Include="Validator\FolderStructure\IntegrationTest.cs" />
     <Compile Include="Validator\FolderStructure\FolderRuleTest.cs" />
@@ -106,6 +108,58 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\DoNotTouch.original.cst">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveConstructor.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveDelegate.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveDestructor.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveEnum.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveEvent.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveIndexer.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveInterface.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveInternalFields.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveMethod.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveNestedClass.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveNestedStruct.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MovePrivateFields.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveProperty.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveProtectedFields.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MoveProtectedInternalFields.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\Refactoring\RearrangeMembers\MovePublicFields.original.cst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestData\TestConfigurations\Empty1.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

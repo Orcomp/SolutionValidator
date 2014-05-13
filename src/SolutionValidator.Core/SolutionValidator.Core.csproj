@@ -107,6 +107,7 @@
     <Compile Include="Configuration\PropertyToCheckElement.cs" />
     <Compile Include="Configuration\PropertiesToMatchCollection.cs" />
     <Compile Include="Configuration\PropertiesToMatchElement.cs" />
+    <Compile Include="Configuration\RearrangeMembersElement.cs" />
     <Compile Include="Configuration\RemoveRedundantThisQualifierElement.cs" />
     <Compile Include="Configuration\SolutionValidatorConfigurationSection.cs" />
     <Compile Include="DependencyInjection\Dependency.cs" />
@@ -129,11 +130,13 @@
     <Compile Include="SolutionValidatorEnvironment.cs" />
     <Compile Include="Validator\CodeInspection\Extensions\CSharpFormattingOptionsExtension - Copy.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Rules\RemoveRedundantThisQualifierSourceRefactorRule.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Rules\RearrangeMembersTreeRefactorRule.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Rules\RenamePrivateFieldsSourceRefactorRule.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Rules\SourceRefactorRule.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Rules\TreeRefactorRule.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Rules\RemoveRedundantThisQualifierTreeRefactorRule.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RemoveRedundantThisQualifierChangeCollector.cs" />
+    <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RearrangeMembersRewriter.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RemoveRedundantThisQualifierRewriter.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Visitors\CSharpSyntaxChangeCollector.cs" />
     <Compile Include="Validator\CodeInspection\Refactoring\Visitors\RenamePrivateFieldsChangeCollector.cs" />

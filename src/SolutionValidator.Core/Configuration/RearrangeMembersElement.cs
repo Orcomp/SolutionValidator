@@ -1,6 +1,6 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="RemoveRedundantThisQualifierElement.cs" company="Orcomp development team">
+// <copyright file="RearrangeMembersElement.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace SolutionValidator.Configuration
 	#endregion
 
 	// ReSharper disable once ClassNeverInstantiated.Global
-	public class RemoveRedundantThisQualifierElement : ConfigurationElement
+	public class RearrangeMembersElement : ConfigurationElement
 	{
 		[ConfigurationProperty(SolutionValidatorConfigurationSection.CheckAttributeName, DefaultValue = "true")]
 		public bool Check
@@ -21,6 +21,4 @@ namespace SolutionValidator.Configuration
 			get { return (bool) base[SolutionValidatorConfigurationSection.CheckAttributeName]; }
 		}
 	}
-
-	// ReSharper disable once ClassNeverInstantiated.Global
 }

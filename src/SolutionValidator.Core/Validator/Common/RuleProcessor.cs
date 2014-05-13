@@ -140,6 +140,13 @@ namespace SolutionValidator.Common
 				_rules.Add(new RemoveRedundantThisQualifierSourceRefactorRule(
 					configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper));
 			}
+
+			if (configuration.CSharpFormatting.RearrangeMembers.Check && isReformatEnabled)
+			{
+				var fileSystemHelper = Dependency.Resolve<IFileSystemHelper>();
+				_rules.Add(new RearrangeMembersTreeRefactorRule(
+					configuration.CSharpFormatting.SourceFileFilters, fileSystemHelper));
+			}
 		}
 
 		public int TotalCheckCount

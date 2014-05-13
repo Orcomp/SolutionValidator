@@ -28,10 +28,6 @@ namespace SolutionValidator.Tests.Validator.CodeInspection
 		}
 
 		private const string RootPath = "should not matter what is this content";
-		private static readonly string[] Count0 = new string[0];
-		private static readonly string[] Count1 = {"anything"};
-		private static readonly string[] Count2 = {"anything", "something"};
-		private static readonly string[][] Counts = {Count0, Count1, Count2};
 
 		private RepositoryInfo repositoryInfo;
 		private Mock<IFileSystemHelper> fshMock;

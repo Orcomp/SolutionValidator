@@ -1,0 +1,299 @@
+﻿// <copyright file="DoNotTouch.original.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+using System;
+namespace SolutionValidator.Tests.TestData.Refactoring.RearrangeMembers
+{
+	/// <summary>
+	/// Class Class1.
+	/// </summary>
+	public class Class1
+	{
+
+		/// <summary>
+		/// The public field1
+		/// </summary>
+		public int PublicField1;
+		
+		/// <summary>
+		/// The public field2
+		/// </summary>
+		public int PublicField2;
+
+		/// <summary>
+		/// The interal field1
+		/// </summary>
+		internal int InteralField1;
+		
+		/// <summary>
+		/// The interal field2
+		/// </summary>
+		internal int InteralField2;
+
+		/// <summary>
+		/// The protected interal field1
+		/// </summary>
+		protected internal int ProtectedInteralField1;
+		
+		/// <summary>
+		/// The protected interal field2
+		/// </summary>
+		protected internal int ProtectedInteralField2;
+
+		/// <summary>
+		/// The protected field1
+		/// </summary>
+		protected int ProtectedField1;
+		
+		/// <summary>
+		/// The protected field2
+		/// </summary>
+		protected int ProtectedField2;
+
+		/// <summary>
+		/// The field1
+		/// </summary>
+		private int field1;
+
+		/// <summary>
+		/// The field2
+		/// </summary>
+		int field2;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Class1"/> class.
+		/// </summary>
+		/// <param name="field1">The field1.</param>
+		/// <param name="field2">The field2.</param>
+		public Class1(int field1, int field2)
+		{
+			// Internal comment, must not touched
+			this.field1 = field1;
+			// Internal comment, must not touched
+			this.field2 = field2;
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Class1"/> class.
+		/// </summary>
+		/// <param name="dummy">The dummy.</param>
+		/// <param name="field1">The field1.</param>
+		/// <param name="field2">The field2.</param>
+		internal Class1(string dummy, int field1, int field2)
+		{
+			// Internal comment, must not touched
+			this.field1 = field1;
+
+			this.field2 = field2;
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Class1"/> class.
+		/// </summary>
+		/// <param name="dummy">The dummy.</param>
+		/// <param name="field1">The field1.</param>
+		protected internal Class1(string dummy, int field1)
+		{
+			// Internal comment, must not touched
+			this.field1 = field1;
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Class1"/> class.
+		/// </summary>
+		/// <param name="field1">The field1.</param>
+		protected Class1(int field1)
+		{
+			// Internal comment, must not touched
+			this.field1 = field1;
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Prevents a default instance of the <see cref="Class1"/> class from being created.
+		/// </summary>
+		private Class1()
+		{
+			
+			// Internal comment, must not touched
+
+		}
+
+		/// <summary>
+		/// Finalizes an instance of the <see cref="Class1"/> class.
+		/// </summary>
+		~Class1()
+		{
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Delegate Delegate1
+		/// </summary>
+		/// <param name="dummy">The dummy.</param>
+		private delegate void Delegate1(int dummy);
+	
+		/// <summary>
+		/// Delegate Delegate2
+		/// </summary>
+		/// <param name="dummy">The dummy.</param>
+		private delegate void Delegate2(int dummy);
+
+		/// <summary>
+		/// Occurs when [event1].
+		/// </summary>
+		private event Action Event1;
+		
+		/// <summary>
+		/// Occurs when [event2].
+		/// </summary>
+		private event Action Event2;
+
+		/// <summary>
+		/// Enum Enum1
+		/// </summary>
+		private enum Enum1
+		{
+			/// <summary>
+			/// The value1
+			/// </summary>
+			Value1
+		};
+
+		/// <summary>
+		/// Enum Enum2
+		/// </summary>
+		private enum Enum2
+		{
+			/// <summary>
+			/// The value1
+			/// </summary>
+			Value1,
+
+			/// <summary>
+			/// The value2
+			/// </summary>
+			Value2
+		};
+
+		/// <summary>
+		/// Gets or sets the property1.
+		/// </summary>
+		/// <value>The property1.</value>
+		public int Property1 { get; set; }
+
+		/// <summary>
+		/// Gets or sets the property2.
+		/// </summary>
+		/// <value>The property2.</value>
+		public int Property2
+		{
+			get
+			{
+				// Internal comment, must not touched
+				return 0;
+				// Internal comment, must not touched
+			}
+			set { value = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="System.Int32"/> with the specified dummy.
+		/// </summary>
+		/// <param name="dummy">The dummy.</param>
+		/// <returns>System.Int32.</returns>
+		private int this[int dummy]
+		{
+			get { return 0; }
+			set
+			{
+				// Internal comment, must not touched
+				value = value;
+				// Internal comment, must not touched
+			}
+		}
+
+		/// <summary>
+		/// Method1s this instance.
+		/// </summary>
+		private void Method1()
+		{
+			
+			// Internal comment, must not touched
+
+		}
+
+		/// <summary>
+		/// Method1s the specified dummy.
+		/// </summary>
+		/// <param name="dummy">The dummy.</param>
+		private void Method1(int dummy)
+		{
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Method2s this instance.
+		/// </summary>
+		private void Method2()
+		{
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Struct NestedStruct1
+		/// </summary>
+		private struct NestedStruct1
+		{
+			private int f1;
+			private int f2;
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Struct NestedStruct2
+		/// </summary>
+		private struct NestedStruct2
+		{
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Class NestedClass1.
+		/// </summary>
+		private class NestedClass1
+		{
+			private int f1;
+			private int f2;
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Class NestedClass2.
+		/// </summary>
+		private class NestedClass2
+		{
+			// Internal comment, must not touched
+		}
+
+		/// <summary>
+		/// Interface Interface1
+		/// </summary>
+		public interface Interface1
+		{
+			/// <summary>
+			/// Member1s this instance.
+			/// </summary>
+			void Member1();
+
+			/// <summary>
+			/// Member2s this instance.
+			/// </summary>
+			void Member2();
+		}
+	}
+}
