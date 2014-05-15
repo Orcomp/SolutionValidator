@@ -8,8 +8,8 @@
                    xmlns:converters="clr-namespace:SolutionValidator.Converters"
                    xmlns:viewModels="clr-namespace:SolutionValidator.ViewModels"
                    mc:Ignorable="d" 
-                   d:DesignHeight="300" 
-                   d:DesignWidth="300">
+                   d:DesignHeight="600" 
+                   d:DesignWidth="600">
     <!-- Resources -->        
     <UserControl.Resources>
         <!-- ValidationResultTemplateSelector -->
@@ -66,13 +66,23 @@
                        Grid.ColumnSpan="3"
                        VerticalAlignment="Center"/>
 
-            <Button Command="{Binding SelectSettingsFileCommand}"
-                    Grid.Column="4"
+            <WrapPanel Grid.Column="4"
                        Grid.Row="2"
-                    Width="120"
-                    Height="35"
-                    HorizontalAlignment="Right">Settings</Button>
+                       HorizontalAlignment="Right">
+                
+                <CheckBox IsChecked="{Binding IsReformatEnabled}"
+                          Content="Reformat"
+                          VerticalAlignment="Center"
+                          Margin="5"/>
 
+                <Button Command="{Binding SelectSettingsFileCommand}"
+                        Width="120"
+                        Height="35"
+                        HorizontalAlignment="Right">Settings</Button>
+
+            </WrapPanel>
+            
+            
             <TextBlock Grid.Column="1"
                        Grid.Row="1"
                        Grid.ColumnSpan="3"
@@ -115,15 +125,7 @@
                     Width="120"
                     Height="35"
                     HorizontalAlignment="Right"
-                    Background="{Binding ProjectFileLocation, Converter={StaticResource ProjectFileLocationToRunButtonbackGroundColorConverter}}">Run</Button>
-            
-            <WrapPanel Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="5" VerticalAlignment="Center">
-               
-                <CheckBox IsChecked="{Binding IsReformatEnabled}"
-                      Grid.Column="2"
-                      Content="Reformat"
-                      VerticalAlignment="Center"/>
-            </WrapPanel>
+                    Background="{Binding ProjectFileLocation, Converter={StaticResource ProjectFileLocationToRunButtonbackGroundColorConverter}}">Run</Button>                        
 
         </Grid>
                 
