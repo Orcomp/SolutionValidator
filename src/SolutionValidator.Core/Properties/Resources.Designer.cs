@@ -229,60 +229,6 @@ namespace SolutionValidator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not verify zipped backup.
-        /// </summary>
-        internal static string ReformatRule_BackupExists_Can_not_verify_zipped_backup {
-            get {
-                return ResourceManager.GetString("ReformatRule_BackupExists_Can_not_verify_zipped_backup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can not read file for formatting. File {0}..
-        /// </summary>
-        internal static string ReformatRule_Validate_Can_not_read_file_for_formatting {
-            get {
-                return ResourceManager.GetString("ReformatRule_Validate_Can_not_read_file_for_formatting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File successfully formatted: {0}..
-        /// </summary>
-        internal static string ReformatRule_Validate_File_successfully_formatted {
-            get {
-                return ResourceManager.GetString("ReformatRule_Validate_File_successfully_formatted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Formatter can not create backup file. No .cs file will be formatted..
-        /// </summary>
-        internal static string ReformatRule_Validate_Formatter_can_not_create_backup_file {
-            get {
-                return ResourceManager.GetString("ReformatRule_Validate_Formatter_can_not_create_backup_file", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Formatter error: {0} in file {1}..
-        /// </summary>
-        internal static string ReformatRule_Validate_Formatter_error {
-            get {
-                return ResourceManager.GetString("ReformatRule_Validate_Formatter_error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not formatting file because can not verify backup exists. File {0}..
-        /// </summary>
-        internal static string ReformatRule_Validate_Not_formatting_file_because_can_not_verify_backup_exists {
-            get {
-                return ResourceManager.GetString("ReformatRule_Validate_Not_formatting_file_because_can_not_verify_backup_exists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Checking repository: &apos;{0}&apos;...
         ///    .
         /// </summary>
@@ -325,6 +271,69 @@ namespace SolutionValidator.Properties {
         internal static string RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists {
             get {
                 return ResourceManager.GetString("RuleProcessor_RuleProcessor_Repository_root_folder_does_not_exists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} can not verify zipped backup..
+        /// </summary>
+        internal static string TransformRule_BackupExists_can_not_verify {
+            get {
+                return ResourceManager.GetString("TransformRule_BackupExists_can_not_verify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not read file for {0}. File: {1}..
+        /// </summary>
+        internal static string TransformRule_Validate_Can_not_read_file {
+            get {
+                return ResourceManager.GetString("TransformRule_Validate_Can_not_read_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code {0} error: {1} in file {2}..
+        /// </summary>
+        internal static string TransformRule_Validate_Code_error_in_file {
+            get {
+                return ResourceManager.GetString("TransformRule_Validate_Code_error_in_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} error: {1} in file {2}..
+        /// </summary>
+        internal static string TransformRule_Validate_error_in_file {
+            get {
+                return ResourceManager.GetString("TransformRule_Validate_error_in_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File successfully {0}: {1}..
+        /// </summary>
+        internal static string TransformRule_Validate_File_successfully {
+            get {
+                return ResourceManager.GetString("TransformRule_Validate_File_successfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not {0} file because can not verify backup exists. File {1}..
+        /// </summary>
+        internal static string TransformRule_Validate_Not_file_because_can_not_verify_backup {
+            get {
+                return ResourceManager.GetString("TransformRule_Validate_Not_file_because_can_not_verify_backup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} rule can not create backup file. No source file will be modified..
+        /// </summary>
+        internal static string TransformRule_Validate_rule_can_not_create_backup_file {
+            get {
+                return ResourceManager.GetString("TransformRule_Validate_rule_can_not_create_backup_file", resourceCulture);
             }
         }
         

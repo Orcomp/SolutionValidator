@@ -13,6 +13,7 @@ namespace SolutionValidator.Configuration
 	using System.Configuration;
 	using System.IO;
 	using Catel.Logging;
+	using ICSharpCode.NRefactory.CSharp;
 	using Properties;
 
 	#endregion
@@ -43,6 +44,29 @@ namespace SolutionValidator.Configuration
 		{
 			get { return ((IncludeExcludeCollection)(base[SourceFileFiltersElementName])); }
 		}
+
+		private const string CodeMemberOrderElementName = "codeMemberOrder";
+		[ConfigurationProperty(CodeMemberOrderElementName)]
+		public CodeMemberOrderCollection CodeMemberOrder
+		{
+			get { return ((CodeMemberOrderCollection)(base[CodeMemberOrderElementName])); }
+		}
+
+		private const string PrivateFieldRenameElementName = "privateFieldRename";
+		[ConfigurationProperty(PrivateFieldRenameElementName)]
+		public PrivateFieldRenameElement PrivateFieldRename
+		{
+			get { return ((PrivateFieldRenameElement)(base[PrivateFieldRenameElementName])); }
+		}
+
+		private const string RemoveRedundantThisQualifierElementName = "removeRedundantThisQualifier";
+		[ConfigurationProperty(RemoveRedundantThisQualifierElementName)]
+		public RemoveRedundantThisQualifierElement RemoveRedundantThisQualifier
+		{
+			get { return ((RemoveRedundantThisQualifierElement)(base[RemoveRedundantThisQualifierElementName])); }
+		}
+
+
 
 		public FormattingOptionSet DefaultFormattingOptionSet
 		{
@@ -82,5 +106,40 @@ namespace SolutionValidator.Configuration
 				return Path.GetFullPath(OptionsFilePath);
 			}
 		}
+	}
+
+	[ConfigurationCollection(typeof(GeneratedCodeMemberElement))]
+	public class CodeMemberOrderCollection : ConfigurationElementCollection
+	{
+		public GeneratedCodeMemberElement this[int idx]
+		{
+			get { return (GeneratedCodeMemberElement)BaseGet(idx); }
+		}
+
+		protected override ConfigurationElement CreateNewElement()
+		{
+			return new GeneratedCodeMemberElement();
+		}
+
+		protected override object GetElementKey(ConfigurationElement element)
+		{
+			return element.ToString();
+		}
+
+		public void Add(GeneratedCodeMemberElement item)
+		{
+			base.BaseAdd(item);
+		}
+	}
+
+	public class GeneratedCodeMemberElement : ConfigurationElement
+	{
+		private const string MemberAttributeName = "member";
+		[ConfigurationProperty(MemberAttributeName)]
+		public GeneratedCodeMember Member
+		{
+			get { return (GeneratedCodeMember)base[MemberAttributeName]; }
+		}
+
 	}
 }

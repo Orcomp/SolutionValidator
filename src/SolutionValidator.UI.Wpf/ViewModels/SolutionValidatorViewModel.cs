@@ -1,6 +1,7 @@
 ﻿namespace SolutionValidator.ViewModels
 {
     using System.Collections.ObjectModel;
+    using System.Linq;
     using Catel;
     using Catel.Collections;
     using Catel.MVVM;
@@ -33,9 +34,10 @@
 
             CreateCommands();
 
+            ProjectFileLocation = "No project selected";
+            ConfigFilePath = "Default configuration selected";
             ValidationResults = new ObservableCollection<ValidationMessage>();
             TotalCheckCount = 0;
-            ConfigFilePath = null;
         }
         #endregion
 
@@ -74,12 +76,21 @@
             var configuration = ConfigurationHelper.Load(ConfigFilePath);
             var ruleProcessor = new RuleProcessor(ProjectFileLocation, configuration, IsReformatEnabled);
 
-            ruleProcessor.Process(ProcessValidationResult);
+            ruleProcessor.Process(validationResult =>
+            {
+                foreach (var validationMessage in validationResult.Messages.Where(vm => !vm.Processed))
+                {
+                    ValidationResults.AddRange(validationResult.Messages);                    
+                }
+            });
+
+            TotalErrorCount = ruleProcessor.TotalErrorCount;
+            TotalCheckCount = ruleProcessor.TotalCheckCount;
         }
-        
+
         private bool CanRun()
         {
-            return !string.IsNullOrWhiteSpace(ProjectFileLocation);
+            return ProjectFileLocation != "No project selected";
         }
 
         private void SelectProjectFolder()
@@ -96,16 +107,7 @@
             {
                 ConfigFilePath = _openFileService.FileName;
             }
-        }
-
-        private void ProcessValidationResult(ValidationResult validationResult)
-        {
-            Argument.IsNotNull(() => validationResult);
-
-            ValidationResults.AddRange(validationResult.Messages);
-            TotalErrorCount = validationResult.ErrorCount;
-            TotalCheckCount = validationResult.CheckCount;
-        }
+        }        
         #endregion
     }
 }

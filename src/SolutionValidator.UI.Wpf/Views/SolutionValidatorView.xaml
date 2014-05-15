@@ -6,6 +6,7 @@
                    xmlns:catel="http://catel.codeplex.com"
                    xmlns:common="clr-namespace:SolutionValidator.Common;assembly=SolutionValidator.Core"
                    xmlns:converters="clr-namespace:SolutionValidator.Converters"
+                   xmlns:viewModels="clr-namespace:SolutionValidator.ViewModels"
                    mc:Ignorable="d" 
                    d:DesignHeight="300" 
                    d:DesignWidth="300">
@@ -13,13 +14,16 @@
     <UserControl.Resources>
         <!-- ValidationResultTemplateSelector -->
         <converters:ValidationResultTemplateSelector x:Key="ValidationResultTemplateSelector" />
+        <converters:ProjectFileLocationForeColorConverter  x:Key="ProjectFileLocationForeColorConverter" />
+        <converters:ProjectFileLocationToButtonbackgroundColorConverter x:Key="ProjectFileLocationToButtonbackgroundColorConverter" />
+        <converters:ProjectFileLocationToRunButtonbackGroundColorConverter x:Key="ProjectFileLocationToRunButtonbackGroundColorConverter" />
         
         <DataTemplate x:Key="ErrorTemplate"  DataType="common:ValidationMessage">
             <TextBlock Foreground="Red" Text="{Binding Message}" />
         </DataTemplate>
 
         <DataTemplate x:Key="WarningTemplate" DataType="common:ValidationMessage">
-            <TextBlock Foreground="Yellow" Text="{Binding Message}" />
+            <TextBlock Foreground="#FFD3D34B" Text="{Binding Message}" />
         </DataTemplate>
 
         <DataTemplate x:Key="PassedTemplate" DataType="common:ValidationMessage">
@@ -33,62 +37,94 @@
     </UserControl.Resources>
     
     <!-- MainContent -->
-    <Grid>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="300"/>
-            <RowDefinition Height="300"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>-->         
-        
+    <Grid>            
         <Grid Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
 
-            <Button Command="{Binding SelectSettingsFileCommand}"
-                    Grid.Row="0">Settings</Button>
+            
+            <TextBlock Margin="30,10,0,0" 
+                       Grid.ColumnSpan="4"
+                       FontSize="30">Solution Validator</TextBlock>
 
-            <TextBlock Text="{Binding ConfigFilePath}" />
-            
-            <Button Grid.Row="1"
-                    Command="{Binding SelectProjectFolderCommand}">Project</Button>
-            
-            <TextBlock Grid.Row="1"
+            <TextBlock Text="{Binding ConfigFilePath, FallbackValue='Default configuration selected'}" 
                        Grid.Column="1"
-                       Text="{Binding ProjectFileLocation}" />
+                       Grid.Row="2"
+                       Grid.ColumnSpan="3"
+                       VerticalAlignment="Center"/>
 
-            <CheckBox IsChecked="{Binding IsReformatEnabled}"
-                      Grid.Column="2"
-                      Content="Reformat"
-                      VerticalAlignment="Center"/>
+            <Button Command="{Binding SelectSettingsFileCommand}"
+                    Grid.Column="4"
+                       Grid.Row="2"
+                    Width="120"
+                    Height="35"
+                    HorizontalAlignment="Right">Settings</Button>
 
-            <Button Grid.Column="3" Command="{Binding RunCommand}">Run</Button>
+            <TextBlock Grid.Column="1"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="3"
+                       Text="{Binding ProjectFileLocation, FallbackValue='No project selected'}"
+                       Foreground="{Binding ProjectFileLocation, Converter={StaticResource ProjectFileLocationForeColorConverter}}"
+                       VerticalAlignment="Center"
+                       FontSize="20"/>
 
-            <TextBlock Text="{Binding TotalCheckCount}"
-                       Grid.Row="2"/>
+            <Button Grid.Column="4"
+                    Grid.Row="1"
+                    Command="{Binding SelectProjectFolderCommand}"
+                    Width="120"
+                    Height="35"
+                    HorizontalAlignment="Right"
+                    Background="{Binding ProjectFileLocation, Converter={StaticResource ProjectFileLocationToButtonbackgroundColorConverter}}">Project</Button>
+
+            <!--<TextBlock Text="{Binding TotalCheckCount}"
+                       Grid.Row="2"
+                       Grid.Column="1"/>
 
             <TextBlock Text="{Binding TotalErrorCount}"
                        Grid.Row="2" 
-                       Grid.Column="2"/>
+                       Grid.Column="3"/>-->
 
             <ListBox ItemsSource="{Binding ValidationResults}"
                      Grid.Row="3"
+                     Grid.Column="1"
                      Grid.ColumnSpan="4"
                      VerticalAlignment="Stretch"
-                     ItemTemplateSelector="{StaticResource ValidationResultTemplateSelector}">
+                     ItemTemplateSelector="{StaticResource ValidationResultTemplateSelector}"
+                     BorderThickness="1"
+                     BorderBrush="#FFE2E2E2"
+                     Background="#FFF7FCFF">
                 
             </ListBox>
-                                    
+
+            <Button Grid.Row="6" 
+                    Grid.Column="4" 
+                    Command="{Binding RunCommand}"
+                    Width="120"
+                    Height="35"
+                    HorizontalAlignment="Right"
+                    Background="{Binding ProjectFileLocation, Converter={StaticResource ProjectFileLocationToRunButtonbackGroundColorConverter}}">Run</Button>
+            
+            <WrapPanel Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="5" VerticalAlignment="Center">
+               
+                <CheckBox IsChecked="{Binding IsReformatEnabled}"
+                      Grid.Column="2"
+                      Content="Reformat"
+                      VerticalAlignment="Center"/>
+            </WrapPanel>
+
         </Grid>
                 
     </Grid>

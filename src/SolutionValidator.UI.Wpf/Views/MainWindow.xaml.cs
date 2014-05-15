@@ -14,9 +14,7 @@ namespace SolutionValidator.Views
     /// </summary>
     public partial class MainWindow
     {
-        public MainWindow()
-            : base(DataWindowMode.Custom)
-        {
+        public MainWindow()        {
             InitializeComponent();
         }
     }

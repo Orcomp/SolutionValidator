@@ -13,7 +13,6 @@ namespace SolutionValidator.Configuration
 	#endregion
 
 	[ConfigurationCollection(typeof (IncludeExcludeElement))]
-	
 	public class IncludeExcludeCollection : ConfigurationElementCollection
 	{
 		public IncludeExcludeElement this[int idx]
