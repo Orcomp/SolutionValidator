@@ -2,6 +2,8 @@
 {
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Threading;
     using Catel;
     using Catel.Collections;
     using Catel.MVVM;
@@ -76,16 +78,17 @@
             var configuration = ConfigurationHelper.Load(ConfigFilePath);
             var ruleProcessor = new RuleProcessor(ProjectFileLocation, configuration, IsReformatEnabled);
 
-            ruleProcessor.Process(validationResult =>
+            Task.Factory.StartNew(() => ruleProcessor.Process(validationResult =>
             {
-                foreach (var validationMessage in validationResult.Messages.Where(vm => !vm.Processed))
+                if (System.Windows.Application.Current.Dispatcher.CheckAccess())
                 {
-                    ValidationResults.AddRange(validationResult.Messages);                    
+                    ValidationResults.AddRange(validationResult.Messages.Where(vm => !vm.Processed));
                 }
-            });
-
-            TotalErrorCount = ruleProcessor.TotalErrorCount;
-            TotalCheckCount = ruleProcessor.TotalCheckCount;
+                else
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(() => ValidationResults.AddRange(validationResult.Messages.Where(vm => !vm.Processed)));
+                }
+            }));  
         }
 
         private bool CanRun()
