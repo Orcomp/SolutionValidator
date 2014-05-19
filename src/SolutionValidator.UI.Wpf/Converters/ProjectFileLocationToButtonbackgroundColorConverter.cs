@@ -23,7 +23,7 @@ namespace SolutionValidator.Converters
                 return new BrushConverter().ConvertFrom("#00A600");
             }
 
-            return new BrushConverter().ConvertFrom("#2E8DEF");
+            return new SolidColorBrush(Color.FromRgb(250, 248, 248)); //new BrushConverter().ConvertFrom("#2E8DEF");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

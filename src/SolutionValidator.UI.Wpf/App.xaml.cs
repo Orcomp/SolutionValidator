@@ -14,6 +14,8 @@ namespace SolutionValidator
     using Catel.Logging;
     using Catel.Windows;
     using FolderStructure;
+    using Helpers;
+    using Models;
     using ProjectFile;
 
     /// <summary>
@@ -40,6 +42,10 @@ namespace SolutionValidator
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
+            var serviceLocator = ServiceLocator.Default;
+
+            var appSettings = serviceLocator.ResolveType<AppSettings>();
+            appSettings.SaveAppSettings();
 
             try
             {
@@ -85,6 +91,7 @@ namespace SolutionValidator
 
             serviceLocator.RegisterInstance<IFileSystemHelper>(new FileSystemHelper());
             serviceLocator.RegisterInstance<IProjectFileHelper>(new ProjectFileHelper());
+            serviceLocator.RegisterInstance(new AppSettings());
         }
         #endregion
     }

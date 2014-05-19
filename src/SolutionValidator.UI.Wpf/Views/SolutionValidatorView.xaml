@@ -115,18 +115,31 @@
                      ItemTemplateSelector="{StaticResource ValidationResultTemplateSelector}"
                      BorderThickness="1"
                      BorderBrush="#FFE2E2E2"
-                     Background="#FFF7FCFF">
+                     Background="#FFF7FCFF"
+                     SelectionMode="Multiple">
                 
             </ListBox>
 
-            <Button Grid.Row="6" 
-                    Grid.Column="4" 
+            <WrapPanel Grid.Row="6" 
+                       Grid.Column="1"
+                       Grid.ColumnSpan="4"
+                       HorizontalAlignment="Right"
+                       Orientation="Horizontal">
+                
+                <Button Width="120"
+                        Height="35"
+                        Content="Export"
+                        Command="{Binding ExportToFileCommand}"/>
+                
+                <Button  
                     Command="{Binding RunCommand}"
                     Width="120"
                     Height="35"
                     HorizontalAlignment="Right"
-                    Background="{Binding ProjectFileLocation, Converter={StaticResource ProjectFileLocationToRunButtonbackGroundColorConverter}}">Run</Button>                        
+                    Background="{Binding ProjectFileLocation, Converter={StaticResource ProjectFileLocationToRunButtonbackGroundColorConverter}}">Run</Button>
 
+            </WrapPanel>
+            
         </Grid>
                 
     </Grid>
